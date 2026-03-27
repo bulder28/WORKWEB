@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const PORT = 8000;
+const PORT = 8002;
 const DIR = __dirname;
 
 // ==================== HELPERS ====================

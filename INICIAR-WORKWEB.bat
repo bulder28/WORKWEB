@@ -10,5 +10,5 @@ echo Esperando a que el servidor se caliente...
 timeout /t 2 >nul
 
 echo Abriendo el hub de agentes en Chrome...
-start http://localhost:8000/
+start http://localhost:8002/
 exit
