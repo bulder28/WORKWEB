@@ -303,13 +303,8 @@
     </div>
     
     <div style="display:flex;gap:10px;margin-left:auto;align-items:center">
-      <button class="btn btn-ghost btn-sm" onclick="changeApiKey()" style="font-size:11px;padding:5px 10px;border-color:rgba(255,255,255,0.15);color:var(--dim)">&#128273; API Key</button>
-    </div>
-  </div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-o btn-sm" id="btn-install-local" onclick="installRecommendedLocalModel()">⬇ Instalar modelo recomendado</button>
-      <button class="btn btn-ghost btn-sm" onclick="loadLocalModels()">↻ Recargar modelos</button>
-      <button class="btn btn-ghost btn-sm" onclick="switchToPremium()">☁ Usar premium</button>
+      <span style="font-family:var(--mono);font-size:9px;color:var(--muted);padding:4px 8px;border:1px solid var(--border);border-radius:4px;white-space:nowrap">🤖 claude-3-5-sonnet</span>
+      <button class="btn btn-ghost btn-sm" onclick="changeApiKey()" style="font-size:11px;padding:5px 10px;border-color:rgba(255,255,255,0.15);color:var(--dim)">🔑 API Key</button>
     </div>
   </div>
 
@@ -1013,29 +1008,35 @@
       container.innerHTML = items.map((l, i) => {
         const wc = l.situacion_web?.includes('Sin') ? 'b-pe' : l.situacion_web?.includes('obsoleta') ? 'b-i' : 'b-c';
         const pc = 'b-' + (l.potencial || 'Medio').toLowerCase();
-        return `<div style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:24px;display:flex;gap:20px;align-items:flex-start">
-          <div style="flex:1">
-            <div style="font-weight:700;font-size:18px;margin-bottom:12px">${esc(l.nombre)}</div>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--dim);font-family:var(--sans);margin-bottom:12px">
-              ${l.zona ? `<span>📍 ${esc(l.zona)}</span>` : ''}
-              <span>🏷️ ${esc(l.sector)}</span>
-              ${l.telefono ? `<span>📞 ${esc(l.telefono)}</span>` : ''}
-              ${l.email ? `<span>✉️ ${esc(l.email)}</span>` : ''}
-              <span class="badge ${wc}">${esc(l.situacion_web)}</span>
-              <span class="badge ${pc}">⚡ ${esc(l.potencial)}</span>
-              ${l.fuente ? `<span class="badge b-c">🛰 ${esc(l.fuente)}</span>` : ''}
+        const accentColor = l.potencial === 'Alto' ? 'var(--green)' : l.potencial === 'Medio' ? 'var(--orange)' : 'var(--muted)';
+        const hasContact = l.telefono || l.email;
+        return `<div style="background:var(--s2);border:1px solid var(--border);border-left:3px solid ${accentColor};border-radius:8px;padding:18px 20px;display:flex;gap:16px;align-items:flex-start;transition:border-color 0.2s">
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+              <div style="font-weight:700;font-size:16px;color:var(--text)">${esc(l.nombre)}</div>
+              <span class="badge ${wc}" style="flex-shrink:0">${esc(l.situacion_web)}</span>
+              <span class="badge ${pc}" style="flex-shrink:0">⚡ ${esc(l.potencial)}</span>
             </div>
-            ${l.direccion ? `<div style="font-size:13px;color:var(--muted);font-family:var(--mono);margin-bottom:10px">${esc(l.direccion)}</div>` : ''}
-            ${l.razon ? `<div style="font-size:14px;color:var(--muted);font-style:italic;line-height:1.5">→ ${esc(l.razon)}</div>` : ''}
+            <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--dim);margin-bottom:8px;align-items:center">
+              ${l.zona ? `<span style="display:flex;align-items:center;gap:4px">📍 ${esc(l.zona)}</span>` : ''}
+              <span style="display:flex;align-items:center;gap:4px">🏷️ ${esc(l.sector)}</span>
+              ${l.telefono ? `<span style="display:flex;align-items:center;gap:4px;color:var(--text);font-family:var(--mono)">📞 ${esc(l.telefono)}</span>` : ''}
+              ${l.email ? `<span style="display:flex;align-items:center;gap:4px;color:var(--text)">✉️ ${esc(l.email)}</span>` : ''}
+            </div>
+            ${l.direccion ? `<div style="font-size:11px;color:var(--muted);font-family:var(--mono);margin-bottom:6px">📌 ${esc(l.direccion)}</div>` : ''}
+            ${l.razon ? `<div style="font-size:12px;color:var(--dim);font-style:italic;line-height:1.5;border-left:2px solid var(--border);padding-left:8px;margin-top:6px">→ ${esc(l.razon)}</div>` : ''}
           </div>
-          <div style="display:flex;gap:8px;align-self:flex-start">
-            <button class="btn btn-g btn-sm" onclick="addFromBatch(${i})">+ Añadir al CRM</button>
-            <button class="btn btn-ghost btn-sm" onclick="addFromBatch(${i}, true)">⚡ Añadir y crear demo</button>
-            <button class="btn btn-ghost btn-sm" onclick="openBatchMap(${i})" title="Abrir en Google Maps">🗺️ Maps</button>
+          <div style="display:flex;flex-direction:column;gap:6px;align-self:flex-start;flex-shrink:0">
+            <button class="btn btn-g btn-sm" onclick="addFromBatch(${i})" style="white-space:nowrap">+ Añadir al CRM</button>
+            <button class="btn btn-c btn-sm" onclick="addFromBatch(${i}, true)" style="white-space:nowrap">⚡ Demo rápida</button>
+            ${l.telefono ? `<a href="tel:${esc(l.telefono)}" class="btn btn-ghost btn-sm" style="white-space:nowrap;text-align:center;text-decoration:none">📞 Llamar</a>` : ''}
+            <button class="btn btn-ghost btn-sm" onclick="openBatchMap(${i})" style="white-space:nowrap">🗺️ Maps</button>
           </div>
         </div>`;
       }).join('');
     }
+
+
 
     function genFallbackBatch(zona, sector) {
       const seed = Date.now() % 1000;
