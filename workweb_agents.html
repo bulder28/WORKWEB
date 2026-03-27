@@ -302,8 +302,9 @@
       <div class="kp p"><div class="kp-v" id="k4">0€</div><div class="kp-l">Pipeline</div></div>
     </div>
     
-    <div style="display:flex;gap:10px;margin-left:auto;align-items:center">
-      <span style="font-family:var(--mono);font-size:9px;color:var(--muted);padding:4px 8px;border:1px solid var(--border);border-radius:4px;white-space:nowrap">🤖 claude-3-5-sonnet</span>
+    <div style="display:flex;gap:8px;margin-left:auto;align-items:center">
+      <span style="font-family:var(--mono);font-size:9px;color:var(--muted);padding:4px 8px;border:1px solid var(--border);border-radius:4px;white-space:nowrap">🤖 claude-3-5-haiku</span>
+      <button class="btn btn-ghost btn-sm" onclick="testApiKey()" style="font-size:11px;padding:5px 10px;border-color:rgba(34,211,238,0.3);color:var(--cyan)">🔬 Test</button>
       <button class="btn btn-ghost btn-sm" onclick="changeApiKey()" style="font-size:11px;padding:5px 10px;border-color:rgba(255,255,255,0.15);color:var(--dim)">🔑 API Key</button>
     </div>
   </div>
@@ -832,7 +833,7 @@
         localStorage.setItem('ww_api_key', key.trim());
       }
       const body = {
-        model: 'claude-3-haiku-20240307',
+        model: 'claude-3-5-haiku-20241022',
         max_tokens: maxTokens,
         system: sys,
         messages: [{ role: 'user', content: msg }]
@@ -860,14 +861,59 @@
     }
 
     function changeApiKey() {
-      const k = prompt('Introduce tu nueva API Key de Anthropic:');
-      if (k) { localStorage.setItem('ww_api_key', k.trim()); toast('API Key actualizada', 'success'); }
+      const current = localStorage.getItem('ww_api_key');
+      const msg = current 
+        ? `API Key actual: ${current.slice(0,8)}...${current.slice(-4)}\n\nIntroduce tu nueva API Key de Anthropic\n(empieza por "sk-ant-"):` 
+        : 'Pega tu API Key de Anthropic (empieza por "sk-ant-"):';
+      const k = prompt(msg);
+      if (k) {
+        const clean = k.replace(/[^\x20-\x7E]/g, '').trim();
+        if (!clean.startsWith('sk-ant-')) {
+          toast('⚠️ La key no empieza por sk-ant- — verifica que sea la correcta', 'error');
+        }
+        localStorage.setItem('ww_api_key', clean);
+        toast('API Key guardada ✓', 'success');
+      }
+    }
+
+    async function testApiKey() {
+      let key = localStorage.getItem('ww_api_key');
+      if (!key) { toast('No hay API Key guardada. Pulsa 🔑 para añadirla.', 'error'); return; }
+      toast('Probando conexión con Anthropic...', 'info');
+      try {
+        const endpoint = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+          ? '/api/anthropic' : 'https://api.anthropic.com/v1/messages';
+        const r = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': key.replace(/[^\x20-\x7E]/g, '').trim(),
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerously-allow-browser': 'true'
+          },
+          body: JSON.stringify({
+            model: 'claude-3-5-haiku-20241022',
+            max_tokens: 20,
+            messages: [{ role: 'user', content: 'Di solo: OK' }]
+          })
+        });
+        const data = await r.json();
+        if (!r.ok) {
+          const msg = data?.error?.message || JSON.stringify(data);
+          toast('❌ Error Anthropic: ' + msg, 'error');
+          console.error('Anthropic error:', data);
+        } else {
+          toast('✅ Conexión OK — Claude funcionando correctamente', 'success');
+        }
+      } catch(e) {
+        toast('❌ Error de red: ' + e.message, 'error');
+      }
     }
 
     async function claudeChat(messages, sys) {
       let key = localStorage.getItem('ww_api_key');
       if (!key) throw new Error('Falta API Key. Pulsa el boton API Key en el header.');
-      const body = { model: 'claude-3-haiku-20240307', max_tokens: 2000, system: sys, messages };
+      const body = { model: 'claude-3-5-haiku-20241022', max_tokens: 2000, system: sys, messages };
       const cleanKey = key.replace(/[^\x20-\x7E]/g, '').trim();
       const endpoint = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
         ? '/api/anthropic' : 'https://api.anthropic.com/v1/messages';
