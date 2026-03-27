@@ -823,9 +823,8 @@
       }
     }
 
-    // ==================== IA API (LOCAL / CHATGPT) ====================
     // ==================== API (CLAUDE) ====================
-    async function claude({ sys, msg, search = false }) {
+    async function claude({ sys, msg, search = false, maxTokens = 1500 }) {
       let key = localStorage.getItem('ww_api_key');
       if (!key) {
         key = prompt('Pega tu API Key de Anthropic (Claude) para activar los Agentes:');
@@ -834,7 +833,7 @@
       }
       const body = {
         model: 'claude-3-5-sonnet-20241022',
-        max_tokens: 1500,
+        max_tokens: maxTokens,
         system: sys,
         messages: [{ role: 'user', content: msg }]
       };
@@ -868,7 +867,7 @@
     async function claudeChat(messages, sys) {
       let key = localStorage.getItem('ww_api_key');
       if (!key) throw new Error('Falta API Key. Pulsa el boton API Key en el header.');
-      const body = { model: 'claude-3-5-sonnet-20241022', max_tokens: 1500, system: sys, messages };
+      const body = { model: 'claude-3-5-sonnet-20241022', max_tokens: 2000, system: sys, messages };
       const cleanKey = key.replace(/[^\x20-\x7E]/g, '').trim();
       const endpoint = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
         ? '/api/anthropic' : 'https://api.anthropic.com/v1/messages';
@@ -890,9 +889,9 @@
       return d?.content?.filter(b => b.type === 'text').map(b => b.text).join('\n') || '';
     }
 
-    // aiReq / aiChat are aliases for backwards compat with agents
-    async function aiReq({ sys, msg }) {
-      const d = await claude({ sys, msg });
+    // aiReq: alias for Claude - accepts optional maxTokens
+    async function aiReq({ sys, msg, maxTokens = 1500 }) {
+      const d = await claude({ sys, msg, maxTokens });
       return getText(d);
     }
     async function aiChat(messages, sys) {
@@ -901,6 +900,7 @@
 
 
     // ==================== NAV ====================
+
     function go(p, el) {
       document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
       document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
@@ -1544,7 +1544,7 @@ Pistas de contenido:
 - Usa textos y secciones adaptadas al sector exacto`;
 
       try {
-        let html = await aiReq({ sys, msg });
+        let html = await aiReq({ sys, msg, maxTokens: 4000 });
         html = html.replace(/^```html\s*/i, '').replace(/```\s*$/, '').trim();
 
         if (!html.includes('<html')) throw new Error('El modelo no devolvio un HTML valido. Intentalo de nuevo.');
@@ -1552,7 +1552,7 @@ Pistas de contenido:
         if (assessDemoQuality(html) < 7) {
           const retrySys = sys + '\n\nREINTENTO OBLIGATORIO: La version anterior fue demasiado pobre. Ahora sube mucho el nivel visual y comercial.';
           const retryMsg = msg + '\n\nMejora obligatoria: mas impacto visual, mejor jerarquia, secciones mas solidas, CTA mas creibles y apariencia moderna.';
-          html = await aiReq({ sys: retrySys, msg: retryMsg });
+          html = await aiReq({ sys: retrySys, msg: retryMsg, maxTokens: 4000 });
           html = html.replace(/^```html\s*/i, '').replace(/```\s*$/, '').trim();
         }
 

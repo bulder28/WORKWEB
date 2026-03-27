@@ -76,6 +76,135 @@ const server = http.createServer(async (req, res) => {
         return;
     }
 
+    // ==================== AUDIT: fetch website snapshot ====================
+    if (req.url === '/api/audit/fetch' && req.method === 'POST') {
+        try {
+            const rawBody = await readBody(req);
+            const { url } = JSON.parse(rawBody || '{}');
+            if (!url) { sendJson(res, 400, { error: 'URL requerida' }); return; }
+
+            let targetUrl = url.trim();
+            if (!/^https?:\/\//i.test(targetUrl)) targetUrl = 'https://' + targetUrl;
+
+            let urlObj;
+            try { urlObj = new URL(targetUrl); } catch { sendJson(res, 400, { error: 'URL no valida' }); return; }
+
+            const client = urlObj.protocol === 'https:' ? https : http;
+            const webReq = client.request(urlObj.toString(), {
+                method: 'GET',
+                headers: { 'User-Agent': 'WorkWebAuditor/1.0', 'Accept': 'text/html' }
+            }, webRes => {
+                let html = '';
+                webRes.on('data', c => html += c.toString());
+                webRes.on('end', () => {
+                    const titleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
+                    const descMatch = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)/i);
+                    const text = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 3000);
+                    sendJson(res, 200, {
+                        ok: true,
+                        url: urlObj.toString(),
+                        title: titleMatch?.[1]?.trim() || '',
+                        description: descMatch?.[1]?.trim() || '',
+                        text
+                    });
+                });
+            });
+            webReq.on('error', e => sendJson(res, 502, { error: 'No se pudo abrir la web: ' + e.message }));
+            webReq.setTimeout(10000, () => { webReq.destroy(); sendJson(res, 504, { error: 'Timeout al cargar la web' }); });
+            webReq.end();
+        } catch (e) {
+            sendJson(res, 500, { error: e.message });
+        }
+        return;
+    }
+
+    // ==================== BUSINESS INTEL (stub - returns structured data for Claude) ====================
+    if (req.url === '/api/business-intel' && req.method === 'POST') {
+        try {
+            const rawBody = await readBody(req);
+            const payload = JSON.parse(rawBody || '{}');
+            // Return minimal structured data so the client-side Claude can use it
+            sendJson(res, 200, {
+                ok: true,
+                nombre: payload.nombre || '',
+                sector: payload.sector || '',
+                zona: payload.zona || '',
+                summary: `Negocio: ${payload.nombre || 'Desconocido'}. Sector: ${payload.sector || 'General'}. Zona: ${payload.zona || 'Illescas'}. ${payload.web ? 'Tiene web: ' + payload.web : 'Sin web conocida'}.`
+            });
+        } catch (e) {
+            sendJson(res, 500, { error: e.message });
+        }
+        return;
+    }
+
+    // ==================== PROSPECTOR (OpenStreetMap) ====================
+    if (req.url === '/api/prospector' && req.method === 'POST') {
+        try {
+            const rawBody = await readBody(req);
+            const { zona, sector, radiusKm = 12 } = JSON.parse(rawBody || '{}');
+            if (!zona || !sector) { sendJson(res, 400, { error: 'zona y sector son requeridos' }); return; }
+
+            // Geocode with Nominatim
+            const geoUrl = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=es&q=${encodeURIComponent(zona + ', Toledo, Spain')}`;
+            const geoReq = https.request(geoUrl, { method: 'GET', headers: { 'User-Agent': 'WorkWebProspector/1.0' } }, geoRes => {
+                let geoBody = '';
+                geoRes.on('data', c => geoBody += c);
+                geoRes.on('end', () => {
+                    try {
+                        const geoData = JSON.parse(geoBody);
+                        if (!geoData?.length) { sendJson(res, 404, { error: 'No se pudo geolocalizar la zona' }); return; }
+                        const { lat, lon } = geoData[0];
+                        const radiusM = parseInt(radiusKm) * 1000;
+
+                        const overpassQuery = `[out:json][timeout:25];(node["shop"](around:${radiusM},${lat},${lon});node["amenity"="restaurant"](around:${radiusM},${lat},${lon});node["amenity"="bar"](around:${radiusM},${lat},${lon});node["craft"](around:${radiusM},${lat},${lon}););out tags;`;
+                        const overpassBody = `data=${encodeURIComponent(overpassQuery)}`;
+                        const ovReq = https.request('https://overpass-api.de/api/interpreter', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'WorkWebProspector/1.0' }
+                        }, ovRes => {
+                            let ovBody = '';
+                            ovRes.on('data', c => ovBody += c);
+                            ovRes.on('end', () => {
+                                try {
+                                    const ovData = JSON.parse(ovBody);
+                                    const leads = (ovData.elements || [])
+                                        .filter(e => e.tags?.name)
+                                        .map(e => ({
+                                            nombre: e.tags.name,
+                                            sector,
+                                            zona,
+                                            telefono: e.tags.phone || e.tags['contact:phone'] || '',
+                                            email: e.tags.email || e.tags['contact:email'] || '',
+                                            situacion_web: e.tags.website ? 'Con web' : e.tags.facebook ? 'Solo redes' : 'Sin web',
+                                            potencial: !e.tags.website ? 'Alto' : 'Medio',
+                                            razon: !e.tags.website ? 'Sin presencia web. Alto potencial de captacion.' : 'Tiene web pero puede mejorar SEO y conversion local.',
+                                            fuente: 'OpenStreetMap',
+                                            direccion: [e.tags['addr:street'], e.tags['addr:housenumber'], e.tags['addr:city']].filter(Boolean).join(', ') || zona
+                                        }))
+                                        .slice(0, 12);
+                                    sendJson(res, 200, { leads, source: 'OpenStreetMap' });
+                                } catch (e2) {
+                                    sendJson(res, 502, { error: 'Error procesando datos de OpenStreetMap' });
+                                }
+                            });
+                        });
+                        ovReq.on('error', e => sendJson(res, 502, { error: 'Overpass no disponible: ' + e.message }));
+                        ovReq.setTimeout(25000, () => { ovReq.destroy(); });
+                        ovReq.write(overpassBody);
+                        ovReq.end();
+                    } catch (e2) {
+                        sendJson(res, 500, { error: e2.message });
+                    }
+                });
+            });
+            geoReq.on('error', e => sendJson(res, 502, { error: 'Nominatim no disponible: ' + e.message }));
+            geoReq.end();
+        } catch (e) {
+            sendJson(res, 500, { error: e.message });
+        }
+        return;
+    }
+
     // ==================== SERVIR ARCHIVOS ====================
     let urlPath = req.url.split('?')[0];
     if (urlPath === '/' || urlPath === '') urlPath = '/workweb_agents.html';
