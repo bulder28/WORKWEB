@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magna Estates | Inmobiliaria de Lujo en Toledo</title>
+    <meta name="description" content="Magna Estates es la agencia inmobiliaria exclusiva para propiedades de lujo e inversión en Toledo y alrededores.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;      /* Navy profundo */
+            --primary-light: #1e293b;
+            --accent: #d4af37;       /* Oro elegante */
+            --accent-hover: #f1c40f;
+            --text-main: #334155;
+            --text-light: #94a3b8;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.05);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        nav.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 1rem 5%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        nav.scrolled .logo, nav.scrolled .nav-links a {
+            color: var(--white);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--white);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-gold {
+            background: var(--accent);
+            color: var(--primary) !important;
+            padding: 0.8rem 1.8rem;
+            border-radius: 2px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            transition: var(--transition);
+        }
+        .btn-gold:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .hero-content h1 {
+            color: var(--white);
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        .hero-content p {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            background: var(--white);
+            padding: 2.5rem;
+            margin: -50px auto 4rem;
+            position: relative;
+            z-index: 20;
+            width: 80%;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            animation: slideUp 1s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Section Global */
+        .section {
+            padding: 6rem 5%;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        /* Properties Grid */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        .property-card {
+            background: var(--white);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        .property-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        .property-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .property-card:hover .property-img img {
+            transform: scale(1.05);
+        }
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+        .property-details {
+            padding: 2rem;
+        }
+        .property-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .property-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .property-meta {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Services */
+        .services-section {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .services-section .section-header h2 {
+            color: var(--white);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+        .service-card {
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+        .service-card:hover {
+            background: rgba(255,255,255,0.03);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        .service-title {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            text-align: center;
+            padding: 8rem 5%;
+        }
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .cta-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0b1120;
+            color: #94a3b8;
+            padding: 4rem 5% 2rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+        .footer-brand h3 {
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .footer-brand span {
+            color: var(--accent);
+        }
+        .footer-title {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        .footer-links a {
+            transition: var(--transition);
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media(max-width: 900px) {
+            .hero-content h1 { font-size: 3rem; }
+            .stats-bar { flex-direction: column; gap: 2rem; width: 90%; }
+            .services-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links { display: none; } /* Simplified mobile for demo */
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="logo">Magna<span>Estates</span></a>
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#propiedades">Colección</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#contacto" class="btn-gold">Contáctanos</a>
+        </div>
+    </nav>
+
+    <header class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>El Arte de Vivir en Toledo</h1>
+            <p>Descubra una colección curada de las propiedades más exclusivas y distinguidas en Toledo, diseñadas para un estilo de vida sin compromisos.</p>
+            <a href="#propiedades" class="btn-gold" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Explorar Colección</a>
+        </div>
+    </header>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Años de Excelencia</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">€50M</div>
+            <div class="stat-label">En Ventas Anuales</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">120</div>
+            <div class="stat-label">Propiedades Premium</div>
+        </div>
+    </div>
+
+    <section class="section" id="propiedades">
+        <div class="section-header">
+            <h2>Propiedades Destacadas</h2>
+            <p>Seleccionamos cuidadosamente cada residencia para asegurar que cumpla con los estándares más exigentes de lujo, privacidad y diseño arquitectónico.</p>
+        </div>
+        
+        <div class="properties-grid">
+            <!-- Property 1 -->
+            <div class="property-card">
+                <div class="badge">Novedad</div>
+                <div class="property-img">
+                    <img src="https://images.unsplash.com/photo-1613490908578-f11139a0e190?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Villa Moderna Toledo">
+                </div>
+                <div class="property-details">
+                    <div class="property-price">€ 1,250,000</div>
+                    <h3 class="property-title">Villa Mirador de San Servando</h3>
+                    <div class="property-meta">
+                        <div class="meta-item">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                            4 Hab
+                        </div>
+                        <div class="meta-item">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                            350 m²
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 2 -->
+            <div class="property-card">
+                <div class="property-img">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ático Casco Histórico">
+                </div>
+                <div class="property-details">
+                    <div class="property-price">€ 890,000</div>
+                    <h3 class="property-title">Ático Imperial Zocodover</h3>
+                    <div class="property-meta">
+                        <div class="meta-item">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                            3 Hab
+                        </div>
+                        <div class="meta-item">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                            210 m²
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 3 -->
+            <div class="property-card">
+                <div class="badge">Vendido</div>
+                <div class="property-img">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cigarral Toledo">
+                </div>
+                <div class="property-details">
+                    <div class="property-price">€ 2,100,000</div>
+                    <h3 class="property-title">Cigarral Histórico Los Olivos</h3>
+                    <div class="property-meta">
+                        <div class="meta-item">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                            6 Hab
+                        </div>
+                        <div class="meta-item">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                            850 m²
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section services-section" id="servicios">
+        <div class="section-header">
+            <h2>Servicios Exclusivos</h2>
+            <p>Más allá de la compra-venta, ofrecemos un asesoramiento integral para inversores y compradores patrimoniales.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💎</div>
+                <h3 class="service-title">Brokerage Privado</h3>
+                <p>Acceso a propiedades off-market y transacciones discretas para clientes VIP.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3 class="service-title">Inversión Patrimonial</h3>
+                <p>Análisis de rentabilidad y asesoría jurídica para la adquisición de edificios y activos.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏛️</div>
+                <h3 class="service-title">Arquitectura y Diseño</h3>
+                <p>Servicio integral de reforma y adecuación con los mejores interioristas de la región.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contacto">
+        <div class="cta-content">
+            <h2>¿Busca algo extraordinario?</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.2rem; color: #475569;">Nuestros asesores patrimoniales están a su disposición para ayudarle a encontrar la propiedad de sus sueños en Toledo.</p>
+            <a href="#" class="btn-gold" style="font-size: 1.2rem; padding: 1.2rem 3rem;">Agendar Cita Privada</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Magna<span>Estates</span></h3>
+                <p>La máxima expresión del lujo inmobiliario en la Ciudad Imperial. Compromiso absoluto con la excelencia y la privacidad de nuestros clientes.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">Enlaces</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio">Colección Privada</a></li>
+                    <li><a href="#">Inversiones</a></li>
+                    <li><a href="#">Nuestro Equipo</a></li>
+                    <li><a href="#">Prensa</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Oficina Central</h4>
+                <ul class="footer-links">
+                    <li>Plaza de Zocodover, 12. Toledo, España</li>
+                    <li>+34 925 000 000</li>
+                    <li>exclusivo@magnaestates.es</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Magna Estates. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

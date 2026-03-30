@@ -1,0 +1,5 @@
+.env
+.DS_Store
+*.log
+out.txt
+out2.txt

@@ -6,6 +6,29 @@ const https = require('https');
 const PORT = 8002;
 const DIR = __dirname;
 
+// ==================== CARGAR API KEY DESDE .env ====================
+function loadApiKey() {
+    const envPath = path.join(DIR, '.env');
+    try {
+        if (fs.existsSync(envPath)) {
+            const lines = fs.readFileSync(envPath, 'utf8').split('\n');
+            for (const line of lines) {
+                const [k, ...v] = line.split('=');
+                if (k && k.trim() === 'ANTHROPIC_API_KEY') {
+                    return v.join('=').trim().replace(/^["']|["']$/g, '');
+                }
+            }
+        }
+    } catch (_) {}
+    return process.env.ANTHROPIC_API_KEY || '';
+}
+let SAVED_API_KEY = loadApiKey();
+if (SAVED_API_KEY) {
+    console.log('  🔑  API Key cargada desde .env');
+} else {
+    console.log('  ⚠️   Sin API Key en .env — crea el archivo con: ANTHROPIC_API_KEY=sk-ant-...');
+}
+
 // ==================== HELPERS ====================
 function setCorsHeaders(res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -36,6 +59,51 @@ const server = http.createServer(async (req, res) => {
         setCorsHeaders(res);
         res.writeHead(204);
         res.end();
+        return;
+    }
+
+    // ==================== CONFIG: devolver API key al frontend ====================
+    if (req.url === '/api/config' && req.method === 'GET') {
+        SAVED_API_KEY = loadApiKey(); // reload in case it changed
+        sendJson(res, 200, { apiKey: SAVED_API_KEY });
+        return;
+    }
+
+    // ==================== GUARDAR API KEY en .env ====================
+    if (req.url === '/api/savekey' && req.method === 'POST') {
+        try {
+            const rawBody = await readBody(req);
+            const { apiKey } = JSON.parse(rawBody || '{}');
+            if (!apiKey || !apiKey.startsWith('sk-ant-')) {
+                sendJson(res, 400, { error: 'API Key no válida (debe empezar por sk-ant-)' });
+                return;
+            }
+            const envPath = path.join(DIR, '.env');
+            fs.writeFileSync(envPath, `ANTHROPIC_API_KEY=${apiKey.trim()}\n`, 'utf8');
+            SAVED_API_KEY = apiKey.trim();
+            console.log('  🔑  API Key guardada en .env ✓');
+            sendJson(res, 200, { ok: true });
+        } catch (e) {
+            sendJson(res, 500, { error: e.message });
+        }
+        return;
+    }
+
+    // ==================== GUARDAR DEMO HTML EN DISCO ====================
+    if (req.url === '/api/save-demo' && req.method === 'POST') {
+        try {
+            const rawBody = await readBody(req);
+            const { html, name } = JSON.parse(rawBody || '{}');
+            if (!html) { sendJson(res, 400, { error: 'HTML requerido' }); return; }
+            const demosDir = path.join(DIR, 'demos');
+            if (!fs.existsSync(demosDir)) fs.mkdirSync(demosDir);
+            const slug = (name || 'demo').toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').slice(0, 40);
+            const filename = slug + '.html';
+            fs.writeFileSync(path.join(demosDir, filename), html, 'utf8');
+            sendJson(res, 200, { ok: true, url: '/demos/' + filename });
+        } catch (e) {
+            sendJson(res, 500, { error: e.message });
+        }
         return;
     }
 
@@ -118,26 +186,179 @@ const server = http.createServer(async (req, res) => {
         return;
     }
 
-    // ==================== BUSINESS INTEL (stub - returns structured data for Claude) ====================
+    // ==================== BUSINESS INTEL — Claude web_search (gratis, busca en todo) ====================
     if (req.url === '/api/business-intel' && req.method === 'POST') {
         try {
             const rawBody = await readBody(req);
-            const payload = JSON.parse(rawBody || '{}');
-            // Return minimal structured data so the client-side Claude can use it
-            sendJson(res, 200, {
-                ok: true,
-                nombre: payload.nombre || '',
-                sector: payload.sector || '',
-                zona: payload.zona || '',
-                summary: `Negocio: ${payload.nombre || 'Desconocido'}. Sector: ${payload.sector || 'General'}. Zona: ${payload.zona || 'Illescas'}. ${payload.web ? 'Tiene web: ' + payload.web : 'Sin web conocida'}.`
+            const { nombre, sector, zona, web } = JSON.parse(rawBody || '{}');
+
+            // Leer API key
+            const apiKey = SAVED_API_KEY || '';
+            if (!apiKey) {
+                sendJson(res, 200, {
+                    ok: true, nombre, sector, zona,
+                    summary: `Negocio: ${nombre} (${sector}) en ${zona}, Toledo.`,
+                    sources: []
+                });
+                return;
+            }
+
+            // Scrape web propia si existe (esto siempre funciona)
+            let webData = null;
+            if (web) {
+                const webUrl = web.startsWith('http') ? web : 'https://' + web;
+                try {
+                    const webHtml = await new Promise((resolve) => {
+                        const u = new URL(webUrl);
+                        const client = u.protocol === 'https:' ? https : http;
+                        const r = client.request(webUrl, {
+                            method: 'GET',
+                            headers: { 'User-Agent': 'Mozilla/5.0 Chrome/120.0.0.0 Safari/537.36', 'Accept': 'text/html' }
+                        }, res => {
+                            let body = '';
+                            res.on('data', c => { if (body.length < 60000) body += c.toString(); });
+                            res.on('end', () => resolve(body));
+                        });
+                        r.on('error', () => resolve(''));
+                        r.setTimeout(8000, () => { r.destroy(); resolve(''); });
+                        r.end();
+                    });
+                    if (webHtml) {
+                        const clean = webHtml.replace(/<script[^>]*>.*?<\/script>/gis, '')
+                            .replace(/<style[^>]*>.*?<\/style>/gis, '')
+                            .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+                        const titleM = webHtml.match(/<title[^>]*>([^<]+)<\/title>/i);
+                        const descM = webHtml.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)/i);
+                        webData = {
+                            title: titleM ? titleM[1].trim() : '',
+                            description: descM ? descM[1].trim() : '',
+                            text: clean.slice(0, 1500)
+                        };
+                    }
+                } catch (_) {}
+            }
+
+            // Usar Claude con web_search para buscar info real del negocio
+            const searchPrompt = `Busca informacion REAL sobre este negocio local en internet:
+Nombre: ${nombre}
+Sector: ${sector}
+Zona: ${zona}, Toledo, España
+
+Busca en Google Maps, TripAdvisor, Yelp, Facebook, y cualquier directorio o web donde aparezca este negocio.
+
+Devuelve SOLO un JSON valido con esta estructura exacta (sin texto antes ni despues):
+{
+  "encontrado": true o false,
+  "rating": "4.3" o null,
+  "num_resenas": "127" o null,
+  "telefono": "925123456" o null,
+  "horario": "Lunes a viernes 9:00-21:00" o null,
+  "direccion": "Calle Mayor 5, Illescas" o null,
+  "descripcion": "descripcion real del negocio encontrada online" o null,
+  "resenas": ["texto literal de resena 1", "texto literal de resena 2", "texto literal de resena 3"],
+  "especialidades": ["especialidad 1", "especialidad 2"],
+  "fuentes": ["Google Maps", "TripAdvisor"],
+  "resumen": "parrafo completo con todo lo que sabes de este negocio basado en lo encontrado online"
+}`;
+
+            const claudeBody = JSON.stringify({
+                model: 'claude-3-5-sonnet-20241022',
+                max_tokens: 2000,
+                tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+                betas: ['web-search-2025-03-05'],
+                messages: [{ role: 'user', content: searchPrompt }]
             });
+
+            const claudeResp = await new Promise((resolve, reject) => {
+                const r = https.request('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': apiKey,
+                        'anthropic-version': '2023-06-01'
+                    }
+                }, res => {
+                    let body = '';
+                    res.on('data', c => body += c);
+                    res.on('end', () => {
+                        try { resolve(JSON.parse(body)); }
+                        catch { resolve(null); }
+                    });
+                });
+                r.on('error', reject);
+                r.setTimeout(30000, () => { r.destroy(); reject(new Error('timeout')); });
+                r.write(claudeBody);
+                r.end();
+            });
+
+            // Extraer texto de la respuesta de Claude
+            let parsed = null;
+            if (claudeResp?.content) {
+                const textBlocks = claudeResp.content.filter(b => b.type === 'text').map(b => b.text).join('');
+                // Intentar parsear JSON de la respuesta
+                const jsonMatch = textBlocks.match(/\{[\s\S]*\}/);
+                if (jsonMatch) {
+                    try { parsed = JSON.parse(jsonMatch[0]); } catch (_) {}
+                }
+            }
+
+            // Construir resultado final
+            const results = {
+                ok: true,
+                nombre, sector, zona,
+                sources: [],
+                web: webData
+            };
+
+            if (parsed) {
+                results.google = {
+                    rating: parsed.rating || null,
+                    phone: parsed.telefono || null,
+                    schedule: parsed.horario || null,
+                    address: parsed.direccion || null,
+                    snippets: parsed.descripcion ? [parsed.descripcion] : []
+                };
+                results.tripadvisor = {
+                    reviews: Array.isArray(parsed.resenas) ? parsed.resenas.filter(r => r && r.length > 20).slice(0, 4) : [],
+                    dishes: Array.isArray(parsed.especialidades) ? parsed.especialidades.slice(0, 8) : [],
+                    rating: parsed.rating || null
+                };
+                if (Array.isArray(parsed.fuentes)) results.sources = parsed.fuentes;
+
+                // Summary rico
+                const parts = [`Negocio: ${nombre} (${sector}) en ${zona}, Toledo.`];
+                if (parsed.rating) parts.push(`Valoracion: ${parsed.rating}/5 (${parsed.num_resenas || '?'} resenas).`);
+                if (parsed.horario) parts.push(`Horario: ${parsed.horario}.`);
+                if (parsed.direccion) parts.push(`Direccion: ${parsed.direccion}.`);
+                if (parsed.descripcion) parts.push(parsed.descripcion);
+                if (parsed.resenas?.length) {
+                    parts.push('Resenas reales: ' + parsed.resenas.slice(0,3).map(r => '"' + r + '"').join(' | '));
+                }
+                if (parsed.especialidades?.length) {
+                    parts.push('Especialidades: ' + parsed.especialidades.join(', ') + '.');
+                }
+                if (parsed.resumen) parts.push(parsed.resumen);
+                results.summary = parts.join(' ');
+            } else {
+                // Fallback sin datos de Claude
+                const wParts = [`Negocio: ${nombre} (${sector}) en ${zona}, Toledo.`];
+                if (webData?.description) wParts.push(webData.description);
+                if (webData?.text) wParts.push(webData.text.slice(0, 500));
+                results.summary = wParts.join(' ');
+                results.sources = webData ? ['web propia'] : [];
+            }
+
+            console.log(`[Business Intel] ${nombre} — rating: ${parsed?.rating || 'no encontrado'} — resenas: ${parsed?.resenas?.length || 0} — fuentes: ${results.sources.join(', ') || 'ninguna'}`);
+            sendJson(res, 200, results);
+
         } catch (e) {
+            console.error('[Business Intel] Error:', e.message);
             sendJson(res, 500, { error: e.message });
         }
         return;
     }
 
-    // ==================== PROSPECTOR (OpenStreetMap) ====================
+        // ==================== PROSPECTOR (OpenStreetMap) ====================
     if (req.url === '/api/prospector' && req.method === 'POST') {
         try {
             const rawBody = await readBody(req);

@@ -37,253 +37,811 @@
       --display: 'Syne', sans-serif;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
 
-    html, body {
-      height: 100%; overflow: hidden; background: var(--bg)
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg)
     }
 
     body {
-      color: var(--text); font-family: var(--sans); display: flex; flex-direction: column; font-size: 16px;
+      color: var(--text);
+      font-family: var(--sans);
+      display: flex;
+      flex-direction: column;
+      font-size: 16px;
     }
 
     /* HEADER */
     .hdr {
-      display: flex; align-items: center; justify-content: space-between; padding: 0 32px;
-      height: 72px; border-bottom: 1px solid var(--border); background: var(--s1); flex-shrink: 0; gap: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 72px;
+      border-bottom: 1px solid var(--border);
+      background: var(--s1);
+      flex-shrink: 0;
+      gap: 32px;
     }
 
     .logo {
-      font-family: var(--display); font-size: 24px; font-weight: 800; color: var(--green);
-      letter-spacing: -0.01em; white-space: nowrap; line-height: 1.2;
+      font-family: var(--display);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      line-height: 1.2;
     }
 
     .logo small {
-      font-family: var(--mono); font-size: 12px; color: var(--dim); font-weight: 400;
-      display: block; letter-spacing: 0.1em; text-transform: uppercase
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--dim);
+      font-weight: 400;
+      display: block;
+      letter-spacing: 0.1em;
+      text-transform: uppercase
     }
 
     .kpis {
-      display: flex; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; flex-shrink: 0
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0
     }
 
     .kp {
-      padding: 12px 28px; text-align: center; border-right: 1px solid var(--border); background: var(--s2)
+      padding: 12px 28px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      background: var(--s2)
     }
 
-    .kp:last-child { border-right: none }
-    .kp-v { font-family: var(--mono); font-size: 24px; font-weight: 600 }
-    .kp-l { font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+    .kp:last-child {
+      border-right: none
+    }
 
-    .kp.g .kp-v { color: var(--green) }
-    .kp.b .kp-v { color: var(--blue) }
-    .kp.o .kp-v { color: var(--orange) }
-    .kp.p .kp-v { color: var(--purple) }
+    .kp-v {
+      font-family: var(--mono);
+      font-size: 24px;
+      font-weight: 600
+    }
+
+    .kp-l {
+      font-size: 12px;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    .kp.g .kp-v {
+      color: var(--green)
+    }
+
+    .kp.b .kp-v {
+      color: var(--blue)
+    }
+
+    .kp.o .kp-v {
+      color: var(--orange)
+    }
+
+    .kp.p .kp-v {
+      color: var(--purple)
+    }
 
     /* SIDEBAR + MAIN */
-    .layout { flex: 1; display: flex; overflow: hidden }
+    .layout {
+      flex: 1;
+      display: flex;
+      overflow: hidden
+    }
 
     /* SIDEBAR */
     .sidebar {
-      width: 280px; flex-shrink: 0; border-right: 1px solid var(--border); background: var(--s1);
-      display: flex; flex-direction: column; overflow-y: auto; padding-top: 16px;
+      width: 280px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      background: var(--s1);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding-top: 16px;
     }
 
-    .sidebar::-webkit-scrollbar { width: 6px }
-    .sidebar::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 6px; }
+    .sidebar::-webkit-scrollbar {
+      width: 6px
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: var(--muted);
+      border-radius: 6px;
+    }
 
     .sb-section {
-      padding: 20px 24px 12px; font-family: var(--mono); font-size: 13px; color: var(--dim);
-      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;
+      padding: 20px 24px 12px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
     }
 
     .sb-item {
-      display: flex; align-items: center; gap: 14px; padding: 16px 24px; cursor: pointer;
-      transition: all 0.15s; border-left: 4px solid transparent; font-size: 16px; font-weight: 500; color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 24px;
+      cursor: pointer;
+      transition: all 0.15s;
+      border-left: 4px solid transparent;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
       opacity: 0.8;
     }
 
-    .sb-item:hover { background: var(--s2); opacity: 1; }
-    .sb-item.active { background: var(--s2); opacity: 1; }
+    .sb-item:hover {
+      background: var(--s2);
+      opacity: 1;
+    }
 
-    .sb-item.active[data-p="prospector"] { border-left-color: var(--green); color: var(--green) }
-    .sb-item.active[data-p="crm"] { border-left-color: var(--blue); color: var(--blue) }
-    .sb-item.active[data-p="dev"] { border-left-color: var(--cyan); color: var(--cyan) }
-    .sb-item.active[data-p="marketing"] { border-left-color: var(--orange); color: var(--orange) }
-    .sb-item.active[data-p="business"] { border-left-color: var(--yellow); color: var(--yellow) }
-    .sb-item.active[data-p="legal"] { border-left-color: var(--purple); color: var(--purple) }
-    .sb-item.active[data-p="chatbot"] { border-left-color: var(--red); color: var(--red) }
-    .sb-item.active[data-p="closer"] { border-left-color: var(--green); color: var(--green) }
-    .sb-item.active[data-p="auditor"] { border-left-color: var(--blue); color: var(--blue) }
-    .sb-item.active[data-p="seo"] { border-left-color: var(--orange); color: var(--orange) }
-    .sb-item.active[data-p="proposal"] { border-left-color: var(--purple); color: var(--purple) }
+    .sb-item.active {
+      background: var(--s2);
+      opacity: 1;
+    }
 
-    .sb-icon { font-size: 20px; flex-shrink: 0 }
+    .sb-item.active[data-p="prospector"] {
+      border-left-color: var(--green);
+      color: var(--green)
+    }
+
+    .sb-item.active[data-p="crm"] {
+      border-left-color: var(--blue);
+      color: var(--blue)
+    }
+
+    .sb-item.active[data-p="dev"] {
+      border-left-color: var(--cyan);
+      color: var(--cyan)
+    }
+
+    .sb-item.active[data-p="marketing"] {
+      border-left-color: var(--orange);
+      color: var(--orange)
+    }
+
+    .sb-item.active[data-p="business"] {
+      border-left-color: var(--yellow);
+      color: var(--yellow)
+    }
+
+    .sb-item.active[data-p="legal"] {
+      border-left-color: var(--purple);
+      color: var(--purple)
+    }
+
+    .sb-item.active[data-p="chatbot"] {
+      border-left-color: var(--red);
+      color: var(--red)
+    }
+
+    .sb-item.active[data-p="closer"] {
+      border-left-color: var(--green);
+      color: var(--green)
+    }
+
+    .sb-item.active[data-p="auditor"] {
+      border-left-color: var(--blue);
+      color: var(--blue)
+    }
+
+    .sb-item.active[data-p="seo"] {
+      border-left-color: var(--orange);
+      color: var(--orange)
+    }
+
+    .sb-item.active[data-p="proposal"] {
+      border-left-color: var(--purple);
+      color: var(--purple)
+    }
+
+    .sb-icon {
+      font-size: 20px;
+      flex-shrink: 0
+    }
+
     .sb-badge {
-      margin-left: auto; background: var(--green); color: #000; border-radius: 100px; padding: 2px 10px;
-      font-size: 12px; font-weight: 700; font-family: var(--mono); display: none;
+      margin-left: auto;
+      background: var(--green);
+      color: #000;
+      border-radius: 100px;
+      padding: 2px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--mono);
+      display: none;
     }
 
     /* MAIN */
-    .main { flex: 1; overflow: hidden; display: flex; flex-direction: column; background: var(--bg); }
+    .main {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
 
     .panel {
-      display: none; height: 100%; overflow-y: auto; padding: 40px 48px; flex-direction: column; gap: 32px
+      display: none;
+      height: 100%;
+      overflow-y: auto;
+      padding: 40px 48px;
+      flex-direction: column;
+      gap: 32px
     }
 
-    .panel.active { display: flex }
+    .panel.active {
+      display: flex
+    }
 
-    .panel::-webkit-scrollbar { width: 8px }
-    .panel::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 4px }
+    .panel::-webkit-scrollbar {
+      width: 8px
+    }
+
+    .panel::-webkit-scrollbar-thumb {
+      background: var(--muted);
+      border-radius: 4px
+    }
 
     /* COMPONENTS */
-    .card { background: var(--s1); border: 1px solid var(--border); border-radius: 10px; padding: 32px; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-    .card-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; gap: 16px }
-    
-    .card-title {
-      font-family: var(--mono); font-size: 16px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--text); display: flex; align-items: center; gap: 12px
+    .card {
+      background: var(--s1);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
-    .card-title .dot { width: 12px; height: 12px; border-radius: 50% }
+    .card-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      gap: 16px
+    }
+
+    .card-title {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .card-title .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%
+    }
 
     label {
-      font-size: 14px; color: var(--dim); font-family: var(--sans); font-weight: 500;
-      display: block; margin-bottom: 10px
+      font-size: 14px;
+      color: var(--dim);
+      font-family: var(--sans);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 10px
     }
 
-    select, input, textarea {
-      background: var(--s2); border: 1px solid var(--border); border-radius: 8px; color: var(--text);
-      font-family: var(--sans); font-size: 16px; padding: 14px 20px; outline: none; transition: border-color 0.15s; width: 100%;
+    select,
+    input,
+    textarea {
+      background: var(--s2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      padding: 14px 20px;
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
     }
 
-    select:focus, input:focus, textarea:focus { border-color: var(--green) }
-    textarea { resize: vertical; min-height: 140px; line-height: 1.6 }
-    select option { background: var(--s2); font-size: 16px; }
+    select:focus,
+    input:focus,
+    textarea:focus {
+      border-color: var(--green)
+    }
 
-    .row { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-end }
-    .field { display: flex; flex-direction: column; flex: 1; min-width: 250px }
+    textarea {
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.6
+    }
+
+    select option {
+      background: var(--s2);
+      font-size: 16px;
+    }
+
+    .row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: flex-end
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 250px
+    }
 
     .btn {
-      padding: 14px 28px; border-radius: 8px; border: none; font-family: var(--sans); font-size: 16px;
-      font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap;
-      display: inline-flex; align-items: center; gap: 10px; justify-content: center;
+      padding: 14px 28px;
+      border-radius: 8px;
+      border: none;
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
     }
 
-    .btn:disabled { opacity: 0.4; cursor: not-allowed }
-    .btn-g { background: var(--green); color: #000 }
-    .btn-g:hover:not(:disabled) { background: #00ff88 }
-    .btn-b { background: var(--bd); color: var(--blue); border: 1px solid rgba(77, 171, 247, 0.3) }
-    .btn-b:hover:not(:disabled) { background: rgba(77, 171, 247, 0.2) }
-    .btn-o { background: var(--od); color: var(--orange); border: 1px solid rgba(255, 169, 77, 0.3) }
-    .btn-o:hover:not(:disabled) { background: rgba(255, 169, 77, 0.2) }
-    .btn-p { background: var(--pd); color: var(--purple); border: 1px solid rgba(204, 93, 232, 0.3) }
-    .btn-p:hover:not(:disabled) { background: rgba(204, 93, 232, 0.2) }
-    .btn-r { background: var(--rd); color: var(--red); border: 1px solid rgba(255, 107, 107, 0.3) }
-    .btn-r:hover:not(:disabled) { background: rgba(255, 107, 107, 0.2) }
-    .btn-c { background: var(--cd); color: var(--cyan); border: 1px solid rgba(34, 211, 238, 0.3) }
-    .btn-c:hover:not(:disabled) { background: rgba(34, 211, 238, 0.2) }
-    .btn-ghost { background: transparent; color: var(--dim); border: 1px solid var(--border) }
-    .btn-ghost:hover:not(:disabled) { border-color: var(--dim); color: var(--text); background: var(--s2) }
-    .btn-sm { padding: 10px 20px; font-size: 14px }
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed
+    }
+
+    .btn-g {
+      background: var(--green);
+      color: #000
+    }
+
+    .btn-g:hover:not(:disabled) {
+      background: #00ff88
+    }
+
+    .btn-b {
+      background: var(--bd);
+      color: var(--blue);
+      border: 1px solid rgba(77, 171, 247, 0.3)
+    }
+
+    .btn-b:hover:not(:disabled) {
+      background: rgba(77, 171, 247, 0.2)
+    }
+
+    .btn-o {
+      background: var(--od);
+      color: var(--orange);
+      border: 1px solid rgba(255, 169, 77, 0.3)
+    }
+
+    .btn-o:hover:not(:disabled) {
+      background: rgba(255, 169, 77, 0.2)
+    }
+
+    .btn-p {
+      background: var(--pd);
+      color: var(--purple);
+      border: 1px solid rgba(204, 93, 232, 0.3)
+    }
+
+    .btn-p:hover:not(:disabled) {
+      background: rgba(204, 93, 232, 0.2)
+    }
+
+    .btn-r {
+      background: var(--rd);
+      color: var(--red);
+      border: 1px solid rgba(255, 107, 107, 0.3)
+    }
+
+    .btn-r:hover:not(:disabled) {
+      background: rgba(255, 107, 107, 0.2)
+    }
+
+    .btn-c {
+      background: var(--cd);
+      color: var(--cyan);
+      border: 1px solid rgba(34, 211, 238, 0.3)
+    }
+
+    .btn-c:hover:not(:disabled) {
+      background: rgba(34, 211, 238, 0.2)
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--dim);
+      border: 1px solid var(--border)
+    }
+
+    .btn-ghost:hover:not(:disabled) {
+      border-color: var(--dim);
+      color: var(--text);
+      background: var(--s2)
+    }
+
+    .btn-sm {
+      padding: 10px 20px;
+      font-size: 14px
+    }
 
     .badge {
-      display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 6px;
-      font-family: var(--mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em
     }
-    .b-n { background: var(--s3); color: var(--dim) }
-    .b-c { background: var(--bd); color: var(--blue) }
-    .b-i { background: var(--od); color: var(--orange) }
-    .b-pr { background: var(--pd); color: var(--purple) }
-    .b-ce { background: var(--gd); color: var(--green) }
-    .b-pe { background: var(--rd); color: var(--red) }
-    .b-alto { background: var(--gd); color: var(--green) }
-    .b-medio { background: var(--od); color: var(--orange) }
-    .b-bajo { background: var(--s3); color: var(--dim) }
+
+    .b-n {
+      background: var(--s3);
+      color: var(--dim)
+    }
+
+    .b-c {
+      background: var(--bd);
+      color: var(--blue)
+    }
+
+    .b-i {
+      background: var(--od);
+      color: var(--orange)
+    }
+
+    .b-pr {
+      background: var(--pd);
+      color: var(--purple)
+    }
+
+    .b-ce {
+      background: var(--gd);
+      color: var(--green)
+    }
+
+    .b-pe {
+      background: var(--rd);
+      color: var(--red)
+    }
+
+    .b-alto {
+      background: var(--gd);
+      color: var(--green)
+    }
+
+    .b-medio {
+      background: var(--od);
+      color: var(--orange)
+    }
+
+    .b-bajo {
+      background: var(--s3);
+      color: var(--dim)
+    }
 
     .output {
-      background: var(--s2); border: 1px solid var(--border); border-radius: 8px; padding: 24px;
-      font-size: 16px; line-height: 1.8; white-space: pre-wrap; word-break: break-word; color: var(--text); min-height: 100px;
+      background: var(--s2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      font-size: 16px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: var(--text);
+      min-height: 100px;
     }
 
-    .tbl { width: 100%; border-collapse: collapse; font-size: 15px }
-    .tbl th {
-      font-family: var(--sans); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
-      color: var(--dim); padding: 16px 20px; text-align: left; border-bottom: 2px solid var(--border); background: var(--s2)
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px
     }
-    .tbl td { padding: 20px; border-bottom: 1px solid var(--border); vertical-align: middle }
-    .tbl tr:hover td { background: rgba(255, 255, 255, 0.02) }
-    .tbl tr:last-child td { border-bottom: none }
+
+    .tbl th {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--dim);
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+      background: var(--s2)
+    }
+
+    .tbl td {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle
+    }
+
+    .tbl tr:hover td {
+      background: rgba(255, 255, 255, 0.02)
+    }
+
+    .tbl tr:last-child td {
+      border-bottom: none
+    }
 
     .status {
-      display: flex; align-items: center; gap: 16px; padding: 16px 24px; background: var(--s2);
-      border: 1px solid var(--border); border-radius: 8px; font-size: 16px; color: var(--text)
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 24px;
+      background: var(--s2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      color: var(--text)
     }
 
     .spin {
-      display: inline-block; width: 20px; height: 20px; border: 3px solid var(--muted);
-      border-top-color: var(--green); border-radius: 50%; animation: spin 0.7s linear infinite
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--muted);
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite
     }
-    @keyframes spin { to { transform: rotate(360deg) } }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
 
     #toast {
-      position: fixed; bottom: 32px; right: 32px; padding: 16px 28px; background: var(--s3);
-      border: 1px solid var(--border); border-radius: 8px; font-size: 16px; font-family: var(--sans); font-weight: 500;
-      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 999; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      padding: 16px 28px;
+      background: var(--s3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: var(--sans);
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      z-index: 999;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
-    #toast.show { opacity: 1 }
-    #toast.success { border-color: rgba(0, 230, 118, 0.4); color: var(--green) }
-    #toast.error { border-color: rgba(255, 107, 107, 0.4); color: var(--red) }
-    #toast.info { border-color: rgba(77, 171, 247, 0.4); color: var(--blue) }
+
+    #toast.show {
+      opacity: 1
+    }
+
+    #toast.success {
+      border-color: rgba(0, 230, 118, 0.4);
+      color: var(--green)
+    }
+
+    #toast.error {
+      border-color: rgba(255, 107, 107, 0.4);
+      color: var(--red)
+    }
+
+    #toast.info {
+      border-color: rgba(77, 171, 247, 0.4);
+      color: var(--blue)
+    }
 
     .stsel {
-      background: transparent; border: 1px solid var(--border); font-family: var(--sans); font-size: 14px;
-      cursor: pointer; padding: 8px 12px; border-radius: 6px; color: inherit; font-weight: 600; outline: none; width: 100%;
+      background: transparent;
+      border: 1px solid var(--border);
+      font-family: var(--sans);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: inherit;
+      font-weight: 600;
+      outline: none;
+      width: 100%;
     }
-    .stsel:focus { border-color: var(--dim); }
+
+    .stsel:focus {
+      border-color: var(--dim);
+    }
 
     /* CHATBOT */
     .chat-msgs {
-      height: 500px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; padding: 24px;
-      background: var(--s2); border: 1px solid var(--border); border-radius: 8px;
+      height: 500px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 24px;
+      background: var(--s2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
     }
-    .chat-msgs::-webkit-scrollbar { width: 6px }
-    .chat-msgs::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 6px; }
 
-    .cmsg { display: flex; gap: 16px; animation: fadeUp 0.2s ease }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(5px) } to { opacity: 1; transform: translateY(0) } }
-    .cmsg.bot { flex-direction: row }
-    .cmsg.user { flex-direction: row-reverse }
+    .chat-msgs::-webkit-scrollbar {
+      width: 6px
+    }
+
+    .chat-msgs::-webkit-scrollbar-thumb {
+      background: var(--muted);
+      border-radius: 6px;
+    }
+
+    .cmsg {
+      display: flex;
+      gap: 16px;
+      animation: fadeUp 0.2s ease
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(5px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .cmsg.bot {
+      flex-direction: row
+    }
+
+    .cmsg.user {
+      flex-direction: row-reverse
+    }
 
     .cmsg-av {
-      width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
-      font-size: 20px; flex-shrink: 0; border: 1px solid var(--border); background: var(--s3)
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      background: var(--s3)
     }
-    .cmsg-bubble {
-      max-width: 85%; padding: 16px 20px; border-radius: 10px; font-size: 16px; line-height: 1.6; border: 1px solid var(--border)
-    }
-    .cmsg.bot .cmsg-bubble { background: var(--s1); border-color: rgba(0, 230, 118, 0.2) }
-    .cmsg.user .cmsg-bubble { background: var(--s3) }
 
-    .chat-input-row { display: flex; gap: 16px; margin-top: 24px }
-    
-    /* DEV PREVIEW */
-    .dev-preview { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--s2); }
-    .dev-preview-bar {
-      padding: 16px 24px; border-bottom: 1px solid var(--border); background: var(--s3); font-family: var(--mono);
-      font-size: 14px; color: var(--dim); display: flex; align-items: center; gap: 16px
+    .cmsg-bubble {
+      max-width: 85%;
+      padding: 16px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      line-height: 1.6;
+      border: 1px solid var(--border)
     }
-    .dev-preview-dots { display: flex; gap: 10px }
-    .dev-preview-dots span { width: 14px; height: 14px; border-radius: 50% }
-    iframe#demo-frame { width: 100%; height: 500px; border: none; background: #fff }
+
+    .cmsg.bot .cmsg-bubble {
+      background: var(--s1);
+      border-color: rgba(0, 230, 118, 0.2)
+    }
+
+    .cmsg.user .cmsg-bubble {
+      background: var(--s3)
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px
+    }
+
+    /* DEV PREVIEW */
+    .dev-preview {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--s2);
+    }
+
+    .dev-preview-bar {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--s3);
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--dim);
+      display: flex;
+      align-items: center;
+      gap: 16px
+    }
+
+    .dev-preview-dots {
+      display: flex;
+      gap: 10px
+    }
+
+    .dev-preview-dots span {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%
+    }
+
+    iframe#demo-frame {
+      width: 100%;
+      height: 500px;
+      border: none;
+      background: #fff
+    }
 
     /* PIPELINE */
-    .pipeline { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: 32px }
-    .stage { background: var(--s2); border: 1px solid var(--border); border-radius: 8px; padding: 20px 16px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    .stage-l { font-family: var(--sans); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--dim); margin-bottom: 12px }
-    .stage-n { font-family: var(--mono); font-size: 32px; font-weight: 700 }
-    
-    .note { font-size: 15px; color: var(--dim); margin-top: 10px; display: block; }
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-bottom: 32px
+    }
+
+    .stage {
+      background: var(--s2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .stage-l {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--dim);
+      margin-bottom: 12px
+    }
+
+    .stage-n {
+      font-family: var(--mono);
+      font-size: 32px;
+      font-weight: 700
+    }
+
+    .note {
+      font-size: 15px;
+      color: var(--dim);
+      margin-top: 10px;
+      display: block;
+    }
   </style>
 </head>
 
@@ -295,17 +853,36 @@
       <small>Agent Hub · 10 Agentes Activos</small>
     </div>
     <div class="kpis">
-      <div class="kp"><div class="kp-v" id="k0">0</div><div class="kp-l">Leads</div></div>
-      <div class="kp b"><div class="kp-v" id="k1">0</div><div class="kp-l">Contact.</div></div>
-      <div class="kp o"><div class="kp-v" id="k2">0</div><div class="kp-l">Interes.</div></div>
-      <div class="kp g"><div class="kp-v" id="k3">0</div><div class="kp-l">Cerrados</div></div>
-      <div class="kp p"><div class="kp-v" id="k4">0€</div><div class="kp-l">Pipeline</div></div>
+      <div class="kp">
+        <div class="kp-v" id="k0">0</div>
+        <div class="kp-l">Leads</div>
+      </div>
+      <div class="kp b">
+        <div class="kp-v" id="k1">0</div>
+        <div class="kp-l">Contact.</div>
+      </div>
+      <div class="kp o">
+        <div class="kp-v" id="k2">0</div>
+        <div class="kp-l">Interes.</div>
+      </div>
+      <div class="kp g">
+        <div class="kp-v" id="k3">0</div>
+        <div class="kp-l">Cerrados</div>
+      </div>
+      <div class="kp p">
+        <div class="kp-v" id="k4">0€</div>
+        <div class="kp-l">Pipeline</div>
+      </div>
     </div>
-    
+
     <div style="display:flex;gap:8px;margin-left:auto;align-items:center">
-      <span style="font-family:var(--mono);font-size:9px;color:var(--muted);padding:4px 8px;border:1px solid var(--border);border-radius:4px;white-space:nowrap">🤖 claude-3-5-haiku</span>
-      <button class="btn btn-ghost btn-sm" onclick="testApiKey()" style="font-size:11px;padding:5px 10px;border-color:rgba(34,211,238,0.3);color:var(--cyan)">🔬 Test</button>
-      <button class="btn btn-ghost btn-sm" onclick="changeApiKey()" style="font-size:11px;padding:5px 10px;border-color:rgba(255,255,255,0.15);color:var(--dim)">🔑 API Key</button>
+      <span
+        style="font-family:var(--mono);font-size:9px;color:var(--muted);padding:4px 8px;border:1px solid var(--border);border-radius:4px;white-space:nowrap">🤖
+        claude-sonnet-4-5</span>
+      <button class="btn btn-ghost btn-sm" onclick="testApiKey()"
+        style="font-size:11px;padding:5px 10px;border-color:rgba(34,211,238,0.3);color:var(--cyan)">🔬 Test</button>
+      <button class="btn btn-ghost btn-sm" onclick="changeApiKey()"
+        style="font-size:11px;padding:5px 10px;border-color:rgba(255,255,255,0.15);color:var(--dim)">🔑 API Key</button>
     </div>
   </div>
 
@@ -313,19 +890,24 @@
 
     <div class="sidebar">
       <div class="sb-section">Captación</div>
-      <div class="sb-item active" data-p="prospector" onclick="go('prospector',this)"><span class="sb-icon">🔍</span>Prospector</div>
-      <div class="sb-item" data-p="crm" onclick="go('crm',this)"><span class="sb-icon">📋</span>CRM<span class="sb-badge" id="badge-crm">0</span></div>
+      <div class="sb-item active" data-p="prospector" onclick="go('prospector',this)"><span
+          class="sb-icon">🔍</span>Prospector</div>
+      <div class="sb-item" data-p="crm" onclick="go('crm',this)"><span class="sb-icon">📋</span>CRM<span
+          class="sb-badge" id="badge-crm">0</span></div>
 
       <div class="sb-section">Agentes IA</div>
       <div class="sb-item" data-p="dev" onclick="go('dev',this)"><span class="sb-icon">🌐</span>Agente Dev</div>
-      <div class="sb-item" data-p="marketing" onclick="go('marketing',this)"><span class="sb-icon">📢</span>Marketing</div>
+      <div class="sb-item" data-p="marketing" onclick="go('marketing',this)"><span class="sb-icon">📢</span>Marketing
+      </div>
       <div class="sb-item" data-p="business" onclick="go('business',this)"><span class="sb-icon">💼</span>Business</div>
       <div class="sb-item" data-p="legal" onclick="go('legal',this)"><span class="sb-icon">⚖️</span>Legal</div>
       <div class="sb-item" data-p="chatbot" onclick="go('chatbot',this)"><span class="sb-icon">🤖</span>Chatbot</div>
       <div class="sb-item" data-p="closer" onclick="go('closer',this)"><span class="sb-icon">🎯</span>Closer</div>
-      <div class="sb-item" data-p="auditor" onclick="go('auditor',this)"><span class="sb-icon">🩺</span>Auditor Web</div>
+      <div class="sb-item" data-p="auditor" onclick="go('auditor',this)"><span class="sb-icon">🩺</span>Auditor Web
+      </div>
       <div class="sb-item" data-p="seo" onclick="go('seo',this)"><span class="sb-icon">📍</span>SEO Local</div>
-      <div class="sb-item" data-p="proposal" onclick="go('proposal',this)"><span class="sb-icon">📄</span>Propuesta Premium</div>
+      <div class="sb-item" data-p="proposal" onclick="go('proposal',this)"><span class="sb-icon">📄</span>Propuesta
+        Premium</div>
     </div>
 
     <div class="main">
@@ -342,8 +924,12 @@
             <div class="field">
               <label>Zona</label>
               <select id="pr-zona">
-                <option>Illescas</option><option>Esquivias</option><option>Yeles</option><option>Yuncos</option>
-                <option>Numancia de la Sagra</option><option>Seseña</option>
+                <option>Illescas</option>
+                <option>Esquivias</option>
+                <option>Yeles</option>
+                <option>Yuncos</option>
+                <option>Numancia de la Sagra</option>
+                <option>Seseña</option>
               </select>
             </div>
             <div class="field">
@@ -384,11 +970,18 @@
         <div class="pipeline" id="pipeline-bar"></div>
         <div class="card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--blue)"></div>Pipeline de Leads</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--blue)"></div>Pipeline de Leads
+            </div>
             <div style="display:flex;gap:16px;align-items:center">
               <select id="crm-f" onchange="renderCRM()" style="width:auto;min-width:180px;">
-                <option value="">Filtrar: Todos</option><option>Nuevo</option><option>Contactado</option>
-                <option>Interesado</option><option>Propuesta</option><option>Cerrado</option><option>Perdido</option>
+                <option value="">Filtrar: Todos</option>
+                <option>Nuevo</option>
+                <option>Contactado</option>
+                <option>Interesado</option>
+                <option>Propuesta</option>
+                <option>Cerrado</option>
+                <option>Perdido</option>
               </select>
               <button class="btn btn-ghost" onclick="showAddForm()">+ Añadir Manual</button>
             </div>
@@ -396,14 +989,25 @@
           <div style="overflow-x:auto">
             <table class="tbl">
               <thead>
-                <tr><th>Negocio</th><th>Sector</th><th>Zona</th><th>Teléfono</th><th>Potencial</th><th>Estado</th><th>Precio</th><th>Acciones</th></tr>
+                <tr>
+                  <th>Negocio</th>
+                  <th>Sector</th>
+                  <th>Zona</th>
+                  <th>Teléfono</th>
+                  <th>Potencial</th>
+                  <th>Estado</th>
+                  <th>Precio</th>
+                  <th>Acciones</th>
+                </tr>
               </thead>
               <tbody id="crm-body"></tbody>
             </table>
           </div>
         </div>
         <div class="card" id="add-form" style="display:none">
-          <div class="card-title" style="margin-bottom:24px"><div class="dot" style="background:var(--green)"></div>Nuevo Lead Manual</div>
+          <div class="card-title" style="margin-bottom:24px">
+            <div class="dot" style="background:var(--green)"></div>Nuevo Lead Manual
+          </div>
           <div class="row">
             <div class="field"><label>Nombre *</label><input id="af-n" placeholder="Bar El Rincón"></div>
             <div class="field"><label>Sector</label><input id="af-s" placeholder="Hostelería"></div>
@@ -413,19 +1017,28 @@
             <div class="field"><label>Teléfono</label><input id="af-t" placeholder="925 XXX XXX"></div>
             <div class="field"><label>Email</label><input id="af-e" placeholder="info@..."></div>
             <div class="field"><label>Situación web</label>
-              <select id="af-w"><option>Sin web</option><option>Web obsoleta</option><option>Solo redes</option></select>
+              <select id="af-w">
+                <option>Sin web</option>
+                <option>Web obsoleta</option>
+                <option>Solo redes</option>
+              </select>
             </div>
           </div>
           <div class="row" style="margin-top:32px">
             <button class="btn btn-g" onclick="addManual()">Guardar Lead</button>
-            <button class="btn btn-ghost" onclick="document.getElementById('add-form').style.display='none'">Cancelar</button>
+            <button class="btn btn-ghost"
+              onclick="document.getElementById('add-form').style.display='none'">Cancelar</button>
           </div>
         </div>
         <div class="card" id="crm-activity-card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--blue)"></div>Actividad del lead</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--blue)"></div>Actividad del lead
+            </div>
             <div style="display:flex;gap:12px;align-items:center">
-              <select id="crm-activity-sel" onchange="renderLeadActivity()" style="width:auto;min-width:260px;"><option value="">— Selecciona lead —</option></select>
+              <select id="crm-activity-sel" onchange="renderLeadActivity()" style="width:auto;min-width:260px;">
+                <option value="">— Selecciona lead —</option>
+              </select>
               <button class="btn btn-ghost btn-sm" onclick="addManualActivity()">+ Nota</button>
             </div>
           </div>
@@ -437,13 +1050,17 @@
       <div class="panel" id="p-dev">
         <div class="card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--cyan)"></div>Agente Dev — Genera Demo Web</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--cyan)"></div>Agente Dev — Genera Demo Web
+            </div>
             <span class="note" style="margin:0">Crea una web funcional para enviar al prospecto</span>
           </div>
           <div class="row">
             <div class="field" style="flex:2">
               <label>Lead objetivo</label>
-              <select id="dev-sel" onchange="onDevSel()"><option value="">— Selecciona lead —</option></select>
+              <select id="dev-sel" onchange="onDevSel()">
+                <option value="">— Selecciona lead —</option>
+              </select>
             </div>
             <div class="field">
               <label>Estilo visual</label>
@@ -459,31 +1076,42 @@
             <label>Servicios / Especialidades del negocio (opcional)</label>
             <input id="dev-extra" placeholder="Ej: menú del día 10€, especialidad en asados...">
           </div>
-          <div id="dev-research-box" style="display:none;margin-top:20px;border:1px solid var(--border);background:var(--s2);border-radius:8px;padding:16px 18px">
+          <div id="dev-research-box"
+            style="display:none;margin-top:20px;border:1px solid var(--border);background:var(--s2);border-radius:8px;padding:16px 18px">
             <div style="display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:12px">
-              <div style="font-family:var(--mono);font-size:13px;color:var(--cyan);text-transform:uppercase;letter-spacing:.08em">Investigacion previa del negocio</div>
+              <div
+                style="font-family:var(--mono);font-size:13px;color:var(--cyan);text-transform:uppercase;letter-spacing:.08em">
+                Investigacion previa del negocio</div>
               <div style="display:flex;gap:10px">
-                <button class="btn btn-ghost btn-sm" id="btn-dev-research" onclick="researchBusinessForDev()">🔎 Investigar negocio</button>
+                <button class="btn btn-ghost btn-sm" id="btn-dev-research" onclick="researchBusinessForDev()">🔎
+                  Investigar negocio</button>
               </div>
             </div>
-            <div id="dev-research-summary" class="note">Antes de generar la demo puedes reunir informacion de la web, Google y otros datos detectados del negocio.</div>
+            <div id="dev-research-summary" class="note">Antes de generar la demo puedes reunir informacion de la web,
+              Google y otros datos detectados del negocio.</div>
           </div>
         </div>
         <div id="dev-status" style="display:none" class="status"></div>
         <div class="card" id="dev-result" style="display:none">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--cyan)"></div>Demo generada — <span id="dev-nombre-label"></span></div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--cyan)"></div>Demo generada — <span id="dev-nombre-label"></span>
+            </div>
             <div style="display:flex;gap:16px">
+              <button class="btn btn-o btn-sm" onclick="runSalesAutoflowForCurrentLead()"
+                title="Ejecuta los agentes comerciales, legales y de marketing automáticamente tras aprobar el diseño.">🎯
+                Aprobar + Autoflow Ventas</button>
               <button class="btn btn-ghost btn-sm" onclick="copyDemoHTML()">📋 Copiar HTML</button>
               <button class="btn btn-g btn-sm" onclick="goMarketing()">📢 Enviar por email →</button>
             </div>
           </div>
           <div class="dev-preview">
             <div class="dev-preview-bar">
-              <div class="dev-preview-dots"><span style="background:#ff6b6b"></span><span style="background:#ffd43b"></span><span style="background:#00e676"></span></div>
+              <div class="dev-preview-dots"><span style="background:#ff6b6b"></span><span
+                  style="background:#ffd43b"></span><span style="background:#00e676"></span></div>
               <span id="dev-url-bar" style="flex:1;text-align:center">demo.workwebsolutions.es/preview</span>
             </div>
-            <iframe id="demo-frame" sandbox="allow-same-origin allow-scripts"></iframe>
+            <iframe id="demo-frame" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
           </div>
         </div>
       </div>
@@ -491,42 +1119,56 @@
       <div class="panel" id="p-marketing">
         <div class="card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--orange)"></div>Agente Marketing — Campañas y Email</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--orange)"></div>Agente Marketing — Campañas y Email
+            </div>
           </div>
           <div class="row">
             <div class="field" style="flex:2">
               <label>Lead objetivo</label>
-              <select id="mkt-sel" onchange="onMktSel()"><option value="">— Selecciona lead —</option></select>
+              <select id="mkt-sel" onchange="onMktSel()">
+                <option value="">— Selecciona lead —</option>
+              </select>
             </div>
             <div class="field">
               <label>Email destinatario</label>
               <input id="mkt-email" placeholder="propietario@negocio.es">
             </div>
           </div>
-          <div id="mkt-preview" style="display:none;margin-top:16px;font-size:16px;color:var(--orange);font-family:var(--sans);font-weight:500"></div>
+          <div id="mkt-preview"
+            style="display:none;margin-top:16px;font-size:16px;color:var(--orange);font-family:var(--sans);font-weight:500">
+          </div>
           <div class="row" style="margin-top:24px">
             <button class="btn btn-o" id="btn-mkt-email" onclick="draftMktEmail()" disabled>✍️ Redactar Email</button>
-            <button class="btn btn-o" id="btn-mkt-social" onclick="genSocial()" disabled>📱 Posts Redes Sociales</button>
-            <button class="btn btn-o" id="btn-mkt-followup" onclick="genFollowup()" disabled>🔄 Email Seguimiento</button>
+            <button class="btn btn-o" id="btn-mkt-social" onclick="genSocial()" disabled>📱 Posts Redes
+              Sociales</button>
+            <button class="btn btn-o" id="btn-mkt-followup" onclick="genFollowup()" disabled>🔄 Email
+              Seguimiento</button>
           </div>
         </div>
         <div id="mkt-status" style="display:none" class="status"></div>
         <div class="card" id="mkt-email-result" style="display:none">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--orange)"></div>Email redactado</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--orange)"></div>Email redactado
+            </div>
             <div style="display:flex;gap:16px">
               <button class="btn btn-g btn-sm" id="btn-send-gmail" onclick="sendRealEmail()">📧 Abrir Email</button>
               <button class="btn btn-ghost btn-sm" id="btn-send-wa" onclick="sendWhatsAppPitch()">💬 WhatsApp</button>
-              <button class="btn btn-ghost btn-sm" onclick="document.getElementById('mkt-email-result').style.display='none'">✕ Cerrar</button>
+              <button class="btn btn-ghost btn-sm"
+                onclick="document.getElementById('mkt-email-result').style.display='none'">✕ Cerrar</button>
             </div>
           </div>
           <label style="margin-bottom:10px">Asunto del correo:</label>
-          <div id="mkt-subject" class="output" style="margin-bottom:24px;font-weight:600;min-height:auto;padding:16px 24px;"></div>
+          <div id="mkt-subject" class="output"
+            style="margin-bottom:24px;font-weight:600;min-height:auto;padding:16px 24px;"></div>
           <label style="margin-bottom:10px">Cuerpo del mensaje:</label>
           <div id="mkt-body" class="output"></div>
         </div>
         <div class="card" id="mkt-social-result" style="display:none">
-          <div class="card-title" style="margin-bottom:20px"><div class="dot" style="background:var(--orange)"></div>Posts para Redes</div>
+          <div class="card-title" style="margin-bottom:20px">
+            <div class="dot" style="background:var(--orange)"></div>Posts para Redes
+          </div>
           <div id="mkt-social-text" class="output"></div>
         </div>
       </div>
@@ -534,24 +1176,33 @@
       <div class="panel" id="p-business">
         <div class="card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--yellow)"></div>Agente Business — Viabilidad y Pricing</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--yellow)"></div>Agente Business — Viabilidad y Pricing
+            </div>
           </div>
           <div class="row">
             <div class="field" style="flex:2">
               <label>Lead a analizar</label>
-              <select id="biz-sel" onchange="document.getElementById('btn-biz').disabled=!this.value"><option value="">— Selecciona lead —</option></select>
+              <select id="biz-sel" onchange="document.getElementById('btn-biz').disabled=!this.value">
+                <option value="">— Selecciona lead —</option>
+              </select>
             </div>
-            <button class="btn btn-o" id="btn-biz" onclick="runBusiness()" disabled style="background:var(--yd);color:var(--yellow);border:1px solid rgba(255,212,59,0.3)">Analizar Prospecto →</button>
+            <button class="btn btn-o" id="btn-biz" onclick="runBusiness()" disabled
+              style="background:var(--yd);color:var(--yellow);border:1px solid rgba(255,212,59,0.3)">Analizar Prospecto
+              →</button>
           </div>
           <div style="margin-top:24px">
             <label>Notas adicionales</label>
-            <textarea id="biz-extra" placeholder="Tamaño del negocio, competencia local, urgencia del cliente..."></textarea>
+            <textarea id="biz-extra"
+              placeholder="Tamaño del negocio, competencia local, urgencia del cliente..."></textarea>
           </div>
         </div>
         <div id="biz-status" style="display:none" class="status"></div>
         <div class="card" id="biz-result" style="display:none">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--yellow)"></div>Análisis Estratégico</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--yellow)"></div>Análisis Estratégico
+            </div>
             <button class="btn btn-ghost btn-sm" onclick="applyPrice()">✓ Aplicar precio al CRM</button>
           </div>
           <div id="biz-text" class="output"></div>
@@ -561,12 +1212,16 @@
       <div class="panel" id="p-legal">
         <div class="card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--purple)"></div>Agente Legal — Propuesta y Contrato</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--purple)"></div>Agente Legal — Propuesta y Contrato
+            </div>
           </div>
           <div class="row">
             <div class="field" style="flex:2">
               <label>Lead a formalizar</label>
-              <select id="leg-sel" onchange="onLegSel()"><option value="">— Selecciona lead —</option></select>
+              <select id="leg-sel" onchange="onLegSel()">
+                <option value="">— Selecciona lead —</option>
+              </select>
             </div>
             <div class="field">
               <label>Tipo de Documento</label>
@@ -586,7 +1241,9 @@
         <div id="leg-status" style="display:none" class="status"></div>
         <div class="card" id="leg-result" style="display:none">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--purple)"></div>Documento Final</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--purple)"></div>Documento Final
+            </div>
             <div style="display:flex;gap:16px">
               <button class="btn btn-ghost btn-sm" onclick="copyText('leg-text')">📋 Copiar Todo</button>
               <button class="btn btn-g btn-sm" onclick="markClosed()">✓ Marcar Lead como Cerrado</button>
@@ -599,22 +1256,29 @@
       <div class="panel" id="p-chatbot">
         <div class="card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--red)"></div>Chatbot Comercial — Simula interacción</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--red)"></div>Chatbot Comercial — Simula interacción
+            </div>
           </div>
           <div class="row">
             <div class="field" style="flex:2">
               <label>Contexto del Prospecto</label>
-              <input id="cb-context" placeholder="Ej: dueño de bar en Illescas, sin web, recibió nuestro email promocional">
+              <input id="cb-context"
+                placeholder="Ej: dueño de bar en Illescas, sin web, recibió nuestro email promocional">
             </div>
             <button class="btn btn-r" onclick="initChat()">Iniciar Simulación</button>
           </div>
         </div>
         <div class="card" id="cb-area" style="display:none">
-          <div class="card-title" style="margin-bottom:24px"><div class="dot" style="background:var(--red)"></div>Chat en vivo (Dictado en Inglés Soportado)</div>
+          <div class="card-title" style="margin-bottom:24px">
+            <div class="dot" style="background:var(--red)"></div>Chat en vivo (Dictado en Inglés Soportado)
+          </div>
           <div class="chat-msgs" id="cb-msgs"></div>
           <div class="chat-input-row">
-            <input class="chat-input" id="cb-input" placeholder="Escribe tu respuesta aquí..." onkeydown="if(event.key==='Enter')sendChat()">
-            <button class="btn btn-ghost" id="micBtn" style="padding: 0 20px; font-size: 20px;" title="Dictar en Inglés">🎤</button>
+            <input class="chat-input" id="cb-input" placeholder="Escribe tu respuesta aquí..."
+              onkeydown="if(event.key==='Enter')sendChat()">
+            <button class="btn btn-ghost" id="micBtn" style="padding: 0 20px; font-size: 20px;"
+              title="Dictar en Inglés">🎤</button>
             <button class="btn btn-r" onclick="sendChat()">Enviar Mensaje</button>
           </div>
         </div>
@@ -623,13 +1287,18 @@
       <div class="panel" id="p-closer">
         <div class="card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--green)"></div>Agente Closer — Objeciones y cierre</div>
-            <span class="note" style="margin:0">Genera guiones de venta y cierres listos para WhatsApp, llamada o reunion</span>
+            <div class="card-title">
+              <div class="dot" style="background:var(--green)"></div>Agente Closer — Objeciones y cierre
+            </div>
+            <span class="note" style="margin:0">Genera guiones de venta y cierres listos para WhatsApp, llamada o
+              reunion</span>
           </div>
           <div class="row">
             <div class="field" style="flex:2">
               <label>Lead objetivo</label>
-              <select id="closer-sel" onchange="onCloserSel()"><option value="">— Selecciona lead —</option></select>
+              <select id="closer-sel" onchange="onCloserSel()">
+                <option value="">— Selecciona lead —</option>
+              </select>
             </div>
             <div class="field">
               <label>Escenario</label>
@@ -644,13 +1313,16 @@
           </div>
           <div style="margin-top:24px">
             <label>Objeciones / contexto adicional</label>
-            <textarea id="closer-extra" placeholder="Ej: dice que ahora no tiene tiempo, compara con un sobrino que le hace la web barata, quiere pensarlo..."></textarea>
+            <textarea id="closer-extra"
+              placeholder="Ej: dice que ahora no tiene tiempo, compara con un sobrino que le hace la web barata, quiere pensarlo..."></textarea>
           </div>
         </div>
         <div id="closer-status" style="display:none" class="status"></div>
         <div class="card" id="closer-result" style="display:none">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--green)"></div>Guion de cierre</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--green)"></div>Guion de cierre
+            </div>
             <button class="btn btn-ghost btn-sm" onclick="copyText('closer-text')">📋 Copiar Todo</button>
           </div>
           <div id="closer-text" class="output"></div>
@@ -660,13 +1332,18 @@
       <div class="panel" id="p-auditor">
         <div class="card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--blue)"></div>Auditor Web — Diagnostico comercial</div>
-            <span class="note" style="margin:0">Detecta fallos de conversión, confianza y SEO local para vender mejoras</span>
+            <div class="card-title">
+              <div class="dot" style="background:var(--blue)"></div>Auditor Web — Diagnostico comercial
+            </div>
+            <span class="note" style="margin:0">Detecta fallos de conversión, confianza y SEO local para vender
+              mejoras</span>
           </div>
           <div class="row">
             <div class="field" style="flex:2">
               <label>Lead objetivo</label>
-              <select id="audit-sel" onchange="onAuditSel()"><option value="">— Selecciona lead —</option></select>
+              <select id="audit-sel" onchange="onAuditSel()">
+                <option value="">— Selecciona lead —</option>
+              </select>
             </div>
             <div class="field">
               <label>URL actual</label>
@@ -676,26 +1353,33 @@
           </div>
           <div style="margin-top:24px">
             <label>Observaciones del negocio</label>
-            <textarea id="audit-extra" placeholder="Ej: la web es lenta en movil, no capta formularios, no sale bien en Google Maps, tiene mal aspecto..."></textarea>
+            <textarea id="audit-extra"
+              placeholder="Ej: la web es lenta en movil, no capta formularios, no sale bien en Google Maps, tiene mal aspecto..."></textarea>
           </div>
         </div>
         <div id="audit-status" style="display:none" class="status"></div>
         <div class="card" id="audit-result" style="display:none">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--blue)"></div>Informe de auditoria</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--blue)"></div>Informe de auditoria
+            </div>
             <div style="display:flex;gap:12px">
               <button class="btn btn-ghost btn-sm" onclick="copyText('audit-text')">📋 Copiar Todo</button>
-              <button class="btn btn-g btn-sm" id="btn-audit-proposal" onclick="generateProposalFromAudit()">⚡ Crear Propuesta</button>
+              <button class="btn btn-g btn-sm" id="btn-audit-proposal" onclick="generateProposalFromAudit()">⚡ Crear
+                Propuesta</button>
             </div>
           </div>
           <div id="audit-text" class="output"></div>
         </div>
         <div class="card" id="audit-proposal-result" style="display:none">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--green)"></div>Propuesta express desde auditoria</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--green)"></div>Propuesta express desde auditoria
+            </div>
             <div style="display:flex;gap:12px">
               <button class="btn btn-ghost btn-sm" onclick="copyText('audit-proposal-text')">📋 Copiar Todo</button>
-              <button class="btn btn-ghost btn-sm" onclick="exportTextCard('audit-proposal-text','Propuesta Express')">🖨️ Exportar</button>
+              <button class="btn btn-ghost btn-sm"
+                onclick="exportTextCard('audit-proposal-text','Propuesta Express')">🖨️ Exportar</button>
             </div>
           </div>
           <div id="audit-proposal-text" class="output"></div>
@@ -705,13 +1389,17 @@
       <div class="panel" id="p-seo">
         <div class="card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--orange)"></div>SEO Local — Google y contenidos</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--orange)"></div>SEO Local — Google y contenidos
+            </div>
             <span class="note" style="margin:0">Crea textos locales para posicionar y captar leads en la zona</span>
           </div>
           <div class="row">
             <div class="field" style="flex:2">
               <label>Lead objetivo</label>
-              <select id="seo-sel" onchange="onSeoSel()"><option value="">— Selecciona lead —</option></select>
+              <select id="seo-sel" onchange="onSeoSel()">
+                <option value="">— Selecciona lead —</option>
+              </select>
             </div>
             <div class="field">
               <label>Entregable SEO</label>
@@ -726,16 +1414,20 @@
           </div>
           <div style="margin-top:24px">
             <label>Servicios / keywords objetivo</label>
-            <textarea id="seo-extra" placeholder="Ej: diseño web en Illescas, mantenimiento web, posicionamiento local, paginas para restaurantes..."></textarea>
+            <textarea id="seo-extra"
+              placeholder="Ej: diseño web en Illescas, mantenimiento web, posicionamiento local, paginas para restaurantes..."></textarea>
           </div>
         </div>
         <div id="seo-status" style="display:none" class="status"></div>
         <div class="card" id="seo-result" style="display:none">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--orange)"></div>Contenido SEO generado</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--orange)"></div>Contenido SEO generado
+            </div>
             <div style="display:flex;gap:12px">
               <button class="btn btn-ghost btn-sm" onclick="copyText('seo-text')">📋 Copiar Todo</button>
-              <button class="btn btn-ghost btn-sm" onclick="exportTextCard('seo-text','SEO Local')">🖨️ Exportar</button>
+              <button class="btn btn-ghost btn-sm" onclick="exportTextCard('seo-text','SEO Local')">🖨️
+                Exportar</button>
             </div>
           </div>
           <div id="seo-text" class="output"></div>
@@ -745,13 +1437,18 @@
       <div class="panel" id="p-proposal">
         <div class="card">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--purple)"></div>Propuesta Premium — Oferta integral</div>
-            <span class="note" style="margin:0">Combina auditoria, SEO y venta en una propuesta premium lista para presentar</span>
+            <div class="card-title">
+              <div class="dot" style="background:var(--purple)"></div>Propuesta Premium — Oferta integral
+            </div>
+            <span class="note" style="margin:0">Combina auditoria, SEO y venta en una propuesta premium lista para
+              presentar</span>
           </div>
           <div class="row">
             <div class="field" style="flex:2">
               <label>Lead objetivo</label>
-              <select id="proposal-sel" onchange="onProposalSel()"><option value="">— Selecciona lead —</option></select>
+              <select id="proposal-sel" onchange="onProposalSel()">
+                <option value="">— Selecciona lead —</option>
+              </select>
             </div>
             <div class="field">
               <label>Tipo de oferta</label>
@@ -769,30 +1466,38 @@
                 <option>Premium Local · 1490 + 129/mes</option>
               </select>
             </div>
-            <button class="btn btn-p" id="btn-proposal" onclick="runProposalPremium()" disabled>Generar Propuesta Premium</button>
+            <button class="btn btn-p" id="btn-proposal" onclick="runProposalPremium()" disabled>Generar Propuesta
+              Premium</button>
           </div>
           <div style="margin-top:24px">
             <label>Condiciones / notas comerciales</label>
-            <textarea id="proposal-extra" placeholder="Ej: incluir mantenimiento mensual, integracion WhatsApp, SEO local para Illescas y Seseña, prioridad de entrega..."></textarea>
+            <textarea id="proposal-extra"
+              placeholder="Ej: incluir mantenimiento mensual, integracion WhatsApp, SEO local para Illescas y Seseña, prioridad de entrega..."></textarea>
           </div>
         </div>
         <div id="proposal-status" style="display:none" class="status"></div>
         <div class="card" id="proposal-result" style="display:none">
           <div class="card-hdr">
-            <div class="card-title"><div class="dot" style="background:var(--purple)"></div>Propuesta premium generada</div>
+            <div class="card-title">
+              <div class="dot" style="background:var(--purple)"></div>Propuesta premium generada
+            </div>
             <div style="display:flex;gap:12px">
               <button class="btn btn-ghost btn-sm" onclick="copyText('proposal-text')">📋 Copiar Todo</button>
-              <button class="btn btn-ghost btn-sm" onclick="exportTextCard('proposal-text','Propuesta Premium')">🖨️ Exportar</button>
+              <button class="btn btn-ghost btn-sm" onclick="exportTextCard('proposal-text','Propuesta Premium')">🖨️
+                Exportar</button>
             </div>
           </div>
           <div id="proposal-text" class="output"></div>
         </div>
       </div>
 
-    </div></div><div id="toast"></div>
+    </div>
+  </div>
+  <div id="toast"></div>
 
   <script>
     // ==================== STATE ====================
+    // VERSIÓN-FIX-5
     let leads = [];
     let draftSubject = '', draftBody = '', draftedFor = null;
     let demoHTML = '';
@@ -828,12 +1533,22 @@
     async function claude({ sys, msg, search = false, maxTokens = 1500 }) {
       let key = localStorage.getItem('ww_api_key');
       if (!key) {
+        // Try to load from server config
+        try {
+          const r = await fetch('/api/config');
+          if (r.ok) {
+            const cfg = await r.json();
+            if (cfg.apiKey) { key = cfg.apiKey; localStorage.setItem('ww_api_key', key); }
+          }
+        } catch (_) { }
+      }
+      if (!key) {
         key = prompt('Pega tu API Key de Anthropic (Claude) para activar los Agentes:');
         if (!key) throw new Error('Falta API Key de Anthropic.');
         localStorage.setItem('ww_api_key', key.trim());
       }
       const body = {
-        model: 'claude-3-5-haiku-20241022',
+        model: 'claude-sonnet-4-5',
         max_tokens: maxTokens,
         system: sys,
         messages: [{ role: 'user', content: msg }]
@@ -854,7 +1569,7 @@
       });
       if (!r.ok) {
         let errText = 'HTTP ' + r.status;
-        try { const e = await r.json(); errText = e.error?.message || errText; } catch (_) {}
+        try { const e = await r.json(); errText = e.error?.message || errText; } catch (_) { }
         throw new Error(errText);
       }
       return r.json();
@@ -862,8 +1577,8 @@
 
     function changeApiKey() {
       const current = localStorage.getItem('ww_api_key');
-      const msg = current 
-        ? `API Key actual: ${current.slice(0,8)}...${current.slice(-4)}\n\nIntroduce tu nueva API Key de Anthropic\n(empieza por "sk-ant-"):` 
+      const msg = current
+        ? `API Key actual: ${current.slice(0, 8)}...${current.slice(-4)}\n\nIntroduce tu nueva API Key de Anthropic\n(empieza por "sk-ant-"):`
         : 'Pega tu API Key de Anthropic (empieza por "sk-ant-"):';
       const k = prompt(msg);
       if (k) {
@@ -872,7 +1587,15 @@
           toast('⚠️ La key no empieza por sk-ant- — verifica que sea la correcta', 'error');
         }
         localStorage.setItem('ww_api_key', clean);
-        toast('API Key guardada ✓', 'success');
+        // Guardar también en el servidor (.env) para no volver a pedirla
+        fetch('/api/savekey', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ apiKey: clean })
+        }).then(r => r.json()).then(d => {
+          if (d.ok) toast('API Key guardada permanentemente en .env ✓', 'success');
+          else toast('Guardada en sesión (error al persistir: ' + (d.error || '') + ')', 'info');
+        }).catch(() => toast('API Key guardada en sesión (servidor no disponible)', 'info'));
       }
     }
 
@@ -892,7 +1615,7 @@
             'anthropic-dangerously-allow-browser': 'true'
           },
           body: JSON.stringify({
-            model: 'claude-3-5-haiku-20241022',
+            model: 'claude-sonnet-4-5',
             max_tokens: 20,
             messages: [{ role: 'user', content: 'Di solo: OK' }]
           })
@@ -905,7 +1628,7 @@
         } else {
           toast('✅ Conexión OK — Claude funcionando correctamente', 'success');
         }
-      } catch(e) {
+      } catch (e) {
         toast('❌ Error de red: ' + e.message, 'error');
       }
     }
@@ -913,7 +1636,7 @@
     async function claudeChat(messages, sys) {
       let key = localStorage.getItem('ww_api_key');
       if (!key) throw new Error('Falta API Key. Pulsa el boton API Key en el header.');
-      const body = { model: 'claude-3-5-haiku-20241022', max_tokens: 2000, system: sys, messages };
+      const body = { model: 'claude-sonnet-4-5', max_tokens: 2000, system: sys, messages };
       const cleanKey = key.replace(/[^\x20-\x7E]/g, '').trim();
       const endpoint = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
         ? '/api/anthropic' : 'https://api.anthropic.com/v1/messages';
@@ -1269,7 +1992,7 @@
         </tr>`;
       }).join('');
     }
-    
+
     function setEstado(id, e) { const l = leads.find(x => x.id === id); if (l) { l.estado = e; registerActivity(id, 'estado', `Estado actualizado a ${e}`); save(); updateKPIs(); renderCRM() } }
     function delLead(id) { leads = leads.filter(x => x.id !== id); save(); updateKPIs(); renderCRM(); populateSels(); toast('Lead eliminado', 'info') }
     function showAddForm() { document.getElementById('add-form').style.display = 'block' }
@@ -1286,7 +2009,7 @@
       toast('Lead guardado correctamente', 'success');
       if (created) await runLeadAutoflow(created.id);
     }
-    
+
     function goTo(panel, id) {
       document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
       document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
@@ -1295,13 +2018,13 @@
       populateSels();
       const selId = panel === 'dev' ? 'dev-sel'
         : panel === 'marketing' ? 'mkt-sel'
-        : panel === 'business' ? 'biz-sel'
-        : panel === 'legal' ? 'leg-sel'
-        : panel === 'closer' ? 'closer-sel'
-        : panel === 'auditor' ? 'audit-sel'
-        : panel === 'seo' ? 'seo-sel'
-        : panel === 'proposal' ? 'proposal-sel'
-        : '';
+          : panel === 'business' ? 'biz-sel'
+            : panel === 'legal' ? 'leg-sel'
+              : panel === 'closer' ? 'closer-sel'
+                : panel === 'auditor' ? 'audit-sel'
+                  : panel === 'seo' ? 'seo-sel'
+                    : panel === 'proposal' ? 'proposal-sel'
+                      : '';
       setTimeout(() => { const s = document.getElementById(selId); if (s) { s.value = id; s.dispatchEvent(new Event('change')) } }, 50);
     }
 
@@ -1382,151 +2105,206 @@
       const web = l.web || '';
       const direccion = l.direccion || `${l.zona}, Toledo`;
       const services = inferDemoServices(l, contexto);
-      const reviewA = services[0] || 'Servicio excelente';
-      const reviewB = services[1] || 'Atencion rapida';
-      const reviewC = services[2] || 'Resultados visibles';
       const sectorLabel = l.sector || 'negocio local';
-      const summary = esc((l.researchSummary || '').slice(0, 320));
+      const summary = esc((l.researchSummary || '').slice(0, 280));
       const sector = (l.sector || '').toLowerCase();
 
-      let theme = {
-        accent: '#eab308',
-        accent2: '#ca8a04',
-        bg: '#111315',
-        heroTag: `Negocio local en ${l.zona}`,
-        headline: `${l.nombre}<span class="accent"> online con una imagen que vende</span>`,
-        intro: `${l.nombre} es un ${sectorLabel} en ${l.zona}. Esta demo muestra una version mas profesional, clara y orientada a conversion para captar mas llamadas, reservas y contactos reales.`,
-        benefits: ['Mensaje claro', 'Contexto local', 'Conversion'],
-        benefitCopy: [
-          'El visitante entiende en segundos que ofrece el negocio y por que elegirlo.',
-          `Se refuerza la cercania con ${l.zona} y la zona de servicio para aumentar confianza.`,
-          'Botones, contacto y estructura pensados para llamadas, WhatsApp, reservas o solicitudes.'
-        ],
-        cta: `Esta demo puede convertirse en la web real de ${l.nombre}`,
-        objective: 'Captar mas contactos, transmitir mejor imagen y convertir visitas en clientes.',
-        next: 'Activar SEO local, reseñas reales, contenidos y mantenimiento.'
+      const heroImgs = {
+        hosteler: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1800&q=80',
+        automoc: 'https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=1800&q=80',
+        belleza: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1800&q=80',
+        constru: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1800&q=80',
+        salud: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1800&q=80',
+        inmobil: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1800&q=80',
+        fitness: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=80',
+        legal: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=80',
+        dflt: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1800&q=80'
       };
 
-      if (sector.includes('hosteler')) {
-        theme = {
-          ...theme,
-          accent: '#f59e0b', accent2: '#b45309', bg: '#120f0d',
-          heroTag: `Reservas y ambiente en ${l.zona}`,
-          headline: `${l.nombre}<span class="accent"> para abrir el apetito antes de entrar</span>`,
-          intro: `${l.nombre} necesita una web que transmita ambiente, carta, reservas y ubicacion desde el primer segundo. Esta demo enfoca la experiencia en atraer mesas, grupos y llamadas.`,
-          benefits: ['Reservas mas faciles', 'Carta mejor presentada', 'Ubicacion mas visible'],
-          benefitCopy: ['Una llamada a la accion clara para pedir mesa o contactar rapido.', 'Platos, menus y especialidades organizados con mejor presencia.', `Se refuerza ${l.zona} como punto de encuentro y referencia local.`],
-          cta: `Una web que vende mejor la experiencia de ${l.nombre}`,
-          objective: 'Conseguir mas reservas, mas llamadas y mas visibilidad local.',
-          next: 'Anadir carta visual, horarios, mapa y boton de reserva/WhatsApp.'
-        };
-      } else if (sector.includes('salud') || sector.includes('clin') || sector.includes('dent') || sector.includes('fisio')) {
-        theme = {
-          ...theme,
-          accent: '#22c55e', accent2: '#15803d', bg: '#0c1514',
-          heroTag: `Confianza y atencion en ${l.zona}`,
-          headline: `${l.nombre}<span class="accent"> con una imagen mas profesional y tranquila</span>`,
-          intro: `En salud, la confianza visual lo es todo. Esta demo plantea una web limpia, serena y profesional para transmitir seguridad, especializacion y facilidad de contacto.`,
-          benefits: ['Mas confianza', 'Servicios claros', 'Contacto facil'],
-          benefitCopy: ['Una imagen limpia y ordenada mejora la percepcion del centro desde el primer vistazo.', 'Tratamientos y especialidades explicados con mas claridad.', 'Telefono, ubicacion y llamada a cita visibles en todo momento.'],
-          cta: `Haz que ${l.nombre} transmita confianza antes de la primera cita`,
-          objective: 'Transmitir profesionalidad, confianza y facilitar la captacion de pacientes.',
-          next: 'Anadir especialidades, equipo, preguntas frecuentes y reserva de cita.'
-        };
-      } else if (sector.includes('inmobil')) {
-        theme = {
-          ...theme,
-          accent: '#38bdf8', accent2: '#0f766e', bg: '#0d1318',
-          heroTag: `Captacion inmobiliaria en ${l.zona}`,
-          headline: `${l.nombre}<span class="accent"> con una presencia digital mas solida</span>`,
-          intro: `Una inmobiliaria necesita confianza, oportunidades visibles y una marca seria. Esta demo presenta una web orientada a captar propietarios, compradores y solicitudes de valoracion.`,
-          benefits: ['Mas confianza', 'Mas captacion', 'Mejor posicionamiento'],
-          benefitCopy: ['Imagen corporativa mas firme para competir mejor en la zona.', 'CTAs orientados a valoracion, visita y contacto rapido.', `Contexto local fuerte para destacar en ${l.zona} y alrededores.`],
-          cta: `Convierte la web de ${l.nombre} en una herramienta de captacion`,
-          objective: 'Captar propietarios, generar solicitudes y reforzar la marca local.',
-          next: 'Anadir inmuebles destacados, valoracion online y fichas optimizadas.'
-        };
-      } else if (sector.includes('fitness') || sector.includes('gimnas')) {
-        theme = {
-          ...theme,
-          accent: '#ef4444', accent2: '#b91c1c', bg: '#111114',
-          heroTag: `Energia y accion en ${l.zona}`,
-          headline: `${l.nombre}<span class="accent"> con una web que activa inscripciones</span>`,
-          intro: `Fitness necesita dinamismo, energia y llamada a la accion. Esta demo busca transmitir intensidad, objetivos y acceso rapido a contacto, horarios o prueba inicial.`,
-          benefits: ['Mas energia visual', 'Oferta clara', 'Mas conversion'],
-          benefitCopy: ['Una imagen potente ayuda a vender mejor clases, entrenamientos o bonos.', 'Servicios y modalidades explicados con mas fuerza comercial.', 'Botones y secciones preparados para captar pruebas o llamadas.'],
-          cta: `Haz que ${l.nombre} convierta visitas en nuevas altas`,
-          objective: 'Generar inscripciones, pruebas y consultas con una imagen mas potente.',
-          next: 'Anadir horarios, planes, testimonios y boton de prueba gratuita.'
-        };
-      } else if (sector.includes('legal') || sector.includes('abog') || sector.includes('asesor')) {
-        theme = {
-          ...theme,
-          accent: '#c084fc', accent2: '#7c3aed', bg: '#111017',
-          heroTag: `Seriedad y autoridad en ${l.zona}`,
-          headline: `${l.nombre}<span class="accent"> con una presencia mas solida y confiable</span>`,
-          intro: `Despachos y asesorias necesitan transmitir claridad, solvencia y orden. Esta demo enfoca la web en autoridad, confianza y facilidad de contacto.`,
-          benefits: ['Mas autoridad', 'Mejor claridad', 'Contacto profesional'],
-          benefitCopy: ['Una web cuidada refuerza experiencia y credibilidad.', 'Servicios explicados con estructura mas clara y profesional.', 'Formas de contacto directas para captar consultas cualificadas.'],
-          cta: `Haz que ${l.nombre} proyecte mas autoridad online`,
-          objective: 'Transmitir solvencia, captar consultas y reforzar reputacion.',
-          next: 'Anadir areas de practica, preguntas frecuentes y formulario de consulta.'
-        };
-      }
+      const themes = {
+        hosteler: { primary: '#1a0a00', accent: '#e07b3c', font: 'Merriweather', sans: 'Outfit', heroTitle: 'La mejor mesa de ' + l.zona + ' te espera', heroSub: 'Sabor, ambiente y trato personal desde el primer momento.', stat1: '15+', statL1: 'A\u00f1os de historia', stat2: '200+', statL2: 'Men\u00fas al d\u00eda', stat3: '\u2605 4.8', statL3: 'Valoraci\u00f3n media', cta: 'Reservar mesa', img: 'hosteler' },
+        automoc: { primary: '#0d1117', accent: '#3b82f6', font: 'Syne', sans: 'Inter', heroTitle: 'Tu coche en manos expertas', heroSub: 'Rapidez, confianza y precio justo para tu veh\u00edculo.', stat1: '20+', statL1: 'A\u00f1os en el sector', stat2: '5.000+', statL2: 'Veh\u00edculos reparados', stat3: '\u2605 4.9', statL3: 'Satisfacci\u00f3n', cta: 'Pedir cita', img: 'automoc' },
+        belleza: { primary: '#150d1a', accent: '#d946ef', font: 'Playfair Display', sans: 'Outfit', heroTitle: 'Tu mejor versi\u00f3n comienza aqu\u00ed', heroSub: 'Tratamientos pensados para que te sientas extraordinaria.', stat1: '10+', statL1: 'A\u00f1os de exp.', stat2: '2.000+', statL2: 'Clientas satisfechas', stat3: '\u2605 5.0', statL3: 'Valoraci\u00f3n media', cta: 'Reservar cita', img: 'belleza' },
+        constru: { primary: '#111a0d', accent: '#84cc16', font: 'Syne', sans: 'Inter', heroTitle: 'Reformas que transforman tu hogar', heroSub: 'Calidad garantizada, plazos reales y trato cercano.', stat1: '500+', statL1: 'Obras realizadas', stat2: '12+', statL2: 'A\u00f1os de trabajo', stat3: '100%', statL3: 'Garant\u00eda en obra', cta: 'Pedir presupuesto', img: 'constru' },
+        salud: { primary: '#0c1514', accent: '#10b981', font: 'Inter', sans: 'Inter', heroTitle: 'Tu salud, nuestra prioridad', heroSub: 'Atenci\u00f3n personalizada con los m\u00e1s altos est\u00e1ndares m\u00e9dicos.', stat1: '15+', statL1: 'A\u00f1os de exp.', stat2: '3.000+', statL2: 'Pacientes atendidos', stat3: '\u2605 4.9', statL3: 'Valoraci\u00f3n media', cta: 'Pedir cita', img: 'salud' },
+        inmobil: { primary: '#0f172a', accent: '#d4af37', font: 'Playfair Display', sans: 'Inter', heroTitle: 'El hogar que mereces en ' + l.zona, heroSub: 'Expertos en encontrar la propiedad perfecta para cada cliente.', stat1: '15+', statL1: 'A\u00f1os de exp.', stat2: '500+', statL2: 'Propiedades vendidas', stat3: '50M+', statL3: 'En ventas anuales', cta: 'Ver propiedades', img: 'inmobil' },
+        fitness: { primary: '#0f0f14', accent: '#ef4444', font: 'Syne', sans: 'Outfit', heroTitle: 'Supera tus l\u00edmites. Aqu\u00ed y ahora.', heroSub: 'Entrenamiento de alta intensidad con resultados reales.', stat1: '500+', statL1: 'Miembros activos', stat2: '20+', statL2: 'Clases semanales', stat3: '98%', statL3: 'Renovaci\u00f3n anual', cta: 'Clase gratis', img: 'fitness' },
+        legal: { primary: '#110f1a', accent: '#a78bfa', font: 'Playfair Display', sans: 'Inter', heroTitle: 'Tu defensa. Nuestra responsabilidad.', heroSub: 'Asesoramiento jur\u00eddico experto con total confidencialidad.', stat1: '20+', statL1: 'A\u00f1os de trayectoria', stat2: '1.000+', statL2: 'Casos resueltos', stat3: '98%', statL3: '\u00c9xito en juicio', cta: 'Consulta gratuita', img: 'legal' }
+      };
 
-      return `<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${esc(l.nombre)} | ${esc(l.zona)}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:${theme.bg};--accent:${theme.accent};--accent2:${theme.accent2};--text:#f0f4ff;--muted:#94a3b8;--border:rgba(255,255,255,.08);--card:rgba(255,255,255,.03);--display:'Bebas Neue',sans-serif;--body:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden}
-    a{text-decoration:none;color:inherit}section{padding:96px 24px}.wrap{max-width:1180px;margin:0 auto}.tag{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;gap:10px;align-items:center;margin-bottom:16px}.tag:before{content:'';width:28px;height:1px;background:var(--accent)}
-    nav{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:rgba(17,19,21,.84);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-    .logo{font-family:var(--display);letter-spacing:.04em;font-size:22px;color:var(--accent)} .navcta{padding:10px 18px;border-radius:5px;background:var(--accent);color:#111;font-weight:800}
-    .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 24px 64px}.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(234,179,8,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(234,179,8,.05) 1px,transparent 1px);background-size:58px 58px;mask-image:radial-gradient(circle at center,black 35%,transparent 100%)}
-    .glow{position:absolute;top:18%;left:50%;transform:translateX(-50%);width:760px;height:380px;background:radial-gradient(ellipse,rgba(234,179,8,.16) 0%,transparent 70%)}
-    h1{font-family:var(--display);font-size:clamp(62px,10vw,122px);line-height:.92;letter-spacing:.02em;margin:0 0 22px}.accent{color:var(--accent)}
-    .hero p{max-width:640px;color:var(--muted);font-size:19px;line-height:1.7}.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin:36px 0 40px}.btn1,.btn2{padding:15px 24px;border-radius:6px;font-weight:700}.btn1{background:var(--accent);color:#111}.btn2{border:1px solid var(--border);color:var(--text)}
-    .stats{display:flex;gap:30px;flex-wrap:wrap;padding-top:28px;border-top:1px solid var(--border)}.statv{font-family:var(--display);font-size:40px;color:var(--accent)}.statl{color:var(--muted);font-size:13px}
-    h2{font-family:var(--display);font-size:clamp(40px,6vw,72px);line-height:.95;letter-spacing:.02em;margin:0 0 18px}.sub{max-width:620px;color:var(--muted);line-height:1.7;font-size:17px}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:46px}.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px}.card b{display:block;font-size:20px;margin-bottom:10px}.card p{margin:0;color:var(--muted);line-height:1.7}
-    .strip{background:rgba(255,255,255,.02)}.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:42px}.quote{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px}.stars{color:var(--accent);letter-spacing:2px;margin-bottom:10px}.quote p{color:var(--muted);line-height:1.7}.quote strong{display:block;margin-top:16px}
-    .cta{border:1px solid rgba(234,179,8,.24);background:linear-gradient(135deg,rgba(234,179,8,.08),rgba(234,179,8,.02));border-radius:16px;padding:36px;text-align:center}.cta p{max-width:760px;margin:0 auto 24px;color:var(--muted);line-height:1.8}
-    .contact{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}.info{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px}.item{padding:16px 0;border-bottom:1px solid var(--border)}.item:last-child{border-bottom:0}.k{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}.v{margin-top:8px;font-size:16px}
-    footer{padding:28px 24px;border-top:1px solid var(--border);color:var(--muted);font:500 12px var(--mono)}
-    @media (max-width:860px){.contact{grid-template-columns:1fr}.hero{padding-top:110px}section{padding:72px 20px}nav{padding:16px 20px}}
-  </style>
-</head>
-<body>
-  <nav><div class="logo">${esc(l.nombre)}</div><a class="navcta" href="#contacto">Contactar</a></nav>
-  <section class="hero">
-    <div class="grid"></div><div class="glow"></div>
-    <div class="wrap" style="position:relative;z-index:1">
-      <div class="tag">${esc(theme.heroTag)}</div>
-      <h1>${theme.headline}</h1>
-      <p>${esc(theme.intro)}${summary ? ' ' + summary : ''}</p>
-      <div class="hero-btns">
-        <a class="btn1" href="tel:${esc(telefono)}">Llamar ahora</a>
-        <a class="btn2" href="#contacto">Ver contacto</a>
-      </div>
-      <div class="stats"><div><div class="statv">24/7</div><div class="statl">Presencia digital</div></div><div><div class="statv">+${services.length}</div><div class="statl">Servicios destacados</div></div><div><div class="statv">${esc(l.zona)}</div><div class="statl">Cobertura local</div></div></div>
-    </div>
-  </section>
-  <section><div class="wrap"><div class="tag">Servicios</div><h2>Una web que presenta mejor el negocio</h2><p class="sub">Estructuramos la informacion clave para que un cliente entienda rapido que hace ${esc(l.nombre)}, por que confiar y como contactar sin perder tiempo.</p><div class="cards">${services.map((s,i)=>`<div class="card"><div class="tag" style="margin-bottom:10px">0${i+1}</div><b>${esc(s)}</b><p>Presentado con una propuesta clara, visual y enfocada en conversion local para ${esc(l.zona)}.</p></div>`).join('')}</div></div></section>
-  <section class="strip"><div class="wrap"><div class="tag">Ventajas</div><h2>Mas credibilidad. Mas contacto. Mejor imagen.</h2><p class="sub">La demo sigue una estructura comercial similar al nivel visual de WorkWeb: hero fuerte, bloques cuidados, secciones de confianza, llamadas a la accion y contacto visible.</p><div class="cards"><div class="card"><b>${esc(theme.benefits[0])}</b><p>${esc(theme.benefitCopy[0])}</p></div><div class="card"><b>${esc(theme.benefits[1])}</b><p>${esc(theme.benefitCopy[1])}</p></div><div class="card"><b>${esc(theme.benefits[2])}</b><p>${esc(theme.benefitCopy[2])}</p></div></div></div></section>
-  <section><div class="wrap"><div class="tag">Confianza</div><h2>Prueba social que ayuda a decidir</h2><p class="sub">Aunque esta es una demo, una version real puede mostrar testimonios, reseñas y casos de exito para aumentar conversion.</p><div class="proof"><div class="quote"><div class="stars">★★★★★</div><p>"Nos transmitieron mucha mas confianza desde el primer vistazo. La web deja claro lo que hacemos y como contactar."</p><strong>Cliente local · ${esc(reviewA)}</strong></div><div class="quote"><div class="stars">★★★★★</div><p>"La presentacion es mucho mas profesional y ahora la gente encuentra antes la informacion importante."</p><strong>Negocio de la zona · ${esc(reviewB)}</strong></div><div class="quote"><div class="stars">★★★★★</div><p>"Se nota una web mas moderna, mas seria y mucho mejor preparada para vender."</p><strong>Comercio local · ${esc(reviewC)}</strong></div></div></div></section>
-  <section><div class="wrap"><div class="cta"><div class="tag" style="justify-content:center">Siguiente paso</div><h2 style="margin-bottom:16px">${esc(theme.cta)}</h2><p>Con una adaptacion final del contenido, imagenes reales, formulario, SEO local y botones de contacto, esta base puede transformarse rapidamente en una pagina lista para captar clientes.</p><a class="btn1" href="#contacto">Quiero esta version para mi negocio</a></div></div></section>
-  <section id="contacto"><div class="wrap"><div class="tag">Contacto</div><h2>Haz que la web trabaje por el negocio</h2><div class="contact"><div class="info"><div class="item"><div class="k">Negocio</div><div class="v">${esc(l.nombre)}</div></div><div class="item"><div class="k">Sector</div><div class="v">${esc(sectorLabel)}</div></div><div class="item"><div class="k">Telefono</div><div class="v"><a href="tel:${esc(telefono)}">${esc(telefono)}</a></div></div><div class="item"><div class="k">Ubicacion</div><div class="v">${esc(direccion)}</div></div>${web ? `<div class="item"><div class="k">Web actual</div><div class="v"><a href="${esc(web)}" target="_blank" rel="noopener noreferrer">${esc(web)}</a></div></div>` : ''}</div><div class="info"><div class="item"><div class="k">Objetivo</div><div class="v">${esc(theme.objective)}</div></div><div class="item"><div class="k">CTA recomendado</div><div class="v">Llamada directa, WhatsApp visible y formulario corto.</div></div><div class="item"><div class="k">Siguiente mejora</div><div class="v">${esc(theme.next)}</div></div></div></div></div></section>
-  <footer><div class="wrap">Demo comercial creada por WorkWeb Solutions para ${esc(l.nombre)} · ${esc(l.zona)}</div></footer>
-</body>
-</html>`;
-    }
+      let th = themes.inmobil;
+      for (const k of Object.keys(themes)) { if (sector.includes(k)) { th = themes[k]; break; } }
 
-    async function generateDemoForLead(l, opts = {}) {
+      const heroImg = heroImgs[th.img] || heroImgs.dflt;
+      const cardImg1 = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80';
+      const cardImg2 = 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=600&q=80';
+      const cardImg3 = 'https://images.unsplash.com/photo-1560472355-a3b762df54f3?auto=format&fit=crop&w=600&q=80';
+      const cardImgArr = [cardImg1, cardImg2, cardImg3];
+
+      const nameParts = l.nombre.split(' ');
+      const logo1 = nameParts[0];
+      const logo2 = nameParts.length > 1 ? ' ' + nameParts.slice(1).join(' ') : '';
+
+      return `\x3C!DOCTYPE html\x3E
+\x3Chtml lang="es"\x3E
+\x3Chead\x3E
+\x3Cmeta charset="UTF-8"\x3E
+\x3Cmeta name="viewport" content="width=device-width, initial-scale=1.0"\x3E
+\x3Ctitle\x3E${esc(l.nombre)} | ${esc(l.zona)}\x3C/title\x3E
+\x3Cmeta name="description" content="${esc(l.nombre)} — ${esc(sectorLabel)} en ${esc(l.zona)}, Toledo."\x3E
+\x3Clink href="https://fonts.googleapis.com/css2?family=${th.font.replace(/ /g, '+')}:ital,wght@0,400;0,600;0,700;1,400&family=${th.sans.replace(/ /g, '+')}:wght@300;400;500;600;700&display=swap" rel="stylesheet"\x3E
+\x3Cstyle\x3E
+:root{--primary:${th.primary};--accent:${th.accent};--text:#1e293b;--muted:#64748b;--bg:#f8fafc;--white:#fff;--tr:all 0.4s cubic-bezier(0.16,1,0.3,1)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'${th.sans}',sans-serif;color:var(--text);background:var(--bg);overflow-x:hidden;line-height:1.6}
+h1,h2,h3{font-family:'${th.font}',serif;line-height:1.15}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+nav{position:fixed;top:0;width:100%;padding:1.4rem 5%;display:flex;justify-content:space-between;align-items:center;z-index:100;transition:var(--tr)}
+nav.scrolled{background:rgba(15,23,42,0.95);padding:1rem 5%;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.logo{font-family:'${th.font}',serif;font-size:1.7rem;font-weight:700;color:#fff}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;align-items:center}.nav-links a{color:rgba(255,255,255,0.85);font-weight:500;font-size:0.9rem;text-transform:uppercase;letter-spacing:1px;transition:var(--tr)}.nav-links a:hover{color:var(--accent)}
+.btn-nav{background:var(--accent);color:var(--primary) !important;padding:0.75rem 1.6rem;border-radius:3px;font-weight:700;transition:var(--tr)}.btn-nav:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.2)}
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;background:url('${heroImg}') center/cover no-repeat}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.78) 0%,rgba(0,0,0,0.32) 100%)}
+.hero-content{position:relative;z-index:10;text-align:center;max-width:980px;padding:0 2rem;animation:fadeInUp 1.1s ease forwards}
+.hero-badge{display:inline-block;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:0.5rem 1.2rem;border-radius:50px;font-size:0.85rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1.5rem}
+.hero-content h1{color:#fff;font-size:clamp(2.5rem,6.5vw,5rem);margin-bottom:1.5rem;font-weight:700}.hero-content h1 .ac{color:var(--accent)}
+.hero-content p{color:rgba(255,255,255,0.85);font-size:1.2rem;margin-bottom:2.5rem;max-width:640px;margin-inline:auto}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-accent{background:var(--accent);color:var(--primary);padding:1rem 2.5rem;border-radius:3px;font-weight:700;font-size:1rem;transition:var(--tr);display:inline-block}
+.btn-accent:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,0.25)}
+.btn-out{border:2px solid rgba(255,255,255,0.5);color:#fff;padding:1rem 2.5rem;border-radius:3px;font-weight:600;font-size:1rem;transition:var(--tr);display:inline-block}
+.btn-out:hover{border-color:#fff;background:rgba(255,255,255,0.1)}
+.stats-bar{display:flex;justify-content:center;gap:4rem;background:#fff;padding:2.5rem;position:relative;z-index:20;margin:-55px auto 5rem;width:80%;max-width:900px;border-radius:4px;box-shadow:0 10px 40px rgba(0,0,0,0.08);animation:slideUp 1s 0.5s ease forwards;opacity:0;transform:translateY(30px)}
+.stat-item{text-align:center}.stat-num{font-family:'${th.font}',serif;font-size:2.4rem;color:var(--accent);font-weight:700;line-height:1;margin-bottom:0.4rem}.stat-lbl{font-size:0.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600}
+.section{padding:6rem 5%}.section-hdr{text-align:center;margin-bottom:4rem}
+.section-hdr h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:0.8rem;position:relative;display:inline-block}
+.section-hdr h2::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:48px;height:3px;background:var(--accent)}
+.section-hdr p{color:var(--muted);font-size:1.05rem;margin-top:1.5rem;max-width:570px;margin-inline:auto}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:2rem}
+.svc-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.05);transition:var(--tr);border:1px solid #f1f5f9}
+.svc-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.1)}
+.svc-img{height:220px;overflow:hidden}.svc-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}.svc-card:hover .svc-img img{transform:scale(1.06)}
+.svc-body{padding:1.8rem}.svc-body h3{font-size:1.25rem;margin-bottom:0.6rem;color:var(--text)}.svc-body p{color:var(--muted);font-size:0.95rem;line-height:1.7}
+.cta-dark{background:var(--primary);padding:7rem 5%;text-align:center;position:relative;overflow:hidden}
+.cta-dark::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,${th.accent}22 0%,transparent 70%)}
+.cta-dark h2{color:#fff;font-size:clamp(1.8rem,4vw,3rem);margin-bottom:1rem;position:relative;z-index:2}
+.cta-dark p{color:rgba(255,255,255,0.7);max-width:580px;margin:0 auto 2.5rem;font-size:1.05rem;position:relative;z-index:2}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:2rem}
+.testi-card{background:#fff;border-radius:12px;padding:2rem;box-shadow:0 8px 25px rgba(0,0,0,0.05);border:1px solid #f1f5f9;border-left:4px solid var(--accent);transition:var(--tr)}
+.testi-card:hover{transform:translateY(-5px)}
+.stars{color:var(--accent);font-size:1.05rem;margin-bottom:0.8rem;letter-spacing:2px}
+.testi-card p{color:var(--text);line-height:1.7;font-style:italic;font-size:0.95rem;margin-bottom:1rem}
+.testi-card strong{color:var(--muted);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:900px;margin:0 auto}
+.info-box{background:#fff;padding:1.8rem;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.05);border:1px solid #f1f5f9}
+.info-lbl{font-size:0.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:0.5rem}
+.info-val{font-size:1.1rem;font-weight:600;color:var(--text)}
+.cta-box{background:var(--primary);border-radius:12px;padding:2.5rem;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.btn-wa{background:rgba(255,255,255,0.1);color:#fff;padding:1rem 2rem;border-radius:3px;font-weight:600;display:inline-block;margin-top:0.8rem;transition:var(--tr)}.btn-wa:hover{background:rgba(255,255,255,0.18)}
+footer{background:${th.primary};color:rgba(255,255,255,0.6);padding:4rem 5% 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand .fb-logo{font-family:'${th.font}',serif;color:#fff;font-size:1.5rem;margin-bottom:0.8rem}.footer-brand .fb-logo span{color:var(--accent)}
+.footer-title{color:#fff;font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;font-weight:600}
+.fl{list-style:none}.fl li{margin-bottom:0.6rem}.fl a{color:rgba(255,255,255,0.6);transition:var(--tr)}.fl a:hover{color:var(--accent);padding-left:4px}
+.footer-bottom{text-align:center;border-top:1px solid rgba(255,255,255,0.1);padding-top:2rem;font-size:0.82rem}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){.stats-bar{flex-direction:column;gap:2rem;width:92%}.footer-grid{grid-template-columns:1fr;gap:2rem}.contact-grid{grid-template-columns:1fr}.nav-links{display:none}}
+\x3C/style\x3E
+\x3C/head\x3E
+\x3Cbody\x3E
+\x3Cnav id="navbar"\x3E
+  \x3Cdiv class="logo"\x3E${esc(logo1)}\x3Cspan\x3E${esc(logo2)}\x3C/span\x3E\x3C/div\x3E
+  \x3Cdiv class="nav-links"\x3E
+    \x3Ca href="#inicio"\x3EInicio\x3C/a\x3E
+    \x3Ca href="#servicios"\x3EServicios\x3C/a\x3E
+    \x3Ca href="#nosotros"\x3ENosotros\x3C/a\x3E
+    \x3Ca href="#contacto" class="btn-nav"\x3E${esc(th.cta)}\x3C/a\x3E
+  \x3C/div\x3E
+\x3C/nav\x3E
+
+\x3Csection class="hero" id="inicio"\x3E
+  \x3Cdiv class="hero-content"\x3E
+    \x3Cdiv class="hero-badge"\x3E${esc(sectorLabel)} &middot; ${esc(l.zona)}, Toledo\x3C/div\x3E
+    \x3Ch1\x3E${esc(th.heroTitle)}\x3C/h1\x3E
+    \x3Cp\x3E${esc(th.heroSub)}${summary ? ' ' + summary : ''}\x3C/p\x3E
+    \x3Cdiv class="hero-btns"\x3E
+      \x3Ca class="btn-accent" href="tel:${esc(telefono)}"\x3E${esc(th.cta)}\x3C/a\x3E
+      \x3Ca class="btn-out" href="#servicios"\x3EVer servicios\x3C/a\x3E
+    \x3C/div\x3E
+  \x3C/div\x3E
+\x3C/section\x3E
+
+\x3Cdiv class="stats-bar"\x3E
+  \x3Cdiv class="stat-item"\x3E\x3Cdiv class="stat-num"\x3E${esc(th.stat1)}\x3C/div\x3E\x3Cdiv class="stat-lbl"\x3E${esc(th.statL1)}\x3C/div\x3E\x3C/div\x3E
+  \x3Cdiv class="stat-item"\x3E\x3Cdiv class="stat-num"\x3E${esc(th.stat2)}\x3C/div\x3E\x3Cdiv class="stat-lbl"\x3E${esc(th.statL2)}\x3C/div\x3E\x3C/div\x3E
+  \x3Cdiv class="stat-item"\x3E\x3Cdiv class="stat-num"\x3E${esc(th.stat3)}\x3C/div\x3E\x3Cdiv class="stat-lbl"\x3E${esc(th.statL3)}\x3C/div\x3E\x3C/div\x3E
+\x3C/div\x3E
+
+\x3Csection class="section" id="servicios"\x3E
+  \x3Cdiv class="section-hdr"\x3E
+    \x3Ch2\x3ELo que ofrecemos\x3C/h2\x3E
+    \x3Cp\x3EDescubre por qu\u00e9 cientos de clientes de ${esc(l.zona)} conf\u00edan en ${esc(l.nombre)}.\x3C/p\x3E
+  \x3C/div\x3E
+  \x3Cdiv class="cards-grid"\x3E
+    ${services.slice(0, 3).map((s, i) =\x3E `\x3Cdiv class="svc-card"\x3E\x3Cdiv class="svc-img"\x3E\x3Cimg src="${cardImgArr[i % 3]}" alt="${esc(s)}" loading="lazy"\x3E\x3C/div\x3E\x3Cdiv class="svc-body"\x3E\x3Ch3\x3E${esc(s)}\x3C/h3\x3E\x3Cp\x3EServicio de alta calidad con atenci\u00f3n personalizada para nuestros clientes de ${esc(l.zona)} y alrededores.\x3C/p\x3E\x3C/div\x3E\x3C/div\x3E`).join('')}
+  \x3C/div\x3E
+\x3C/section\x3E
+
+\x3Csection class="cta-dark" id="nosotros"\x3E
+  \x3Ch2 style="position:relative;z-index:2"\x3E${esc(l.nombre)} &mdash; A tu servicio\x3C/h2\x3E
+  \x3Cp style="position:relative;z-index:2"\x3ELlevamos a\u00f1os siendo el referente de ${esc(sectorLabel)} en ${esc(l.zona)}, Toledo. Calidad, confianza y resultados demostrados.\x3C/p\x3E
+  \x3Ca class="btn-accent" href="tel:${esc(telefono)}" style="position:relative;z-index:2"\x3E${esc(th.cta)}\x3C/a\x3E
+\x3C/section\x3E
+
+\x3Csection class="section" style="background:#fff"\x3E
+  \x3Cdiv class="section-hdr"\x3E
+    \x3Ch2\x3ELo que dicen nuestros clientes\x3C/h2\x3E
+    \x3Cp\x3ELa opini\u00f3n de quienes han confiado en ${esc(l.nombre)}.\x3C/p\x3E
+  \x3C/div\x3E
+  \x3Cdiv class="testi-grid"\x3E
+    \x3Cdiv class="testi-card"\x3E\x3Cdiv class="stars"\x3E&#9733;&#9733;&#9733;&#9733;&#9733;\x3C/div\x3E\x3Cp\x3E"El mejor servicio que he recibido en ${esc(l.zona)}. Totalmente recomendable, muy profesionales."\x3C/p\x3E\x3Cstrong\x3ECliente satisfecho &middot; ${esc(services[0] || l.zona)}\x3C/strong\x3E\x3C/div\x3E
+    \x3Cdiv class="testi-card"\x3E\x3Cdiv class="stars"\x3E&#9733;&#9733;&#9733;&#9733;&#9733;\x3C/div\x3E\x3Cp\x3E"Confianza total desde el primer momento. El resultado super\u00f3 mis expectativas y el trato fue excelente."\x3C/p\x3E\x3Cstrong\x3ECliente habitual &middot; ${esc(l.zona)}\x3C/strong\x3E\x3C/div\x3E
+    \x3Cdiv class="testi-card"\x3E\x3Cdiv class="stars"\x3E&#9733;&#9733;&#9733;&#9733;&#9733;\x3C/div\x3E\x3Cp\x3E"Sin duda volver\u00eda. Rapidez, calidad y precio justo. Son mi referencia en ${esc(l.zona)}."\x3C/p\x3E\x3Cstrong\x3ENuevo cliente &middot; ${esc(sectorLabel)}\x3C/strong\x3E\x3C/div\x3E
+  \x3C/div\x3E
+\x3C/section\x3E
+
+\x3Csection class="section" id="contacto"\x3E
+  \x3Cdiv class="section-hdr"\x3E
+    \x3Ch2\x3ECont\u00e1ctanos\x3C/h2\x3E
+    \x3Cp\x3EEstamos en ${esc(l.zona)}. Ll\u00e1manos o escr\u00edbenos sin compromiso.\x3C/p\x3E
+  \x3C/div\x3E
+  \x3Cdiv class="contact-grid"\x3E
+    \x3Cdiv style="display:flex;flex-direction:column;gap:1.5rem"\x3E
+      \x3Cdiv class="info-box"\x3E\x3Cdiv class="info-lbl"\x3ETel\u00e9fono\x3C/div\x3E\x3Ca href="tel:${esc(telefono)}" style="font-size:1.5rem;font-weight:700;color:var(--accent)"\x3E${esc(telefono)}\x3C/a\x3E\x3C/div\x3E
+      \x3Cdiv class="info-box"\x3E\x3Cdiv class="info-lbl"\x3EUbicaci\u00f3n\x3C/div\x3E\x3Cdiv class="info-val"\x3E${esc(direccion)}\x3C/div\x3E\x3C/div\x3E
+      ${web ? `\x3Cdiv class="info-box"\x3E\x3Cdiv class="info-lbl"\x3EWeb actual\x3C/div\x3E\x3Ca href="${esc(web)}" target="_blank" rel="noopener" style="color:var(--accent);font-size:0.95rem"\x3E${esc(web)}\x3C/a\x3E\x3C/div\x3E` : ''}
+    \x3C/div\x3E
+    \x3Cdiv class="cta-box"\x3E
+      \x3Cdiv style="color:rgba(255,255,255,0.7);margin-bottom:0.8rem;font-size:0.95rem"\x3E\u00bfListo para dar el paso?\x3C/div\x3E
+      \x3Ch3 style="color:#fff;font-size:1.8rem;margin-bottom:1.5rem;font-family:'${th.font}',serif"\x3EHablemos hoy\x3C/h3\x3E
+      \x3Ca href="tel:${esc(telefono)}" class="btn-accent"\x3E${esc(th.cta)}\x3C/a\x3E
+      \x3Ca href="https://wa.me/34${esc(telefono.replace(/\D/g, ''))}" target="_blank" class="btn-wa"\x3E\ud83d\udcac WhatsApp\x3C/a\x3E
+    \x3C/div\x3E
+  \x3C/div\x3E
+\x3C/section\x3E
+
+\x3Cfooter\x3E
+  \x3Cdiv class="footer-grid"\x3E
+    \x3Cdiv class="footer-brand"\x3E\x3Cdiv class="fb-logo"\x3E${esc(logo1)}\x3Cspan\x3E${esc(logo2)}\x3C/span\x3E\x3C/div\x3E\x3Cp\x3E${esc(sectorLabel)} de confianza en ${esc(l.zona)}, Toledo. Servicio cercano y calidad garantizada.\x3C/p\x3E\x3C/div\x3E
+    \x3Cdiv\x3E\x3Cdiv class="footer-title"\x3ENavegaci\u00f3n\x3C/div\x3E\x3Cul class="fl"\x3E\x3Cli\x3E\x3Ca href="#inicio"\x3EInicio\x3C/a\x3E\x3C/li\x3E\x3Cli\x3E\x3Ca href="#servicios"\x3EServicios\x3C/a\x3E\x3C/li\x3E\x3Cli\x3E\x3Ca href="#nosotros"\x3EQui\u00e9nes somos\x3C/a\x3E\x3C/li\x3E\x3Cli\x3E\x3Ca href="#contacto"\x3EContacto\x3C/a\x3E\x3C/li\x3E\x3C/ul\x3E\x3C/div\x3E
+    \x3Cdiv\x3E\x3Cdiv class="footer-title"\x3EContacto\x3C/div\x3E\x3Cul class="fl"\x3E\x3Cli\x3E&#128205; ${esc(direccion)}\x3C/li\x3E\x3Cli\x3E&#128222; ${esc(telefono)}\x3C/li\x3E${web ? `\x3Cli\x3E&#127760; \x3Ca href="${esc(web)}" target="_blank"\x3E${esc(web)}\x3C/a\x3E\x3C/li\x3E` : ''}\x3C/ul\x3E\x3C/div\x3E
+  \x3C/div\x3E
+  \x3Cdiv class="footer-bottom"\x3E&copy; 2026 ${esc(l.nombre)}. Todos los derechos reservados. Demo por WorkWeb Solutions.\x3C/div\x3E
+\x3C/footer\x3E
+\x3Cscript\x3E
+window.addEventListener('scroll',function(){var n=document.getElementById('navbar');if(window.scrollY\x3E60)n.classList.add('scrolled');else n.classList.remove('scrolled');});
+  ${'\x3C/' + 'script\x3E'}
+${'\x3C/' + 'body\x3E'}
+
+${'\x3C/' + 'html\x3E'}`;
+}
+
+async function generateDemoForLead(l, opts = {}) {
       const contexto = opts.context || getDevContext();
       const st = document.getElementById('dev-status');
       if (st) {
@@ -1552,37 +2330,32 @@
         return checks.filter(Boolean).length;
       }
 
-      const sys = `Eres un director de arte frontend senior y desarrollador web de WorkWeb Solutions.
-Devuelve SOLO HTML completo con CSS embebido y, si hace falta, JS minimo embebido. Nada de explicaciones.
+      const sys = `Eres un Director de Arte Frontend Senior nivel "Awwwards" y desarrollador de WorkWeb Solutions.
+Devuelve SOLO un archivo HTML completo y perfecto con CSS embebido (Vanilla CSS) y JS minimo. SIN EXPLICACIONES.
 
-REQUISITOS OBLIGATORIOS:
-- Debe empezar por <!DOCTYPE html>
-- Diseno visual premium, no plantilla basica ni estilo escolar
-- Mobile first y responsive con al menos un @media
-- Estructura minima: hero potente, propuesta de valor, servicios, beneficios, prueba social o testimonios, CTA claro, contacto y footer
-- Incluir botones reales de llamada y/o WhatsApp si hay telefono
-- Incluir seccion de ubicacion o contexto local de ${l.zona}
-- Tipografia con personalidad; no usar Arial por defecto
-- Fondo con capas, gradientes o composicion visual; evitar bloques planos sin jerarquia
-- Tarjetas, espaciado y contraste cuidados
-- Copy comercial creible para captar clientes, no texto generico
-- No usar iconos externos que rompan si no cargan librerias
-- No dejes textos tipo "Lorem ipsum", "Bienvenido a" generico ni telefonos falsos si ya hay datos disponibles
+REQUISITOS OBLIGATORIOS DE DISEÑO (NIVEL LUXURY/PREMIUM):
+- Usa fuentes de Google Fonts espectaculares (ej. 'Outfit', 'Playfair Display', 'Inter', 'Syne'). NUNCA Arial.
+- Incorpora Micro-Animaciones CSS (keyframes, transform: translateY, hover scales, fade in) en botones, tarjetas y al cargar la pagina. La web debe sentirse "viva".
+- Estructura moderna con Grid y Flexbox. Mucho espacio en blanco, tarjetas con bordes redondeados (16px+), sombras suaves (box-shadow premium), y fondos con gradientes o glassmorphism (backdrop-filter: blur).
+- Imagenes fotograficas impactantes: DEBES usar URLs reales de Unsplash para los fondos o fotos de servicios. Busca tematicamente segun el negocio.
+- NO uses colores puros genericos. Usa paletas seleccionadas ricas (Navy profundo, Esmeralda moderno, Oro elegante, Naranja vibrante).
+- Estructura integral: Nav fijo con efecto blur al scrollear, Hero inmersivo de pantalla completa, Stats, Servicios en Cards dinamicas, CTA gigante y Footer corporativo limpio.
+- Copy super persuasivo orientado a la conversion local en ${l.zona}. NO uses Lorem Ipsum.
+- Muestra el telefono de contacto claramente con llamadas a la accion directas.
 
 ESTILO VISUAL A RESPETAR: ${contexto.estilo}.
 
-CALIDAD MINIMA:
-Si la propuesta parece simple, fea, generica o poco comercial, rehacela mentalmente antes de responder.
-Tu objetivo es una demo que impresione a un cliente real de negocio local.`;
+CALIDAD EXTREMA OBLIGATORIA:
+La estetica es CRITICA. Tu objetivo es una demo que parezca de una agencia de diseno digital top level.`;
 
       const msg = `Crea una landing page profesional para:
 Negocio: ${l.nombre}
 Sector: ${l.sector}
 Zona: ${l.zona}
 Telefono: ${l.telefono || '925 XXX XXX'}
-${l.web ? `Web actual: ${l.web}` : ''}
-${l.researchSummary ? `Informacion investigada del negocio:\n${l.researchSummary}` : ''}
-${contexto.extra ? `Servicios adicionales: ${contexto.extra}` : ''}
+${l.web ? 'Web actual: ' + l.web : ''}
+${l.researchSummary ? 'Informacion investigada del negocio:\n' + l.researchSummary : ''}
+${contexto.extra ? 'Servicios adicionales: ' + contexto.extra : ''}
 
 Pistas de contenido:
 - Si es hosteleria, prioriza reservas, ambiente, carta y ubicacion
@@ -1590,15 +2363,15 @@ Pistas de contenido:
 - Usa textos y secciones adaptadas al sector exacto`;
 
       try {
-        let html = await aiReq({ sys, msg, maxTokens: 4000 });
+        let html = await aiReq({ sys, msg, maxTokens: 6000 });
         html = html.replace(/^```html\s*/i, '').replace(/```\s*$/, '').trim();
 
         if (!html.includes('<html')) throw new Error('El modelo no devolvio un HTML valido. Intentalo de nuevo.');
 
         if (assessDemoQuality(html) < 7) {
-          const retrySys = sys + '\n\nREINTENTO OBLIGATORIO: La version anterior fue demasiado pobre. Ahora sube mucho el nivel visual y comercial.';
+          const retrySys = sys + '\n\nREINTENTO OBLIGATORIO: La version anterior fue demasiado pobre. Sube mucho el nivel visual y comercial.';
           const retryMsg = msg + '\n\nMejora obligatoria: mas impacto visual, mejor jerarquia, secciones mas solidas, CTA mas creibles y apariencia moderna.';
-          html = await aiReq({ sys: retrySys, msg: retryMsg, maxTokens: 4000 });
+          html = await aiReq({ sys: retrySys, msg: retryMsg, maxTokens: 6000 });
           html = html.replace(/^```html\s*/i, '').replace(/```\s*$/, '').trim();
         }
 
@@ -1609,7 +2382,21 @@ Pistas de contenido:
         demoHTML = html;
         document.getElementById('dev-nombre-label').textContent = l.nombre;
         const frame = document.getElementById('demo-frame');
-        frame.srcdoc = html;
+        try {
+          const saveRes = await fetch('/api/save-demo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ html, name: l.nombre })
+          });
+          if (saveRes.ok) {
+            const { url } = await saveRes.json();
+            frame.src = url + '?t=' + Date.now();
+            document.getElementById('dev-url-bar').textContent = 'localhost:8002' + url;
+          } else { throw new Error('save failed'); }
+        } catch (_) {
+          frame.removeAttribute('src');
+          frame.srcdoc = html;
+        }
         document.getElementById('dev-result').style.display = 'block';
         l.demoGenerated = true;
         registerActivity(l.id, 'demo', opts.activityText || 'Demo web generada para el lead');
@@ -1624,326 +2411,391 @@ Pistas de contenido:
       }
     }
 
-    async function runLeadAutoflow(leadId) {
-      const l = leads.find(x => x.id === leadId);
-      if (!l) return;
-      if (!canRunAiAutomation()) {
-        registerActivity(leadId, 'autoflow', 'Autoflow omitido por falta de modelo activo');
-        toast('Lead anadido. El autoflow se ha omitido porque no hay modelo IA activo.', 'info');
-        return;
-      }
+    async function runLeadAutoflow(leadId) { const l=leads.find(x=> x.id === leadId);
+if (!l) return;
+if (!canRunAiAutomation()) {
+registerActivity(leadId, 'autoflow', 'Autoflow omitido por falta de modelo activo');
+toast('Lead anadido. El autoflow se ha omitido porque no hay modelo IA activo.', 'info');
+return;
+}
 
-      goTo('dev', leadId);
-      const st = document.getElementById('dev-status');
-      if (st) {
-        st.style.display = 'flex';
-        st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: investigando, analizando y creando activos para ${l.nombre}...`;
-      }
+goTo('dev', leadId);
+const st = document.getElementById('dev-status');
+if (st) {
+st.style.display = 'flex';
+st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: investigando, analizando y creando activos para
+${l.nombre}...`;
+}
 
-      try {
-        await researchLeadData(l, { silent: true, keepStatus: true, activityText: 'Autoflow: investigacion del negocio completada' });
-        if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: calculando pricing para ${l.nombre}...`;
-        await analyzeBusinessForLead(l, l.researchSummary || '', { silent: true });
-        if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: creando demo web para ${l.nombre}...`;
-        await generateDemoForLead(l, { silent: true, context: getDevContext(), activityText: 'Autoflow: demo web generada' });
-        if (l.web) {
-          if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: auditando la web real de ${l.nombre}...`;
-          await runAuditForLead(l, { silent: true });
-          if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: creando propuesta express para ${l.nombre}...`;
-          await generateProposalFromLeadAudit(l, { silent: true });
-        }
-        if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: redactando email comercial para ${l.nombre}...`;
-        await generateMarketingEmailForLead(l, 'email', { silent: true });
-        registerActivity(leadId, 'autoflow', 'Autoflow completado: research + pricing + demo + auditoria/propuesta + email');
-        toast(`Autoflow integral completado para ${l.nombre} ✓`, 'success');
-      } catch (e) {
-        registerActivity(leadId, 'autoflow', `Autoflow con incidencia: ${e.message}`);
-        toast('Autoflow detenido: ' + e.message, 'error');
-      } finally {
-        if (st) st.style.display = 'none';
-      }
-    }
+try {
+await researchLeadData(l, { silent: true, keepStatus: true, activityText: 'Autoflow: investigacion del negocio
+completada' });
+if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: calculando pricing para ${l.nombre}...`;
+await analyzeBusinessForLead(l, l.researchSummary || '', { silent: true });
+if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: creando demo web para ${l.nombre}...`;
+await generateDemoForLead(l, { silent: true, context: getDevContext(), activityText: 'Autoflow: demo web generada' });
+if (l.web) {
+if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: auditando la web real de ${l.nombre}...`;
+await runAuditForLead(l, { silent: true });
+if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: creando propuesta express para ${l.nombre}...`;
+await generateProposalFromLeadAudit(l, { silent: true });
+}
+if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow: redactando email comercial para ${l.nombre}...`;
+await generateMarketingEmailForLead(l, 'email', { silent: true });
+registerActivity(leadId, 'autoflow', 'Autoflow completado: research + pricing + demo + auditoria/propuesta + email');
+toast(`Autoflow integral completado para ${l.nombre} ✓`, 'success');
+} catch (e) {
+registerActivity(leadId, 'autoflow', `Autoflow con incidencia: ${e.message}`);
+toast('Autoflow detenido: ' + e.message, 'error');
+} finally {
+if (st) st.style.display = 'none';
+}
+}
 
-    async function researchBusinessForDev() {
-      const id = parseInt(document.getElementById('dev-sel').value);
-      const l = leads.find(x => x.id === id); if (!l) return;
-      const btn = document.getElementById('btn-dev-research');
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Investigando...';
-      try { await researchLeadData(l); } catch (e) { }
+async function researchBusinessForDev() {
+const id = parseInt(document.getElementById('dev-sel').value);
+const l = leads.find(x => x.id === id); if (!l) return;
+const btn = document.getElementById('btn-dev-research');
+btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Investigando...';
+try { await researchLeadData(l); } catch (e) { }
 
-      btn.disabled = false; btn.innerHTML = '🔎 Investigar negocio';
-    }
+btn.disabled = false; btn.innerHTML = '🔎 Investigar negocio';
+}
 
-    async function genDemo() {
-      const id = parseInt(document.getElementById('dev-sel').value);
-      const l = leads.find(x => x.id === id); if (!l) return;
-      const btn = document.getElementById('btn-dev');
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Procesando...';
-      try { await generateDemoForLead(l, { context: getDevContext() }); } catch (e) { }
-      btn.disabled = false; btn.innerHTML = '⚡ Generar Demo';
-    }
-    
-    function copyDemoHTML() {
-      if (!demoHTML) return;
-      navigator.clipboard.writeText(demoHTML).then(() => toast('Código HTML copiado', 'success'));
-    }
-    function goMarketing() {
-      const id = document.getElementById('dev-sel').value;
-      if (id) goTo('marketing', parseInt(id));
-    }
+async function genDemo() {
+const id = parseInt(document.getElementById('dev-sel').value);
+const l = leads.find(x => x.id === id); if (!l) return;
+const btn = document.getElementById('btn-dev');
+btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Procesando...';
+try { await generateDemoForLead(l, { context: getDevContext() }); } catch (e) { }
+btn.disabled = false; btn.innerHTML = '⚡ Generar Demo';
+}
 
-    // ==================== MARKETING AGENT ====================
-    function onMktSel() {
-      const id = parseInt(document.getElementById('mkt-sel').value);
-      const l = leads.find(x => x.id === id);
-      const prev = document.getElementById('mkt-preview');
-      const on = !!l;
-      document.getElementById('btn-mkt-email').disabled = !on;
-      document.getElementById('btn-mkt-social').disabled = !on;
-      document.getElementById('btn-mkt-followup').disabled = !on;
-      if (l) {
-        document.getElementById('mkt-email').value = l.email || '';
-        prev.style.display = 'block';
-        prev.textContent = `→ Situación: ${l.zona} · ${l.sector} · ${l.situacion_web}`;
-      } else { prev.style.display = 'none' }
-      document.getElementById('mkt-email-result').style.display = 'none';
-      document.getElementById('mkt-social-result').style.display = 'none';
-      draftSubject = ''; draftBody = ''; draftedFor = l || null;
-    }
+async function runSalesAutoflowForCurrentLead() {
+const id = parseInt(document.getElementById('dev-sel').value);
+const l = leads.find(x => x.id === id); if (!l) return;
 
-    async function draftMktEmail() { const l = leads.find(x => x.id === parseInt(document.getElementById('mkt-sel').value)); if (l) await runMktAction(l, 'email'); }
-    async function genFollowup() { const l = leads.find(x => x.id === parseInt(document.getElementById('mkt-sel').value)); if (l) await runMktAction(l, 'followup'); }
-    async function genSocial() { const l = leads.find(x => x.id === parseInt(document.getElementById('mkt-sel').value)); if (l) await runMktAction(l, 'social'); }
+const st = document.getElementById('dev-status');
+if (st) {
+st.style.display = 'flex';
+st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow Ventas: investigando, analizando y creando activos de venta
+para ${l.nombre}...`;
+}
 
-    async function generateMarketingEmailForLead(l, tipo = 'email', opts = {}) {
-      const SYS_MKTG = `Eres el agente de marketing de WorkWeb Solutions, agencia web local en Illescas (Toledo). 
+try {
+if (!l.researchSummary) {
+if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow Ventas: investigacion del negocio en curso...`;
+await researchLeadData(l, { silent: true, keepStatus: true, activityText: 'Autoflow Ventas: investigacion completada'
+});
+}
+if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow Ventas: calculando pricing para ${l.nombre}...`;
+await analyzeBusinessForLead(l, l.researchSummary || '', { silent: true });
+
+if (l.web) {
+if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow Ventas: auditando la web real antigua de
+${l.nombre}...`;
+await runAuditForLead(l, { silent: true });
+if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow Ventas: creando propuesta comercial express...`;
+await generateProposalFromLeadAudit(l, { silent: true });
+}
+
+if (st) st.innerHTML = `<span class="spin"></span>&nbsp;Autoflow Ventas: redactando email y argumentos de captacion...`;
+await generateMarketingEmailForLead(l, 'email', { silent: true });
+
+registerActivity(l.id, 'autoflow', 'Autoflow de Ventas completado (Post-Diseno): pricing + auditoria/propuesta + email
+de captacion listos.');
+toast(`Autoflow de Ventas completado para ${l.nombre}. ¡Ya puedes enviarle la propuesta! ✓`, 'success');
+
+// Redirigir al agente CRM/Marketing tras el exito
+setTimeout(() => goMarketing(), 1800);
+} catch (e) {
+registerActivity(l.id, 'autoflow', `Autoflow Ventas con incidencia: ${e.message}`);
+toast('Autoflow de Ventas detenido: ' + e.message, 'error');
+} finally {
+if (st) st.style.display = 'none';
+}
+}
+
+function copyDemoHTML() {
+if (!demoHTML) return;
+navigator.clipboard.writeText(demoHTML).then(() => toast('Código HTML copiado', 'success'));
+}
+function goMarketing() {
+const id = document.getElementById('dev-sel').value;
+if (id) goTo('marketing', parseInt(id));
+}
+
+// ==================== MARKETING AGENT ====================
+function onMktSel() {
+const id = parseInt(document.getElementById('mkt-sel').value);
+const l = leads.find(x => x.id === id);
+const prev = document.getElementById('mkt-preview');
+const on = !!l;
+document.getElementById('btn-mkt-email').disabled = !on;
+document.getElementById('btn-mkt-social').disabled = !on;
+document.getElementById('btn-mkt-followup').disabled = !on;
+if (l) {
+document.getElementById('mkt-email').value = l.email || '';
+prev.style.display = 'block';
+prev.textContent = `→ Situación: ${l.zona} · ${l.sector} · ${l.situacion_web}`;
+} else { prev.style.display = 'none' }
+document.getElementById('mkt-email-result').style.display = 'none';
+document.getElementById('mkt-social-result').style.display = 'none';
+draftSubject = ''; draftBody = ''; draftedFor = l || null;
+}
+
+async function draftMktEmail() { const l = leads.find(x => x.id === parseInt(document.getElementById('mkt-sel').value));
+if (l) await runMktAction(l, 'email'); }
+async function genFollowup() { const l = leads.find(x => x.id === parseInt(document.getElementById('mkt-sel').value));
+if (l) await runMktAction(l, 'followup'); }
+async function genSocial() { const l = leads.find(x => x.id === parseInt(document.getElementById('mkt-sel').value)); if
+(l) await runMktAction(l, 'social'); }
+
+async function generateMarketingEmailForLead(l, tipo = 'email', opts = {}) {
+const SYS_MKTG = `Eres el agente de marketing de WorkWeb Solutions, agencia web local en Illescas (Toledo).
 Especialista en comunicacion persuasiva. Tono: profesional pero cercano, directo al grano.`;
 
-      const promptMsg = tipo === 'email'
-        ? `Email de prospeccion comercial para: ${l.nombre} (${l.sector}). Situacion: ${l.situacion_web}. ${l.demoGenerated ? 'Menciona que adjuntamos un diseno previo gratuito.' : ''} ${l.auditProposal ? 'Apoyate en una propuesta comercial ya preparada.' : ''}`
-        : `Email de seguimiento (2o contacto) para: ${l.nombre} (${l.sector}). Recuerda nuestra oferta de diseno gratuito sin presionar.`;
+const promptMsg = tipo === 'email'
+? `Email de prospeccion comercial para: ${l.nombre} (${l.sector}). Situacion: ${l.situacion_web}. ${l.demoGenerated ?
+'Menciona que adjuntamos un diseno previo gratuito.' : ''} ${l.auditProposal ? 'Apoyate en una propuesta comercial ya
+preparada.' : ''}`
+: `Email de seguimiento (2o contacto) para: ${l.nombre} (${l.sector}). Recuerda nuestra oferta de diseno gratuito sin
+presionar.`;
 
-      const t = await aiReq({
-        sys: SYS_MKTG + '\nFormato OBLIGATORIO:\nASUNTO: [El asunto aqui]\n---\n[Cuerpo del email aqui]',
-        msg: promptMsg
-      });
+const t = await aiReq({
+sys: SYS_MKTG + '\nFormato OBLIGATORIO:\nASUNTO: [El asunto aqui]\n---\n[Cuerpo del email aqui]',
+msg: promptMsg
+});
 
-      let subj = '', body = '';
-      const lines = t.split('\n'); let inBody = false;
-      for (const line of lines) {
-        if (line.toUpperCase().startsWith('ASUNTO:')) subj = line.substring(7).trim();
-        else if (line.trim() === '---') inBody = true;
-        else if (inBody) body += line + '\n';
-      }
+let subj = '', body = '';
+const lines = t.split('\n'); let inBody = false;
+for (const line of lines) {
+if (line.toUpperCase().startsWith('ASUNTO:')) subj = line.substring(7).trim();
+else if (line.trim() === '---') inBody = true;
+else if (inBody) body += line + '\n';
+}
 
-      const result = {
-        subject: subj || 'Propuesta de WorkWeb Solutions',
-        body: body.trim() || t
-      };
+const result = {
+subject: subj || 'Propuesta de WorkWeb Solutions',
+body: body.trim() || t
+};
 
-      l.marketingDraft = result;
-      draftSubject = result.subject;
-      draftBody = result.body;
-      draftedFor = l;
-      registerActivity(l.id, 'marketing', `Borrador de ${tipo === 'email' ? 'email' : 'seguimiento'} generado`);
-      save();
+l.marketingDraft = result;
+draftSubject = result.subject;
+draftBody = result.body;
+draftedFor = l;
+registerActivity(l.id, 'marketing', `Borrador de ${tipo === 'email' ? 'email' : 'seguimiento'} generado`);
+save();
 
-      if (!opts.silent) {
-        document.getElementById('mkt-subject').textContent = result.subject;
-        document.getElementById('mkt-body').textContent = result.body;
-        document.getElementById('mkt-email-result').style.display = 'block';
-      }
+if (!opts.silent) {
+document.getElementById('mkt-subject').textContent = result.subject;
+document.getElementById('mkt-body').textContent = result.body;
+document.getElementById('mkt-email-result').style.display = 'block';
+}
 
-      return result;
-    }
+return result;
+}
 
-    async function runMktAction(l, tipo) {
-      const st = document.getElementById('mkt-status');
-      document.querySelectorAll('#p-marketing .btn').forEach(b => b.disabled = true);
-      st.style.display = 'flex';
-      st.innerHTML = `<span class="spin"></span>&nbsp;${tipo === 'social' ? 'Generando contenido...' : 'Redactando borrador de email...'}`;
-      document.getElementById('mkt-email-result').style.display = 'none';
-      document.getElementById('mkt-social-result').style.display = 'none';
+async function runMktAction(l, tipo) {
+const st = document.getElementById('mkt-status');
+document.querySelectorAll('#p-marketing .btn').forEach(b => b.disabled = true);
+st.style.display = 'flex';
+st.innerHTML = `<span class="spin"></span>&nbsp;${tipo === 'social' ? 'Generando contenido...' : 'Redactando borrador de
+email...'}`;
+document.getElementById('mkt-email-result').style.display = 'none';
+document.getElementById('mkt-social-result').style.display = 'none';
 
-      try {
-        if (tipo === 'email' || tipo === 'followup') {
-          const draft = await generateMarketingEmailForLead(l, tipo, { silent: true });
-          document.getElementById('mkt-subject').textContent = draft.subject;
-          document.getElementById('mkt-body').textContent = draft.body;
-          document.getElementById('mkt-email-result').style.display = 'block';
-        } else {
-          const SYS_MKTG = `Eres el agente de marketing de WorkWeb Solutions, agencia web local en Illescas (Toledo). 
+try {
+if (tipo === 'email' || tipo === 'followup') {
+const draft = await generateMarketingEmailForLead(l, tipo, { silent: true });
+document.getElementById('mkt-subject').textContent = draft.subject;
+document.getElementById('mkt-body').textContent = draft.body;
+document.getElementById('mkt-email-result').style.display = 'block';
+} else {
+const SYS_MKTG = `Eres el agente de marketing de WorkWeb Solutions, agencia web local en Illescas (Toledo).
 Especialista en comunicacion persuasiva. Tono: profesional pero cercano, directo al grano.`;
-          const t = await aiReq({
-            sys: SYS_MKTG,
-            msg: `Genera 3 posts cortos para redes sociales de WorkWeb apuntando a conseguir clientes del sector "${l.sector}" en "${l.zona}".`
-          });
-          document.getElementById('mkt-social-text').textContent = t;
-          document.getElementById('mkt-social-result').style.display = 'block';
-        }
-        toast('Contenido generado ✓', 'success');
-      } catch(e) { toast('Error: ' + e.message, 'error') }
-      
-      st.style.display = 'none';
-      document.getElementById('btn-mkt-email').disabled = false;
-      document.getElementById('btn-mkt-social').disabled = false;
-      document.getElementById('btn-mkt-followup').disabled = false;
-    }
+const t = await aiReq({
+sys: SYS_MKTG,
+msg: `Genera 3 posts cortos para redes sociales de WorkWeb apuntando a conseguir clientes del sector "${l.sector}" en
+"${l.zona}".`
+});
+document.getElementById('mkt-social-text').textContent = t;
+document.getElementById('mkt-social-result').style.display = 'block';
+}
+toast('Contenido generado ✓', 'success');
+} catch (e) { toast('Error: ' + e.message, 'error') }
 
-    function sendRealEmail() {
-      const addr = document.getElementById('mkt-email').value.trim();
-      if (!addr) { toast('El email del destinatario es obligatorio', 'error'); return }
+st.style.display = 'none';
+document.getElementById('btn-mkt-email').disabled = false;
+document.getElementById('btn-mkt-social').disabled = false;
+document.getElementById('btn-mkt-followup').disabled = false;
+}
 
-      const subject = encodeURIComponent(draftSubject || 'Propuesta de WorkWeb Solutions');
-      const body = encodeURIComponent(draftBody || '');
-      window.location.href = `mailto:${encodeURIComponent(addr)}?subject=${subject}&body=${body}`;
+function sendRealEmail() {
+const addr = document.getElementById('mkt-email').value.trim();
+if (!addr) { toast('El email del destinatario es obligatorio', 'error'); return }
 
-      if (draftedFor) {
-        const l = leads.find(x => x.id === draftedFor.id);
-        if (l) {
-          if (l.estado === 'Nuevo') l.estado = 'Contactado';
-          l.email = addr;
-          l.last_contact = new Date().toLocaleDateString('es-ES');
-          registerActivity(l.id, 'email', `Email preparado para ${addr}`);
-          save(); renderCRM();
-        }
-      }
-      toast('Cliente de email abierto', 'success');
-    }
+const subject = encodeURIComponent(draftSubject || 'Propuesta de WorkWeb Solutions');
+const body = encodeURIComponent(draftBody || '');
+window.location.href = `mailto:${encodeURIComponent(addr)}?subject=${subject}&body=${body}`;
 
-    function sendWhatsAppPitch() {
-      if (!draftedFor) { toast('Genera primero un mensaje para un lead.', 'info'); return }
-      const l = leads.find(x => x.id === draftedFor.id);
-      if (!l) return;
-      const phone = sanitizePhone(l.telefono);
-      const text = encodeURIComponent((draftBody || `Hola ${l.nombre}, te escribo desde WorkWeb Solutions para comentarte una mejora web para tu negocio.`).slice(0, 1500));
-      const url = phone ? `https://wa.me/${phone}?text=${text}` : `https://wa.me/?text=${text}`;
-      const win = window.open(url, '_blank', 'noopener,noreferrer');
-      if (!win) window.location.href = url;
-      registerActivity(l.id, 'whatsapp', 'Mensaje comercial abierto en WhatsApp');
-      toast('WhatsApp abierto', 'success');
-    }
+if (draftedFor) {
+const l = leads.find(x => x.id === draftedFor.id);
+if (l) {
+if (l.estado === 'Nuevo') l.estado = 'Contactado';
+l.email = addr;
+l.last_contact = new Date().toLocaleDateString('es-ES');
+registerActivity(l.id, 'email', `Email preparado para ${addr}`);
+save(); renderCRM();
+}
+}
+toast('Cliente de email abierto', 'success');
+}
 
-    // ==================== BUSINESS AGENT ====================
-    let lastBizText = '', lastBizLead = null;
-    async function runBusiness() {
-      const id = parseInt(document.getElementById('biz-sel').value);
-      const l = leads.find(x => x.id === id); if (!l) return;
-      lastBizLead = l;
-      const extra = document.getElementById('biz-extra').value;
-      const btn = document.getElementById('btn-biz');
-      const st = document.getElementById('biz-status');
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
-      st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Analizando estrategia para ${l.nombre}...`;
-      document.getElementById('biz-result').style.display = 'none';
+function sendWhatsAppPitch() {
+if (!draftedFor) { toast('Genera primero un mensaje para un lead.', 'info'); return }
+const l = leads.find(x => x.id === draftedFor.id);
+if (!l) return;
+const phone = sanitizePhone(l.telefono);
+const text = encodeURIComponent((draftBody || `Hola ${l.nombre}, te escribo desde WorkWeb Solutions para comentarte una
+mejora web para tu negocio.`).slice(0, 1500));
+const url = phone ? `https://wa.me/${phone}?text=${text}` : `https://wa.me/?text=${text}`;
+const win = window.open(url, '_blank', 'noopener,noreferrer');
+if (!win) window.location.href = url;
+registerActivity(l.id, 'whatsapp', 'Mensaje comercial abierto en WhatsApp');
+toast('WhatsApp abierto', 'success');
+}
 
-      const sys = `Eres el Business Analyst de WorkWeb Solutions. Analiza el perfil y devuelve un informe estratégico claro.
-IMPORTANTE: Debes incluir obligatoriamente una línea exacta que diga "PRECIO OBJETIVO: XXX" (donde XXX es la cifra en euros, ej: 499, 599).`;
+// ==================== BUSINESS AGENT ====================
+let lastBizText = '', lastBizLead = null;
+async function runBusiness() {
+const id = parseInt(document.getElementById('biz-sel').value);
+const l = leads.find(x => x.id === id); if (!l) return;
+lastBizLead = l;
+const extra = document.getElementById('biz-extra').value;
+const btn = document.getElementById('btn-biz');
+const st = document.getElementById('biz-status');
+btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
+st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Analizando estrategia para ${l.nombre}...`;
+document.getElementById('biz-result').style.display = 'none';
 
-      const msg = `Analiza este prospecto:\nNegocio: ${l.nombre} | ${l.sector} | ${l.zona}\nSituación: ${l.situacion_web}\n${extra ? 'Notas adicionales: '+extra:''}`;
-      
-      try {
-        lastBizText = await aiReq({ sys, msg });
-        document.getElementById('biz-text').textContent = lastBizText;
-        document.getElementById('biz-result').style.display = 'block';
-        toast('Análisis finalizado ✓', 'success');
-      } catch (e) { toast('Error: ' + e.message, 'error') }
-      btn.disabled = false; btn.innerHTML = 'Analizar Prospecto →'; st.style.display = 'none';
-    }
+const sys = `Eres el Business Analyst de WorkWeb Solutions. Analiza el perfil y devuelve un informe estratégico claro.
+IMPORTANTE: Debes incluir obligatoriamente una línea exacta que diga "PRECIO OBJETIVO: XXX" (donde XXX es la cifra en
+euros, ej: 499, 599).`;
 
-    async function analyzeBusinessForLead(l, extra = '', opts = {}) {
-      const sys = `Eres el Business Analyst de WorkWeb Solutions. Analiza el perfil y devuelve un informe estrategico claro.
-IMPORTANTE: Debes incluir obligatoriamente una linea exacta que diga "PRECIO OBJETIVO: XXX" (donde XXX es la cifra en euros, ej: 499, 599).`;
-      const msg = `Analiza este prospecto:\nNegocio: ${l.nombre} | ${l.sector} | ${l.zona}\nSituacion: ${l.situacion_web}\n${extra ? 'Notas adicionales: ' + extra : ''}`;
-      const text = await aiReq({ sys, msg });
-      l.businessReport = text;
-      const m = text.match(/PRECIO OBJETIVO:\s*([\d.]+)/i);
-      if (m && !l.precio) l.precio = parseInt(m[1].replace('.', ''));
-      lastBizText = text;
-      lastBizLead = l;
-      registerActivity(l.id, 'business', 'Analisis de pricing y viabilidad generado');
-      save();
-      if (!opts.silent) {
-        document.getElementById('biz-text').textContent = text;
-        document.getElementById('biz-result').style.display = 'block';
-      }
-      return text;
-    }
+const msg = `Analiza este prospecto:\nNegocio: ${l.nombre} | ${l.sector} | ${l.zona}\nSituación:
+${l.situacion_web}\n${extra ? 'Notas adicionales: ' + extra : ''}`;
 
-    function applyPrice() {
-      if (!lastBizLead || !lastBizText) return;
-      const m = lastBizText.match(/PRECIO OBJETIVO:\s*([\d.]+)/i);
-      if (m) {
-        const l = leads.find(x => x.id === lastBizLead.id);
-        if (l) { l.precio = parseInt(m[1].replace('.','')); registerActivity(l.id, 'pricing', `Precio objetivo aplicado: ${l.precio}EUR`); save(); renderCRM(); toast(`Precio de ${l.precio}€ aplicado al CRM`, 'success'); }
-      } else { toast('No se detectó un "PRECIO OBJETIVO". Por favor, ingrésalo manualmente.', 'info') }
-    }
+try {
+lastBizText = await aiReq({ sys, msg });
+document.getElementById('biz-text').textContent = lastBizText;
+document.getElementById('biz-result').style.display = 'block';
+toast('Análisis finalizado ✓', 'success');
+} catch (e) { toast('Error: ' + e.message, 'error') }
+btn.disabled = false; btn.innerHTML = 'Analizar Prospecto →'; st.style.display = 'none';
+}
 
-    // ==================== LEGAL AGENT ====================
-    function onLegSel() {
-      const id = parseInt(document.getElementById('leg-sel').value);
-      legalLead = leads.find(x => x.id === id) || null;
-      document.getElementById('btn-leg').disabled = !legalLead;
-      document.getElementById('leg-extra-info').style.display = legalLead ? 'block' : 'none';
-      if (legalLead && legalLead.precio) document.getElementById('leg-precio').value = legalLead.precio;
-      document.getElementById('leg-result').style.display = 'none';
-    }
-    
-    async function runLegal() {
-      if (!legalLead) return;
-      const tipo = document.getElementById('leg-tipo').value;
-      const precio = document.getElementById('leg-precio').value || legalLead.precio || '—';
-      const btn = document.getElementById('btn-leg');
-      const st = document.getElementById('leg-status');
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
-      st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Redactando ${tipo}...`;
-      document.getElementById('leg-result').style.display = 'none';
+async function analyzeBusinessForLead(l, extra = '', opts = {}) {
+const sys = `Eres el Business Analyst de WorkWeb Solutions. Analiza el perfil y devuelve un informe estrategico claro.
+IMPORTANTE: Debes incluir obligatoriamente una linea exacta que diga "PRECIO OBJETIVO: XXX" (donde XXX es la cifra en
+euros, ej: 499, 599).`;
+const msg = `Analiza este prospecto:\nNegocio: ${l.nombre} | ${l.sector} | ${l.zona}\nSituacion:
+${l.situacion_web}\n${extra ? 'Notas adicionales: ' + extra : ''}`;
+const text = await aiReq({ sys, msg });
+l.businessReport = text;
+const m = text.match(/PRECIO OBJETIVO:\s*([\d.]+)/i);
+if (m && !l.precio) l.precio = parseInt(m[1].replace('.', ''));
+lastBizText = text;
+lastBizLead = l;
+registerActivity(l.id, 'business', 'Analisis de pricing y viabilidad generado');
+save();
+if (!opts.silent) {
+document.getElementById('biz-text').textContent = text;
+document.getElementById('biz-result').style.display = 'block';
+}
+return text;
+}
 
-      const sys = `Eres el asesor legal y comercial de WorkWeb Solutions. Genera documentos profesionales en español, formales y muy claros.`;
-      const msg = `Genera un/a ${tipo} para el cliente: ${legalLead.nombre} (${legalLead.sector}). Precio acordado del servicio: ${precio}€.`;
+function applyPrice() {
+if (!lastBizLead || !lastBizText) return;
+const m = lastBizText.match(/PRECIO OBJETIVO:\s*([\d.]+)/i);
+if (m) {
+const l = leads.find(x => x.id === lastBizLead.id);
+if (l) { l.precio = parseInt(m[1].replace('.', '')); registerActivity(l.id, 'pricing', `Precio objetivo aplicado:
+${l.precio}EUR`); save(); renderCRM(); toast(`Precio de ${l.precio}€ aplicado al CRM`, 'success'); }
+} else { toast('No se detectó un "PRECIO OBJETIVO". Por favor, ingrésalo manualmente.', 'info') }
+}
 
-      try {
-        const text = await aiReq({ sys, msg });
-        document.getElementById('leg-text').textContent = text;
-        document.getElementById('leg-result').style.display = 'block';
-        registerActivity(legalLead.id, 'legal', `${tipo} generado`);
-        toast('Documento legal generado ✓', 'success');
-      } catch (e) { toast('Error: ' + e.message, 'error') }
-      btn.disabled = false; btn.innerHTML = 'Generar Documento →'; st.style.display = 'none';
-    }
+// ==================== LEGAL AGENT ====================
+function onLegSel() {
+const id = parseInt(document.getElementById('leg-sel').value);
+legalLead = leads.find(x => x.id === id) || null;
+document.getElementById('btn-leg').disabled = !legalLead;
+document.getElementById('leg-extra-info').style.display = legalLead ? 'block' : 'none';
+if (legalLead && legalLead.precio) document.getElementById('leg-precio').value = legalLead.precio;
+document.getElementById('leg-result').style.display = 'none';
+}
 
-    function markClosed() {
-      if (!legalLead) return;
-      const l = leads.find(x => x.id === legalLead.id);
-      if (l) { l.estado = 'Cerrado'; registerActivity(l.id, 'cierre', 'Lead marcado como Cerrado'); save(); updateKPIs(); renderCRM(); toast(`¡Enhorabuena! ${l.nombre} marcado como Cerrado 🤝`, 'success'); }
-    }
+async function runLegal() {
+if (!legalLead) return;
+const tipo = document.getElementById('leg-tipo').value;
+const precio = document.getElementById('leg-precio').value || legalLead.precio || '—';
+const btn = document.getElementById('btn-leg');
+const st = document.getElementById('leg-status');
+btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
+st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Redactando ${tipo}...`;
+document.getElementById('leg-result').style.display = 'none';
 
-    // ==================== CLOSER AGENT ====================
-    function onCloserSel() {
-      const id = parseInt(document.getElementById('closer-sel').value);
-      closerLead = leads.find(x => x.id === id) || null;
-      document.getElementById('btn-closer').disabled = !closerLead;
-      document.getElementById('closer-result').style.display = 'none';
-    }
+const sys = `Eres el asesor legal y comercial de WorkWeb Solutions. Genera documentos profesionales en español, formales
+y muy claros.`;
+const msg = `Genera un/a ${tipo} para el cliente: ${legalLead.nombre} (${legalLead.sector}). Precio acordado del
+servicio: ${precio}€.`;
 
-    async function runCloser() {
-      if (!closerLead) return;
-      const mode = document.getElementById('closer-mode').value;
-      const extra = document.getElementById('closer-extra').value.trim();
-      const btn = document.getElementById('btn-closer');
-      const st = document.getElementById('closer-status');
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Generando...';
-      st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Preparando guion de cierre para ${closerLead.nombre}...`;
-      document.getElementById('closer-result').style.display = 'none';
+try {
+const text = await aiReq({ sys, msg });
+document.getElementById('leg-text').textContent = text;
+document.getElementById('leg-result').style.display = 'block';
+registerActivity(legalLead.id, 'legal', `${tipo} generado`);
+toast('Documento legal generado ✓', 'success');
+} catch (e) { toast('Error: ' + e.message, 'error') }
+btn.disabled = false; btn.innerHTML = 'Generar Documento →'; st.style.display = 'none';
+}
 
-      const sys = `Eres el closer comercial de WorkWeb Solutions. Tu trabajo es cerrar ventas de servicios web para negocios locales.
+function markClosed() {
+if (!legalLead) return;
+const l = leads.find(x => x.id === legalLead.id);
+if (l) { l.estado = 'Cerrado'; registerActivity(l.id, 'cierre', 'Lead marcado como Cerrado'); save(); updateKPIs();
+renderCRM(); toast(`¡Enhorabuena! ${l.nombre} marcado como Cerrado 🤝`, 'success'); }
+}
+
+// ==================== CLOSER AGENT ====================
+function onCloserSel() {
+const id = parseInt(document.getElementById('closer-sel').value);
+closerLead = leads.find(x => x.id === id) || null;
+document.getElementById('btn-closer').disabled = !closerLead;
+document.getElementById('closer-result').style.display = 'none';
+}
+
+async function runCloser() {
+if (!closerLead) return;
+const mode = document.getElementById('closer-mode').value;
+const extra = document.getElementById('closer-extra').value.trim();
+const btn = document.getElementById('btn-closer');
+const st = document.getElementById('closer-status');
+btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Generando...';
+st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Preparando guion de cierre para
+${closerLead.nombre}...`;
+document.getElementById('closer-result').style.display = 'none';
+
+const sys = `Eres el closer comercial de WorkWeb Solutions. Tu trabajo es cerrar ventas de servicios web para negocios
+locales.
 Devuelve un texto accionable y corto, en espanol, con este formato:
 1) Diagnostico rapido
 2) Mensaje principal de cierre
 3) Respuesta a objeciones
 4) CTA final
 5) Version corta para WhatsApp`;
-      const msg = `Prepara un guion para este escenario:
+const msg = `Prepara un guion para este escenario:
 Lead: ${closerLead.nombre}
 Sector: ${closerLead.sector}
 Zona: ${closerLead.zona}
@@ -1953,94 +2805,96 @@ Precio actual: ${closerLead.precio ? closerLead.precio + 'EUR' : 'sin precio cer
 Escenario: ${mode}
 ${extra ? 'Contexto adicional: ' + extra : ''}`;
 
-      try {
-        const text = await aiReq({ sys, msg });
-        document.getElementById('closer-text').textContent = text;
-        document.getElementById('closer-result').style.display = 'block';
-        registerActivity(closerLead.id, 'closer', `Guion generado: ${mode}`);
-        toast('Guion de cierre generado ✓', 'success');
-      } catch (e) { toast('Error: ' + e.message, 'error') }
-      btn.disabled = false; btn.innerHTML = 'Generar Guion'; st.style.display = 'none';
-    }
+try {
+const text = await aiReq({ sys, msg });
+document.getElementById('closer-text').textContent = text;
+document.getElementById('closer-result').style.display = 'block';
+registerActivity(closerLead.id, 'closer', `Guion generado: ${mode}`);
+toast('Guion de cierre generado ✓', 'success');
+} catch (e) { toast('Error: ' + e.message, 'error') }
+btn.disabled = false; btn.innerHTML = 'Generar Guion'; st.style.display = 'none';
+}
 
-    // ==================== AUDITOR AGENT ====================
-    function onAuditSel() {
-      const id = parseInt(document.getElementById('audit-sel').value);
-      auditLead = leads.find(x => x.id === id) || null;
-      document.getElementById('btn-audit').disabled = !auditLead;
-      document.getElementById('audit-url').value = auditLead?.web || '';
-      document.getElementById('audit-text').textContent = auditLead?.auditReport || '';
-      document.getElementById('audit-result').style.display = auditLead?.auditReport ? 'block' : 'none';
-      document.getElementById('audit-proposal-text').textContent = auditLead?.auditProposal || '';
-      document.getElementById('audit-proposal-result').style.display = auditLead?.auditProposal ? 'block' : 'none';
-      lastAuditText = auditLead?.auditReport || '';
-    }
+// ==================== AUDITOR AGENT ====================
+function onAuditSel() {
+const id = parseInt(document.getElementById('audit-sel').value);
+auditLead = leads.find(x => x.id === id) || null;
+document.getElementById('btn-audit').disabled = !auditLead;
+document.getElementById('audit-url').value = auditLead?.web || '';
+document.getElementById('audit-text').textContent = auditLead?.auditReport || '';
+document.getElementById('audit-result').style.display = auditLead?.auditReport ? 'block' : 'none';
+document.getElementById('audit-proposal-text').textContent = auditLead?.auditProposal || '';
+document.getElementById('audit-proposal-result').style.display = auditLead?.auditProposal ? 'block' : 'none';
+lastAuditText = auditLead?.auditReport || '';
+}
 
-    async function fetchAuditSnapshot(url) {
-      const r = await fetch('/api/audit/fetch', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url })
-      });
-      let data = null;
-      try { data = await r.json() } catch { data = null }
-      if (!r.ok) throw new Error(extractApiErrorMessage(data) || `No se pudo analizar la URL (HTTP ${r.status})`);
-      return data;
-    }
+async function fetchAuditSnapshot(url) {
+const r = await fetch('/api/audit/fetch', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ url })
+});
+let data = null;
+try { data = await r.json() } catch { data = null }
+if (!r.ok) throw new Error(extractApiErrorMessage(data) || `No se pudo analizar la URL (HTTP ${r.status})`);
+return data;
+}
 
-    async function fetchBusinessIntel(payload) {
-      const r = await fetch('/api/business-intel', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      let data = null;
-      try { data = await r.json() } catch { data = null }
-      if (!r.ok) throw new Error(extractApiErrorMessage(data) || `No se pudo investigar el negocio (HTTP ${r.status})`);
-      return data;
-    }
+async function fetchBusinessIntel(payload) {
+const r = await fetch('/api/business-intel', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify(payload)
+});
+let data = null;
+try { data = await r.json() } catch { data = null }
+if (!r.ok) throw new Error(extractApiErrorMessage(data) || `No se pudo investigar el negocio (HTTP ${r.status})`);
+return data;
+}
 
-    async function runAudit() {
-      if (!auditLead) return;
-      const url = document.getElementById('audit-url').value.trim();
-      const extra = document.getElementById('audit-extra').value.trim();
-      const btn = document.getElementById('btn-audit');
-      const st = document.getElementById('audit-status');
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Analizando...';
-      st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Auditando oportunidad web para ${auditLead.nombre}...`;
-      document.getElementById('audit-result').style.display = 'none';
+async function runAudit() {
+if (!auditLead) return;
+const url = document.getElementById('audit-url').value.trim();
+const extra = document.getElementById('audit-extra').value.trim();
+const btn = document.getElementById('btn-audit');
+const st = document.getElementById('audit-status');
+btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Analizando...';
+st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Auditando oportunidad web para
+${auditLead.nombre}...`;
+document.getElementById('audit-result').style.display = 'none';
 
-      try {
-        let snapshot = null;
-        if (url) {
-          st.innerHTML = `<span class="spin"></span>&nbsp;Leyendo contenido real de ${url}...`;
-          snapshot = await fetchAuditSnapshot(url);
-          st.innerHTML = `<span class="spin"></span>&nbsp;Preparando auditoria para ${auditLead.nombre}...`;
-        }
+try {
+let snapshot = null;
+if (url) {
+st.innerHTML = `<span class="spin"></span>&nbsp;Leyendo contenido real de ${url}...`;
+snapshot = await fetchAuditSnapshot(url);
+st.innerHTML = `<span class="spin"></span>&nbsp;Preparando auditoria para ${auditLead.nombre}...`;
+}
 
-        const liveLead = leads.find(x => x.id === auditLead.id);
-        if (liveLead) {
-          liveLead.web = url || liveLead.web || '';
-          liveLead.auditSnapshot = snapshot ? {
-            url: snapshot.url,
-            title: snapshot.title,
-            description: snapshot.description,
-            headings: snapshot.headings
-          } : liveLead.auditSnapshot || null;
-          auditLead = liveLead;
-          save();
-          renderCRM();
-        }
+const liveLead = leads.find(x => x.id === auditLead.id);
+if (liveLead) {
+liveLead.web = url || liveLead.web || '';
+liveLead.auditSnapshot = snapshot ? {
+url: snapshot.url,
+title: snapshot.title,
+description: snapshot.description,
+headings: snapshot.headings
+} : liveLead.auditSnapshot || null;
+auditLead = liveLead;
+save();
+renderCRM();
+}
 
-        const sys = `Eres el auditor web y consultor CRO/SEO local de WorkWeb Solutions.
-Si recibes contenido real de una web, basate en ese contenido. Si no hay datos reales, haz una auditoria de oportunidad basada en el contexto del negocio.
+const sys = `Eres el auditor web y consultor CRO/SEO local de WorkWeb Solutions.
+Si recibes contenido real de una web, basate en ese contenido. Si no hay datos reales, haz una auditoria de oportunidad
+basada en el contexto del negocio.
 Devuelve el resultado en espanol con este formato:
 - Hallazgos prioritarios
 - Riesgos comerciales
 - Mejoras recomendadas
 - Oferta propuesta por WorkWeb
 - Cierre comercial sugerido`;
-        const msg = `Audita este negocio local:
+const msg = `Audita este negocio local:
 Negocio: ${auditLead.nombre}
 Sector: ${auditLead.sector}
 Zona: ${auditLead.zona}
@@ -2054,45 +2908,47 @@ Title: ${snapshot.title || 'sin title'}
 Meta description: ${snapshot.description || 'sin meta description'}
 Titulares: ${(snapshot.headings || []).join(' | ') || 'sin encabezados claros'}
 Texto extraido:
-${snapshot.text || 'sin texto util'}` : 'SIN CONTENIDO REAL: haz una auditoria de oportunidad y deja claro que se basa en el contexto aportado.'}`;
+${snapshot.text || 'sin texto util'}` : 'SIN CONTENIDO REAL: haz una auditoria de oportunidad y deja claro que se basa
+en el contexto aportado.'}`;
 
-        const text = await aiReq({ sys, msg });
-        lastAuditText = text;
-        if (liveLead) {
-          liveLead.auditReport = text;
-          auditLead = liveLead;
-          registerActivity(liveLead.id, 'auditoria', `Auditoria ${url ? 'con URL real' : 'de oportunidad'} generada`);
-          save();
-        }
-        document.getElementById('audit-text').textContent = text;
-        document.getElementById('audit-result').style.display = 'block';
-        toast('Auditoria generada ✓', 'success');
-      } catch (e) { toast('Error: ' + e.message, 'error') }
-      btn.disabled = false; btn.innerHTML = 'Analizar Web'; st.style.display = 'none';
-    }
+const text = await aiReq({ sys, msg });
+lastAuditText = text;
+if (liveLead) {
+liveLead.auditReport = text;
+auditLead = liveLead;
+registerActivity(liveLead.id, 'auditoria', `Auditoria ${url ? 'con URL real' : 'de oportunidad'} generada`);
+save();
+}
+document.getElementById('audit-text').textContent = text;
+document.getElementById('audit-result').style.display = 'block';
+toast('Auditoria generada ✓', 'success');
+} catch (e) { toast('Error: ' + e.message, 'error') }
+btn.disabled = false; btn.innerHTML = 'Analizar Web'; st.style.display = 'none';
+}
 
-    async function runAuditForLead(l, opts = {}) {
-      const url = opts.url !== undefined ? opts.url : (l.web || '');
-      let snapshot = null;
-      if (url) snapshot = await fetchAuditSnapshot(url);
+async function runAuditForLead(l, opts = {}) {
+const url = opts.url !== undefined ? opts.url : (l.web || '');
+let snapshot = null;
+if (url) snapshot = await fetchAuditSnapshot(url);
 
-      l.web = url || l.web || '';
-      l.auditSnapshot = snapshot ? {
-        url: snapshot.url,
-        title: snapshot.title,
-        description: snapshot.description,
-        headings: snapshot.headings
-      } : l.auditSnapshot || null;
+l.web = url || l.web || '';
+l.auditSnapshot = snapshot ? {
+url: snapshot.url,
+title: snapshot.title,
+description: snapshot.description,
+headings: snapshot.headings
+} : l.auditSnapshot || null;
 
-      const sys = `Eres el auditor web y consultor CRO/SEO local de WorkWeb Solutions.
-Si recibes contenido real de una web, basate en ese contenido. Si no hay datos reales, haz una auditoria de oportunidad basada en el contexto del negocio.
+const sys = `Eres el auditor web y consultor CRO/SEO local de WorkWeb Solutions.
+Si recibes contenido real de una web, basate en ese contenido. Si no hay datos reales, haz una auditoria de oportunidad
+basada en el contexto del negocio.
 Devuelve el resultado en espanol con este formato:
 - Hallazgos prioritarios
 - Riesgos comerciales
 - Mejoras recomendadas
 - Oferta propuesta por WorkWeb
 - Cierre comercial sugerido`;
-      const msg = `Audita este negocio local:
+const msg = `Audita este negocio local:
 Negocio: ${l.nombre}
 Sector: ${l.sector}
 Zona: ${l.zona}
@@ -2105,36 +2961,39 @@ Title: ${snapshot.title || 'sin title'}
 Meta description: ${snapshot.description || 'sin meta description'}
 Titulares: ${(snapshot.headings || []).join(' | ') || 'sin encabezados claros'}
 Texto extraido:
-${snapshot.text || 'sin texto util'}` : 'SIN CONTENIDO REAL: haz una auditoria de oportunidad y deja claro que se basa en el contexto aportado.'}`;
+${snapshot.text || 'sin texto util'}` : 'SIN CONTENIDO REAL: haz una auditoria de oportunidad y deja claro que se basa
+en el contexto aportado.'}`;
 
-      const text = await aiReq({ sys, msg });
-      l.auditReport = text;
-      auditLead = l;
-      lastAuditText = text;
-      registerActivity(l.id, 'auditoria', `Auditoria ${url ? 'con URL real' : 'de oportunidad'} generada`);
-      save();
+const text = await aiReq({ sys, msg });
+l.auditReport = text;
+auditLead = l;
+lastAuditText = text;
+registerActivity(l.id, 'auditoria', `Auditoria ${url ? 'con URL real' : 'de oportunidad'} generada`);
+save();
 
-      if (!opts.silent) {
-        document.getElementById('audit-url').value = l.web || '';
-        document.getElementById('audit-text').textContent = text;
-        document.getElementById('audit-result').style.display = 'block';
-      }
+if (!opts.silent) {
+document.getElementById('audit-url').value = l.web || '';
+document.getElementById('audit-text').textContent = text;
+document.getElementById('audit-result').style.display = 'block';
+}
 
-      return text;
-    }
+return text;
+}
 
-    async function generateProposalFromAudit() {
-      if (!auditLead || !lastAuditText) {
-        toast('Genera primero una auditoria para crear la propuesta.', 'info');
-        return;
-      }
-      const btn = document.getElementById('btn-audit-proposal');
-      const st = document.getElementById('audit-status');
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Creando...';
-      st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Convirtiendo auditoria en propuesta comercial...`;
-      document.getElementById('audit-proposal-result').style.display = 'none';
+async function generateProposalFromAudit() {
+if (!auditLead || !lastAuditText) {
+toast('Genera primero una auditoria para crear la propuesta.', 'info');
+return;
+}
+const btn = document.getElementById('btn-audit-proposal');
+const st = document.getElementById('audit-status');
+btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Creando...';
+st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Convirtiendo auditoria en propuesta
+comercial...`;
+document.getElementById('audit-proposal-result').style.display = 'none';
 
-      const sys = `Eres un consultor comercial de WorkWeb Solutions. Convierte auditorias en propuestas comerciales claras, breves y faciles de cerrar.
+const sys = `Eres un consultor comercial de WorkWeb Solutions. Convierte auditorias en propuestas comerciales claras,
+breves y faciles de cerrar.
 Devuelve el texto en espanol con este formato:
 1) Resumen ejecutivo
 2) Problemas detectados
@@ -2142,7 +3001,7 @@ Devuelve el texto en espanol con este formato:
 4) Entregables
 5) Precio recomendado
 6) CTA final`;
-      const msg = `Crea una propuesta comercial usando esta auditoria.
+const msg = `Crea una propuesta comercial usando esta auditoria.
 Cliente: ${auditLead.nombre}
 Sector: ${auditLead.sector}
 Zona: ${auditLead.zona}
@@ -2152,26 +3011,27 @@ Precio actual en CRM: ${auditLead.precio ? auditLead.precio + 'EUR' : 'sin preci
 AUDITORIA BASE:
 ${lastAuditText}`;
 
-      try {
-        const text = await aiReq({ sys, msg });
-        const liveLead = leads.find(x => x.id === auditLead.id);
-        if (liveLead) {
-          liveLead.auditProposal = text;
-          auditLead = liveLead;
-          registerActivity(liveLead.id, 'propuesta', 'Propuesta express creada desde auditoria');
-          save();
-        }
-        document.getElementById('audit-proposal-text').textContent = text;
-        document.getElementById('audit-proposal-result').style.display = 'block';
-        toast('Propuesta express generada ✓', 'success');
-      } catch (e) { toast('Error: ' + e.message, 'error') }
-      btn.disabled = false; btn.innerHTML = '⚡ Crear Propuesta'; st.style.display = 'none';
-    }
+try {
+const text = await aiReq({ sys, msg });
+const liveLead = leads.find(x => x.id === auditLead.id);
+if (liveLead) {
+liveLead.auditProposal = text;
+auditLead = liveLead;
+registerActivity(liveLead.id, 'propuesta', 'Propuesta express creada desde auditoria');
+save();
+}
+document.getElementById('audit-proposal-text').textContent = text;
+document.getElementById('audit-proposal-result').style.display = 'block';
+toast('Propuesta express generada ✓', 'success');
+} catch (e) { toast('Error: ' + e.message, 'error') }
+btn.disabled = false; btn.innerHTML = '⚡ Crear Propuesta'; st.style.display = 'none';
+}
 
-    async function generateProposalFromLeadAudit(l, opts = {}) {
-      const baseAudit = l.auditReport || lastAuditText;
-      if (!baseAudit) throw new Error('No hay auditoria disponible para crear propuesta.');
-      const sys = `Eres un consultor comercial de WorkWeb Solutions. Convierte auditorias en propuestas comerciales claras, breves y faciles de cerrar.
+async function generateProposalFromLeadAudit(l, opts = {}) {
+const baseAudit = l.auditReport || lastAuditText;
+if (!baseAudit) throw new Error('No hay auditoria disponible para crear propuesta.');
+const sys = `Eres un consultor comercial de WorkWeb Solutions. Convierte auditorias en propuestas comerciales claras,
+breves y faciles de cerrar.
 Devuelve el texto en espanol con este formato:
 1) Resumen ejecutivo
 2) Problemas detectados
@@ -2179,7 +3039,7 @@ Devuelve el texto en espanol con este formato:
 4) Entregables
 5) Precio recomendado
 6) CTA final`;
-      const msg = `Crea una propuesta comercial usando esta auditoria.
+const msg = `Crea una propuesta comercial usando esta auditoria.
 Cliente: ${l.nombre}
 Sector: ${l.sector}
 Zona: ${l.zona}
@@ -2188,41 +3048,43 @@ Precio actual en CRM: ${l.precio ? l.precio + 'EUR' : 'sin precio'}
 
 AUDITORIA BASE:
 ${baseAudit}`;
-      const text = await aiReq({ sys, msg });
-      l.auditProposal = text;
-      auditLead = l;
-      registerActivity(l.id, 'propuesta', 'Propuesta express creada desde auditoria');
-      save();
-      if (!opts.silent) {
-        document.getElementById('audit-proposal-text').textContent = text;
-        document.getElementById('audit-proposal-result').style.display = 'block';
-      }
-      return text;
-    }
+const text = await aiReq({ sys, msg });
+l.auditProposal = text;
+auditLead = l;
+registerActivity(l.id, 'propuesta', 'Propuesta express creada desde auditoria');
+save();
+if (!opts.silent) {
+document.getElementById('audit-proposal-text').textContent = text;
+document.getElementById('audit-proposal-result').style.display = 'block';
+}
+return text;
+}
 
-    // ==================== SEO LOCAL AGENT ====================
-    function onSeoSel() {
-      const id = parseInt(document.getElementById('seo-sel').value);
-      seoLead = leads.find(x => x.id === id) || null;
-      document.getElementById('btn-seo').disabled = !seoLead;
-      document.getElementById('seo-text').textContent = seoLead?.seoContent || '';
-      document.getElementById('seo-result').style.display = seoLead?.seoContent ? 'block' : 'none';
-    }
+// ==================== SEO LOCAL AGENT ====================
+function onSeoSel() {
+const id = parseInt(document.getElementById('seo-sel').value);
+seoLead = leads.find(x => x.id === id) || null;
+document.getElementById('btn-seo').disabled = !seoLead;
+document.getElementById('seo-text').textContent = seoLead?.seoContent || '';
+document.getElementById('seo-result').style.display = seoLead?.seoContent ? 'block' : 'none';
+}
 
-    async function runSeoLocal() {
-      if (!seoLead) return;
-      const mode = document.getElementById('seo-mode').value;
-      const extra = document.getElementById('seo-extra').value.trim();
-      const btn = document.getElementById('btn-seo');
-      const st = document.getElementById('seo-status');
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Generando...';
-      st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Preparando contenido SEO local para ${seoLead.nombre}...`;
-      document.getElementById('seo-result').style.display = 'none';
+async function runSeoLocal() {
+if (!seoLead) return;
+const mode = document.getElementById('seo-mode').value;
+const extra = document.getElementById('seo-extra').value.trim();
+const btn = document.getElementById('btn-seo');
+const st = document.getElementById('seo-status');
+btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Generando...';
+st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Preparando contenido SEO local para
+${seoLead.nombre}...`;
+document.getElementById('seo-result').style.display = 'none';
 
-      const sys = `Eres un especialista en SEO local de WorkWeb Solutions.
+const sys = `Eres un especialista en SEO local de WorkWeb Solutions.
 Escribe en espanol, con enfoque comercial y posicionamiento local.
-Si el entregable es Pack completo, incluye: perfil Google Business, estructura de landing SEO local, 10 FAQs y 12 keywords.`;
-      const msg = `Genera este entregable SEO:
+Si el entregable es Pack completo, incluye: perfil Google Business, estructura de landing SEO local, 10 FAQs y 12
+keywords.`;
+const msg = `Genera este entregable SEO:
 Tipo: ${mode}
 Negocio: ${seoLead.nombre}
 Sector: ${seoLead.sector}
@@ -2233,44 +3095,46 @@ ${seoLead.auditSnapshot?.title ? 'Title detectado: ' + seoLead.auditSnapshot.tit
 ${seoLead.auditSnapshot?.description ? 'Meta description detectada: ' + seoLead.auditSnapshot.description : ''}
 ${extra ? 'Servicios/keywords objetivo: ' + extra : ''}`;
 
-      try {
-        const text = await aiReq({ sys, msg });
-        const liveLead = leads.find(x => x.id === seoLead.id);
-        if (liveLead) {
-          liveLead.seoContent = text;
-          seoLead = liveLead;
-          registerActivity(liveLead.id, 'seo', `Entregable SEO generado: ${mode}`);
-          save();
-        }
-        document.getElementById('seo-text').textContent = text;
-        document.getElementById('seo-result').style.display = 'block';
-        toast('Contenido SEO local generado ✓', 'success');
-      } catch (e) { toast('Error: ' + e.message, 'error') }
-      btn.disabled = false; btn.innerHTML = 'Generar SEO'; st.style.display = 'none';
-    }
-    
-    // ==================== PROPUESTA PREMIUM ====================
-    function onProposalSel() {
-      const id = parseInt(document.getElementById('proposal-sel').value);
-      proposalLead = leads.find(x => x.id === id) || null;
-      document.getElementById('btn-proposal').disabled = !proposalLead;
-      document.getElementById('proposal-text').textContent = proposalLead?.premiumProposal || '';
-      document.getElementById('proposal-result').style.display = proposalLead?.premiumProposal ? 'block' : 'none';
-    }
+try {
+const text = await aiReq({ sys, msg });
+const liveLead = leads.find(x => x.id === seoLead.id);
+if (liveLead) {
+liveLead.seoContent = text;
+seoLead = liveLead;
+registerActivity(liveLead.id, 'seo', `Entregable SEO generado: ${mode}`);
+save();
+}
+document.getElementById('seo-text').textContent = text;
+document.getElementById('seo-result').style.display = 'block';
+toast('Contenido SEO local generado ✓', 'success');
+} catch (e) { toast('Error: ' + e.message, 'error') }
+btn.disabled = false; btn.innerHTML = 'Generar SEO'; st.style.display = 'none';
+}
 
-    async function runProposalPremium() {
-      if (!proposalLead) return;
-      const mode = document.getElementById('proposal-mode').value;
-      const pricingLabel = document.getElementById('proposal-pricing').value;
-      const pricing = PRICE_TEMPLATES[pricingLabel] || { setup: proposalLead.precio || 0, monthly: 0, label: pricingLabel };
-      const extra = document.getElementById('proposal-extra').value.trim();
-      const btn = document.getElementById('btn-proposal');
-      const st = document.getElementById('proposal-status');
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Generando...';
-      st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Montando propuesta premium para ${proposalLead.nombre}...`;
-      document.getElementById('proposal-result').style.display = 'none';
+// ==================== PROPUESTA PREMIUM ====================
+function onProposalSel() {
+const id = parseInt(document.getElementById('proposal-sel').value);
+proposalLead = leads.find(x => x.id === id) || null;
+document.getElementById('btn-proposal').disabled = !proposalLead;
+document.getElementById('proposal-text').textContent = proposalLead?.premiumProposal || '';
+document.getElementById('proposal-result').style.display = proposalLead?.premiumProposal ? 'block' : 'none';
+}
 
-      const sys = `Eres el director comercial de WorkWeb Solutions. Generas propuestas premium con alto valor percibido, claras y faciles de presentar.
+async function runProposalPremium() {
+if (!proposalLead) return;
+const mode = document.getElementById('proposal-mode').value;
+const pricingLabel = document.getElementById('proposal-pricing').value;
+const pricing = PRICE_TEMPLATES[pricingLabel] || { setup: proposalLead.precio || 0, monthly: 0, label: pricingLabel };
+const extra = document.getElementById('proposal-extra').value.trim();
+const btn = document.getElementById('btn-proposal');
+const st = document.getElementById('proposal-status');
+btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Generando...';
+st.style.display = 'flex'; st.innerHTML = `<span class="spin"></span>&nbsp;Montando propuesta premium para
+${proposalLead.nombre}...`;
+document.getElementById('proposal-result').style.display = 'none';
+
+const sys = `Eres el director comercial de WorkWeb Solutions. Generas propuestas premium con alto valor percibido,
+claras y faciles de presentar.
 Devuelve el texto en espanol con este formato:
 1) Resumen de oportunidad
 2) Objetivos de negocio
@@ -2280,7 +3144,7 @@ Devuelve el texto en espanol con este formato:
 6) Inversion inicial
 7) Mantenimiento mensual
 8) Cierre final`;
-      const msg = `Crea una propuesta premium para:
+const msg = `Crea una propuesta premium para:
 Cliente: ${proposalLead.nombre}
 Sector: ${proposalLead.sector}
 Zona: ${proposalLead.zona}
@@ -2296,179 +3160,233 @@ SEO disponible: ${proposalLead.seoContent || 'no disponible'}
 Propuesta express previa: ${proposalLead.auditProposal || 'no disponible'}
 ${extra ? 'Condiciones adicionales: ' + extra : ''}`;
 
-      try {
-        const text = await aiReq({ sys, msg });
-        const liveLead = leads.find(x => x.id === proposalLead.id);
-        if (liveLead) {
-          liveLead.premiumProposal = text;
-          liveLead.precio = liveLead.precio || pricing.setup;
-          liveLead.monthlyPlan = pricing.monthly;
-          liveLead.pricingTemplate = pricing.label;
-          proposalLead = liveLead;
-          registerActivity(liveLead.id, 'premium', `Propuesta premium generada con plantilla ${pricing.label}`);
-          save();
-        }
-        document.getElementById('proposal-text').textContent = text;
-        document.getElementById('proposal-result').style.display = 'block';
-        toast('Propuesta premium generada ✓', 'success');
-      } catch (e) { toast('Error: ' + e.message, 'error') }
-      btn.disabled = false; btn.innerHTML = 'Generar Propuesta Premium'; st.style.display = 'none';
+try {
+const text = await aiReq({ sys, msg });
+const liveLead = leads.find(x => x.id === proposalLead.id);
+if (liveLead) {
+liveLead.premiumProposal = text;
+liveLead.precio = liveLead.precio || pricing.setup;
+liveLead.monthlyPlan = pricing.monthly;
+liveLead.pricingTemplate = pricing.label;
+proposalLead = liveLead;
+registerActivity(liveLead.id, 'premium', `Propuesta premium generada con plantilla ${pricing.label}`);
+save();
+}
+document.getElementById('proposal-text').textContent = text;
+document.getElementById('proposal-result').style.display = 'block';
+toast('Propuesta premium generada ✓', 'success');
+} catch (e) { toast('Error: ' + e.message, 'error') }
+btn.disabled = false; btn.innerHTML = 'Generar Propuesta Premium'; st.style.display = 'none';
+}
+
+function exportTextCard(id, title = 'Documento') {
+const text = document.getElementById(id)?.textContent?.trim();
+if (!text) { toast('No hay contenido para exportar.', 'info'); return }
+const html = `
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>${esc(title)}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      line-height: 1.65;
+      color: #111
     }
 
-    function exportTextCard(id, title = 'Documento') {
-      const text = document.getElementById(id)?.textContent?.trim();
-      if (!text) { toast('No hay contenido para exportar.', 'info'); return }
-      const html = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>${esc(title)}</title><style>body{font-family:Arial,sans-serif;padding:40px;line-height:1.65;color:#111}h1{font-size:24px;margin:0 0 24px}pre{white-space:pre-wrap;word-break:break-word;font-family:Arial,sans-serif;font-size:15px}</style></head><body><h1>${esc(title)}</h1><pre>${esc(text)}</pre></body></html>`;
-      const win = window.open('', '_blank', 'noopener,noreferrer');
-      if (!win) { toast('El navegador bloqueo la ventana de exportacion.', 'error'); return }
-      win.document.open();
-      win.document.write(html);
-      win.document.close();
-      win.focus();
-      setTimeout(() => win.print(), 250);
+    h1 {
+      font-size: 24px;
+      margin: 0 0 24px
     }
 
-    function openEmailDraftForLead(id) {
-      const l = leads.find(x => x.id === id);
-      if (!l?.email) { toast('Este lead no tiene email guardado.', 'info'); return }
-      const subject = encodeURIComponent(`Idea para mejorar la captacion de ${l.nombre}`);
-      const body = encodeURIComponent(`Hola ${l.nombre},\n\nHe detectado varias oportunidades para mejorar vuestra presencia digital en ${l.zona}. Si quieres, te envio una propuesta breve y clara.\n\nUn saludo,\nWorkWeb Solutions`);
-      window.location.href = `mailto:${encodeURIComponent(l.email)}?subject=${subject}&body=${body}`;
-      registerActivity(l.id, 'email', 'Borrador rapido de email abierto');
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: Arial, sans-serif;
+      font-size: 15px
     }
+  </style>
+</head>
 
-    function openWhatsAppForLead(id) {
-      const l = leads.find(x => x.id === id);
-      if (!l) return;
-      const phone = sanitizePhone(l.telefono);
-      const text = encodeURIComponent(`Hola ${l.nombre}, soy de WorkWeb Solutions. Hemos visto una oportunidad para mejorar vuestra presencia online en ${l.zona}. Si quieres, te la resumo en un mensaje corto.`);
-      const url = phone ? `https://wa.me/${phone}?text=${text}` : `https://wa.me/?text=${text}`;
-      const win = window.open(url, '_blank', 'noopener,noreferrer');
-      if (!win) window.location.href = url;
-      registerActivity(l.id, 'whatsapp', 'Apertura rapida de WhatsApp comercial');
-    }
-
-    function copyText(id) {
-      const t = document.getElementById(id).textContent;
-      navigator.clipboard.writeText(t).then(() => toast('Texto copiado correctamente', 'success'));
-    }
-
-    // ==================== CHATBOT ====================
-    async function initChat() {
-      chatContext = document.getElementById('cb-context').value || 'Prospecto sin web, evaluando opciones y precios.';
-      chatHistory = [];
-      document.getElementById('cb-area').style.display = 'block';
-      document.getElementById('cb-msgs').innerHTML = '';
-      const sys = `Eres el chatbot comercial de WorkWeb Solutions. Sé muy conciso. Convence al prospecto. Contexto: ${chatContext}`;
-      
-      try {
-        const reply = await aiChat([{ role: 'user', content: 'Saluda al prospecto amablemente e invitalo a preguntarte sus dudas sobre la creacion de su web.' }], sys);
-        chatHistory.push({ role: 'assistant', content: reply });
-        appendMsg('bot', reply);
-      } catch(e) { appendMsg('bot', 'Error de conexion con el motor IA del agente.'); }
-    }
-
-    async function sendChat() {
-      const inp = document.getElementById('cb-input');
-      const txt = inp.value.trim(); if (!txt) return;
-      inp.value = '';
-      appendMsg('user', txt);
-      chatHistory.push({ role: 'user', content: txt });
-      
-      const typing = appendMsg('bot', '...', true);
-      const sys = `Eres el chatbot comercial de WorkWeb Solutions. Sé muy conciso. Convence al prospecto resolviendo sus objeciones con profesionalidad. Contexto: ${chatContext}`;
-      
-      try {
-        const reply = await aiChat(chatHistory, sys);
-        chatHistory.push({ role: 'assistant', content: reply });
-        typing.querySelector('.cmsg-bubble').textContent = reply;
-      } catch (e) { typing.querySelector('.cmsg-bubble').textContent = 'Error de conexión.' }
-    }
-
-    function appendMsg(who, txt, asTyping = false) {
-      const msgs = document.getElementById('cb-msgs');
-      const d = document.createElement('div');
-      d.className = `cmsg ${who === 'bot' ? 'bot' : 'user'}`;
-      d.innerHTML = `<div class="cmsg-av">${who === 'bot' ? '🤖' : '👤'}</div><div class="cmsg-bubble">${esc(txt).replace(/\n/g, '<br>')}</div>`;
-      msgs.appendChild(d);
-      msgs.scrollTop = msgs.scrollHeight;
-      return d;
-    }
-
-    // Configuración Micrófono en Inglés
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const micBtn = document.getElementById('micBtn');
-    const chatInput = document.getElementById('cb-input');
-    
-    if (SpeechRecognition && micBtn) {
-      const recognition = new SpeechRecognition();
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.lang = 'en-US'; 
-
-      recognition.onstart = () => {
-        micBtn.style.color = '#ff6b6b';
-        chatInput.placeholder = "Listening in English...";
-      };
-      recognition.onresult = (event) => {
-        chatInput.value = event.results[0][0].transcript;
-      };
-      recognition.onend = () => {
-        micBtn.style.color = 'var(--dim)';
-        chatInput.placeholder = "Escribe tu respuesta aquí...";
-      };
-      micBtn.addEventListener('click', () => {
-        if (micBtn.style.color === 'rgb(255, 107, 107)') recognition.stop();
-        else recognition.start();
-      });
-    } else if(micBtn) {
-      micBtn.style.display = 'none';
-    }
-
-    // ==================== HELPERS ====================
-    function mkLead(nombre, sector, zona, telefono, email, situacion_web, potencial, notas, direccion = '', fuente = 'Manual') {
-      return {
-        id: Date.now() + Math.floor(Math.random() * 1000), nombre, sector, zona: zona || 'Illescas',
-        telefono: telefono || '', email: email || '', situacion_web: situacion_web || 'Sin web',
-        potencial: potencial || 'Medio', estado: 'Nuevo', notas: notas || '', precio: null,
-        created: new Date().toLocaleDateString('es-ES'), last_contact: '', demoGenerated: false,
-        direccion: direccion || '', fuente: fuente || 'Manual', web: '', auditSnapshot: null,
-        auditReport: '', auditProposal: '', seoContent: '', premiumProposal: '', monthlyPlan: 0, pricingTemplate: '', activity: [], researchSummary: '', researchData: null
-      };
-    }
-    
-    function populateSels() {
-      ['dev-sel', 'mkt-sel', 'biz-sel', 'leg-sel', 'closer-sel', 'audit-sel', 'seo-sel', 'proposal-sel', 'crm-activity-sel'].forEach(id => {
-        const s = document.getElementById(id); const v = s.value;
-        s.innerHTML = '<option value="">— Selecciona lead —</option>' + leads.map(l => `<option value="${l.id}">${esc(l.nombre)} · ${esc(l.zona)}</option>`).join('');
-        if (v) s.value = v;
-      });
-    }
-
-    function updateKPIs() {
-      document.getElementById('k0').textContent = leads.length;
-      document.getElementById('k1').textContent = leads.filter(l => l.estado === 'Contactado').length;
-      document.getElementById('k2').textContent = leads.filter(l => l.estado === 'Interesado').length;
-      document.getElementById('k3').textContent = leads.filter(l => l.estado === 'Cerrado').length;
-      const pipe = leads.filter(l => ['Interesado', 'Propuesta'].includes(l.estado) && l.precio).reduce((s, l) => s + l.precio, 0);
-      document.getElementById('k4').textContent = pipe + '€';
-      const b = document.getElementById('badge-crm');
-      b.style.display = leads.length ? 'inline' : 'none';
-      b.textContent = leads.length;
-    }
-    
-    function esc(s) { return s ? String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') : '' }
-    
-    let _tt;
-    function toast(msg, type = 'info') {
-      const el = document.getElementById('toast');
-      el.textContent = msg; el.className = `show ${type}`;
-      clearTimeout(_tt); _tt = setTimeout(() => el.className = '', 3000);
-    }
-
-    // ==================== INIT ====================
-    function init() { load(); updateKPIs(); renderCRM(); populateSels(); renderLeadActivity(); renderModelOptions(getModel()); loadLocalModels(); }
-    init();
-  </script>
+<body>
+  <h1>${esc(title)}</h1>
+  <pre>${esc(text)}</pre>
 </body>
+
+</html>`;
+const win = window.open('', '_blank', 'noopener,noreferrer');
+if (!win) { toast('El navegador bloqueo la ventana de exportacion.', 'error'); return }
+win.document.open();
+win.document.write(html);
+win.document.close();
+win.focus();
+setTimeout(() => win.print(), 250);
+}
+
+function openEmailDraftForLead(id) {
+const l = leads.find(x => x.id === id);
+if (!l?.email) { toast('Este lead no tiene email guardado.', 'info'); return }
+const subject = encodeURIComponent(`Idea para mejorar la captacion de ${l.nombre}`);
+const body = encodeURIComponent(`Hola ${l.nombre},\n\nHe detectado varias oportunidades para mejorar vuestra presencia
+digital en ${l.zona}. Si quieres, te envio una propuesta breve y clara.\n\nUn saludo,\nWorkWeb Solutions`);
+window.location.href = `mailto:${encodeURIComponent(l.email)}?subject=${subject}&body=${body}`;
+registerActivity(l.id, 'email', 'Borrador rapido de email abierto');
+}
+
+function openWhatsAppForLead(id) {
+const l = leads.find(x => x.id === id);
+if (!l) return;
+const phone = sanitizePhone(l.telefono);
+const text = encodeURIComponent(`Hola ${l.nombre}, soy de WorkWeb Solutions. Hemos visto una oportunidad para mejorar
+vuestra presencia online en ${l.zona}. Si quieres, te la resumo en un mensaje corto.`);
+const url = phone ? `https://wa.me/${phone}?text=${text}` : `https://wa.me/?text=${text}`;
+const win = window.open(url, '_blank', 'noopener,noreferrer');
+if (!win) window.location.href = url;
+registerActivity(l.id, 'whatsapp', 'Apertura rapida de WhatsApp comercial');
+}
+
+function copyText(id) {
+const t = document.getElementById(id).textContent;
+navigator.clipboard.writeText(t).then(() => toast('Texto copiado correctamente', 'success'));
+}
+
+// ==================== CHATBOT ====================
+async function initChat() {
+chatContext = document.getElementById('cb-context').value || 'Prospecto sin web, evaluando opciones y precios.';
+chatHistory = [];
+document.getElementById('cb-area').style.display = 'block';
+document.getElementById('cb-msgs').innerHTML = '';
+const sys = `Eres el chatbot comercial de WorkWeb Solutions. Sé muy conciso. Convence al prospecto. Contexto:
+${chatContext}`;
+
+try {
+const reply = await aiChat([{ role: 'user', content: 'Saluda al prospecto amablemente e invitalo a preguntarte sus dudas
+sobre la creacion de su web.' }], sys);
+chatHistory.push({ role: 'assistant', content: reply });
+appendMsg('bot', reply);
+} catch (e) { appendMsg('bot', 'Error de conexion con el motor IA del agente.'); }
+}
+
+async function sendChat() {
+const inp = document.getElementById('cb-input');
+const txt = inp.value.trim(); if (!txt) return;
+inp.value = '';
+appendMsg('user', txt);
+chatHistory.push({ role: 'user', content: txt });
+
+const typing = appendMsg('bot', '...', true);
+const sys = `Eres el chatbot comercial de WorkWeb Solutions. Sé muy conciso. Convence al prospecto resolviendo sus
+objeciones con profesionalidad. Contexto: ${chatContext}`;
+
+try {
+const reply = await aiChat(chatHistory, sys);
+chatHistory.push({ role: 'assistant', content: reply });
+typing.querySelector('.cmsg-bubble').textContent = reply;
+} catch (e) { typing.querySelector('.cmsg-bubble').textContent = 'Error de conexión.' }
+}
+
+function appendMsg(who, txt, asTyping = false) {
+const msgs = document.getElementById('cb-msgs');
+const d = document.createElement('div');
+d.className = `cmsg ${who === 'bot' ? 'bot' : 'user'}`;
+d.innerHTML = `<div class="cmsg-av">${who === 'bot' ? '🤖' : '👤'}</div>
+<div class="cmsg-bubble">${esc(txt).replace(/\n/g, '<br>')}</div>`;
+msgs.appendChild(d);
+msgs.scrollTop = msgs.scrollHeight;
+return d;
+}
+
+// Configuración Micrófono en Inglés
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const micBtn = document.getElementById('micBtn');
+const chatInput = document.getElementById('cb-input');
+
+if (SpeechRecognition && micBtn) {
+const recognition = new SpeechRecognition();
+recognition.continuous = false;
+recognition.interimResults = false;
+recognition.lang = 'en-US';
+
+recognition.onstart = () => {
+micBtn.style.color = '#ff6b6b';
+chatInput.placeholder = "Listening in English...";
+};
+recognition.onresult = (event) => {
+chatInput.value = event.results[0][0].transcript;
+};
+recognition.onend = () => {
+micBtn.style.color = 'var(--dim)';
+chatInput.placeholder = "Escribe tu respuesta aquí...";
+};
+micBtn.addEventListener('click', () => {
+if (micBtn.style.color === 'rgb(255, 107, 107)') recognition.stop();
+else recognition.start();
+});
+} else if (micBtn) {
+micBtn.style.display = 'none';
+}
+
+// ==================== HELPERS ====================
+function mkLead(nombre, sector, zona, telefono, email, situacion_web, potencial, notas, direccion = '', fuente =
+'Manual') {
+return {
+id: Date.now() + Math.floor(Math.random() * 1000), nombre, sector, zona: zona || 'Illescas',
+telefono: telefono || '', email: email || '', situacion_web: situacion_web || 'Sin web',
+potencial: potencial || 'Medio', estado: 'Nuevo', notas: notas || '', precio: null,
+created: new Date().toLocaleDateString('es-ES'), last_contact: '', demoGenerated: false,
+direccion: direccion || '', fuente: fuente || 'Manual', web: '', auditSnapshot: null,
+auditReport: '', auditProposal: '', seoContent: '', premiumProposal: '', monthlyPlan: 0, pricingTemplate: '', activity:
+[], researchSummary: '', researchData: null
+};
+}
+
+function populateSels() {
+['dev-sel', 'mkt-sel', 'biz-sel', 'leg-sel', 'closer-sel', 'audit-sel', 'seo-sel', 'proposal-sel',
+'crm-activity-sel'].forEach(id => {
+const s = document.getElementById(id); const v = s.value;
+s.innerHTML = '<option value="">— Selecciona lead —</option>' + leads.map(l => `<option value="${l.id}">${esc(l.nombre)}
+  · ${esc(l.zona)}</option>`).join('');
+if (v) s.value = v;
+});
+}
+
+function updateKPIs() {
+document.getElementById('k0').textContent = leads.length;
+document.getElementById('k1').textContent = leads.filter(l => l.estado === 'Contactado').length;
+document.getElementById('k2').textContent = leads.filter(l => l.estado === 'Interesado').length;
+document.getElementById('k3').textContent = leads.filter(l => l.estado === 'Cerrado').length;
+const pipe = leads.filter(l => ['Interesado', 'Propuesta'].includes(l.estado) && l.precio).reduce((s, l) => s +
+l.precio, 0);
+document.getElementById('k4').textContent = pipe + '€';
+const b = document.getElementById('badge-crm');
+b.style.display = leads.length ? 'inline' : 'none';
+b.textContent = leads.length;
+}
+
+function esc(s) { return s ? String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;' ).replace( />/g, '&gt;') : '' }
+
+let _tt;
+function toast(msg, type = 'info') {
+const el = document.getElementById('toast');
+el.textContent = msg; el.className = `show ${type}`;
+clearTimeout(_tt); _tt = setTimeout(() => el.className = '', 3000);
+}
+
+// ==================== MODEL HELPERS ====================
+function getModel() { return 'claude-sonnet-4-5'; }
+function getProvider() { return 'anthropic'; }
+function canRunAiAutomation() { return !!localStorage.getItem('ww_api_key'); }
+let cachedLocalModels = [];
+function loadLocalModels() { }
+function renderModelOptions() { }
+
+// ==================== INIT ====================
+function init() { load(); updateKPIs(); renderCRM(); populateSels(); renderLeadActivity(); }
+init();
+</script>
+</body>
+
 </html>

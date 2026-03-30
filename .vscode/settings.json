@@ -1,0 +1,14 @@
+{
+  "[html]": {
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+    "editor.defaultFormatter": null
+  },
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "files.associations": {
+    "workweb_agents.html": "html"
+  }
+}
